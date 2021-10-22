@@ -6,8 +6,13 @@ trait Model
 {
     public static function bootModel() {
         self::saving(function($model) {
-            dd($model);
+            $validate = $model->validate($model->toArray());
 
+            if ($validate->fails()) {
+                throw new \Exception(json_encode($validate->errors()));
+            }
+
+            // Gerando slug caso coluna exista
             if (in_array('slug', $model->getFillable()) AND !$model->slug) {
                 $model->slug = \Str::slug($model->name);
             }

@@ -52,7 +52,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     ['@nuxtjs/axios', {
-      // proxy: true,
+      proxy: true,
     }],
 
     // https://go.nuxtjs.dev/pwa
@@ -98,6 +98,10 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+
+  proxy: {
+    '/api/': process.env.APP_URL,
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

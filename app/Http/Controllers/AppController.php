@@ -88,7 +88,9 @@ class AppController extends \App\Http\Controllers\Controller
 
     public function register()
     {
-        return \App\Models\User::create(request()->all());
+        // dd('teste');
+        // return request()->all();
+        return (new \App\Models\User)->fill(request()->all())->save();
     }
 
     public function endpoints() {

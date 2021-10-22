@@ -18,7 +18,7 @@
     {
       "hid": "description",
       "name": "description",
-      "content": "Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:"
+      "content": "Download/clone application, then:"
     },
     {
       "hid": "og:type",
@@ -30,7 +30,7 @@
       "hid": "og:description",
       "name": "og:description",
       "property": "og:description",
-      "content": "Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:"
+      "content": "Download/clone application, then:"
     }
   ],
   "link": [
@@ -47,7 +47,7 @@
     },
     {
       "rel": "manifest",
-      "href": "/_nuxt/manifest.d9dc8bda.json",
+      "href": "/_nuxt/manifest.6acf5819.json",
       "hid": "manifest"
     }
   ],

@@ -31,7 +31,6 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
@@ -52,5 +51,23 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function validate($data=[]) {
+        $update = (isset($data['id']) AND !empty($data['id']));
+
+        $rules = [
+            'name' => 'required',
+            'email' => ['required', 'unique:App\Models\User,email'],
+        ];
+
+        if ($update) {
+            // 
+        }
+        else {
+            $rules['password'] = ['required', 'confirmed'];
+        }
+
+        return \Validator::make($data, $rules);
     }
 }

@@ -1,7 +1,7 @@
 {
   "name": "",
   "short_name": "",
-  "description": "Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:",
+  "description": "Download/clone application, then:",
   "icons": [
     {
       "src": "/_nuxt/icons/icon_64x64.e3e9fb.png",
