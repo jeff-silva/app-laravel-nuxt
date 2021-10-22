@@ -1,0 +1,14 @@
+{
+  "UiAuthLogin": {
+    "description": "Auto imported from components/ui-auth-login.vue"
+  },
+  "UiAuthPassword": {
+    "description": "Auto imported from components/ui-auth-password.vue"
+  },
+  "UiAuthRegister": {
+    "description": "Auto imported from components/ui-auth-register.vue"
+  },
+  "UiField": {
+    "description": "Auto imported from components/ui-field.vue"
+  }
+}

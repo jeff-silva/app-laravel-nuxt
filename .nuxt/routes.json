@@ -1,0 +1,39 @@
+[
+  {
+    "path": "/dev",
+    "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index.vue",
+    "chunkName": "pages/dev/index",
+    "children": [
+      {
+        "name": "dev-index",
+        "path": "",
+        "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\index.vue",
+        "chunkName": "pages/dev/index/index"
+      },
+      {
+        "name": "dev-index-auth",
+        "path": "auth",
+        "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\auth.vue",
+        "chunkName": "pages/dev/index/auth"
+      },
+      {
+        "name": "dev-index-endpoints",
+        "path": "endpoints",
+        "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\endpoints.vue",
+        "chunkName": "pages/dev/index/endpoints"
+      },
+      {
+        "name": "dev-index-example",
+        "path": "example",
+        "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\example.vue",
+        "chunkName": "pages/dev/index/example"
+      }
+    ]
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]
