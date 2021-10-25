@@ -18,7 +18,8 @@ class UserWelcome extends \Illuminate\Mail\Mailable
     }
 
     static function getTemplate() {
-        return 'Seja bem vindo. Por favor, verifique seu e-mail
+        return 'Seja bem vindo(a). <br>
+        Por favor, verifique seu e-mail
         <a href="{{ $user->getVerifyLink() }}">clicando aqui</a>.';
     }
 }
