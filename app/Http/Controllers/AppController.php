@@ -19,6 +19,8 @@ class AppController extends \App\Http\Controllers\Controller
                 'login',
                 'register',
                 'endpoints',
+                'passwordResetStart',
+                'passwordResetChange',
             ],
         ]);
     }
@@ -111,5 +113,25 @@ class AppController extends \App\Http\Controllers\Controller
             }
         }
         return $routes;
+    }
+
+    public function passwordResetStart() {
+        $user = \App\Models\User::where('email', request('email'))->first();
+        if (! $user) throw new \Exception('Usuário não encontrado');
+        return $user->passwordResetStart();
+    }
+
+    public function passwordResetChange() {
+        $user = \App\Models\User::where([
+            'email' => request('email'),
+            'remember_token' => request('token'),
+        ])->first();
+
+        if (! $user) throw new \Exception('Usuário não encontrado ou token incorreto');
+        $user->remember_token = null;
+        $user->password = request('password');
+        $user->save();
+
+        return $user;
     }
 }

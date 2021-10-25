@@ -25,3 +25,5 @@ Route::post('refresh', 'App\Http\Controllers\AppController@refresh');
 Route::post('me', 'App\Http\Controllers\AppController@me');
 Route::post('register', 'App\Http\Controllers\AppController@register');
 Route::get('endpoints', 'App\Http\Controllers\AppController@endpoints');
+Route::post('password-reset-start', 'App\Http\Controllers\AppController@passwordResetStart');
+Route::post('password-reset-change', 'App\Http\Controllers\AppController@passwordResetChange');

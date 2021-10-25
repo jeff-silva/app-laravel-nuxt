@@ -65,10 +65,20 @@ class User extends Authenticatable implements JWTSubject
 		return $this->attributes['password'] = \Hash::make($value);
 	}
 
+    public function passwordResetStart() {
+        if (! $this->id) return;
+        $this->remember_token = uniqid();
+        $this->save();
+
+        (new \App\Mail\UserPasswordReset($this))->sendTo($this->email);
+
+        return $this;
+    }
+
     public function validate($data=[]) {
         $rules = [
             'name' => ['required'],
-            'email' => ['required', 'unique:users,email'],
+            'email' => ['required'],
         ];
 
         // update
@@ -78,6 +88,7 @@ class User extends Authenticatable implements JWTSubject
 
         // insert
         else {
+            $rules['email'][] = 'unique:users,email';
             $rules['password'] = ['required'];
             // $rules['password_confirmation'] = ['required', 'same:password'];
         }

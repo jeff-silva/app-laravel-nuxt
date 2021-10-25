@@ -6,8 +6,12 @@
             <slot name="after" :loading="loading" :error="error"></slot>
 
             <slot name="fields" :loading="loading" :error="error">
-                <input type="text" class="form-control mb-3" v-model="post.email" placeholder="E-mail">
-                <input type="password" class="form-control mb-3" v-model="post.password" placeholder="Password">
+                <ui-field>
+                    <input type="text" class="form-control mb-3" v-model="post.email" placeholder="E-mail">
+                </ui-field>
+                <ui-field>
+                    <input type="password" class="form-control mb-3" v-model="post.password" placeholder="Password">
+                </ui-field>
             </slot>
 
             <slot name="action" :loading="loading" :error="error">
