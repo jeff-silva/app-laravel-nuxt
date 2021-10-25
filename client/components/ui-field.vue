@@ -6,6 +6,7 @@
             </div>
             <div class="flex-grow-1">
                 <slot></slot>
+                <small class="d-block text-danger" v-if="compError" v-html="compError"></small>
             </div>
         </div>
     
@@ -14,6 +15,7 @@
                 <slot name="label">{{ label }}</slot>
             </div>
             <slot></slot>
+            <small class="d-block text-danger" v-if="compError" v-html="compError"></small>
         </div>
     </div>
 </template>
@@ -24,6 +26,25 @@ export default {
         label: {default:''},
         layout: {default:'vertical'},
         labelWidth: {default:'200px'},
+        error: [String, Array, Object],
+    },
+
+    computed: {
+        compError() {
+            let error = [];
+
+            if (typeof this.error=='string') {
+                error = [this.error];
+            }
+            else if (Array.isArray(this.error)) {
+                error = this.error;
+            }
+            else if (typeof this.error=='object') {
+                error = Object.values(this.error);
+            }
+
+            return error.join('<br>');
+        },
     },
 }
 </script>

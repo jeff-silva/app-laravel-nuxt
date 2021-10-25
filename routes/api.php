@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::get('test', 'App\Http\Controllers\AppController@test');
 Route::post('login', 'App\Http\Controllers\AppController@login');
 Route::post('logout', 'App\Http\Controllers\AppController@logout');
 Route::post('refresh', 'App\Http\Controllers\AppController@refresh');

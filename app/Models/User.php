@@ -43,6 +43,12 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public static function booted() {
+        self::created(function($model) {
+            (new \App\Mail\UserWelcome($model))->sendTo($model->email);
+        });
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -53,21 +59,33 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function validate($data=[]) {
-        $update = (isset($data['id']) AND !empty($data['id']));
+    public function setPasswordAttribute($value) {
+		if (! $value) return;
+		if (! \Hash::needsRehash($value)) return;
+		return $this->attributes['password'] = \Hash::make($value);
+	}
 
+    public function validate($data=[]) {
         $rules = [
-            'name' => 'required',
-            'email' => ['required', 'unique:App\Models\User,email'],
+            'name' => ['required'],
+            'email' => ['required', 'unique:users,email'],
         ];
 
-        if ($update) {
+        // update
+        if (isset($data['id']) AND !empty($data['id'])) {
             // 
         }
+
+        // insert
         else {
-            $rules['password'] = ['required', 'confirmed'];
+            $rules['password'] = ['required'];
+            // $rules['password_confirmation'] = ['required', 'same:password'];
         }
 
         return \Validator::make($data, $rules);
+    }
+
+    public function getVerifyLink() {
+        return \URL::to("/verification/xxx/");
     }
 }

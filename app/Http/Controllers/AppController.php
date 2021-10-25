@@ -15,11 +15,17 @@ class AppController extends \App\Http\Controllers\Controller
     {
         $this->middleware('auth:api', [
             'except' => [
+                'test',
                 'login',
                 'register',
                 'endpoints',
             ],
         ]);
+    }
+
+    public function test() {
+        $user = \App\Models\User::find(1);
+        return (new \App\Mail\UserWelcome($user))->sendTo('jeff@grr.la');
     }
 
     /**
@@ -90,7 +96,7 @@ class AppController extends \App\Http\Controllers\Controller
     {
         // dd('teste');
         // return request()->all();
-        return (new \App\Models\User)->fill(request()->all())->save();
+        return (new \App\Models\User)->create(request()->all());
     }
 
     public function endpoints() {
