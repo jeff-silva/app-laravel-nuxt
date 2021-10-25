@@ -59,11 +59,8 @@ trait Mail {
         $subject = $this->bladeCompile(self::getSubject(), $data);
         $template = $this->bladeCompile(self::getTemplate(), $data);
 
-        \Mail::send([], [], function ($message) use ($subject, $template) {
-            $message->to('jeff@grr.la')
-                ->subject($subject)
-                ->from('from@grr.la')
-                ->setBody($template, 'text/html');
+        \Mail::send([], [], function ($message) use ($emails, $subject, $template) {
+            $message->to($emails)->subject($subject)->setBody($template, 'text/html');
         });
     }
 }
