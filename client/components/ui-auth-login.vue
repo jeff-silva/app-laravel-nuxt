@@ -43,14 +43,14 @@ export default {
         submit() {
             this.loading = true;
             this.error = false;
-            this.$auth.loginWith('jwt', {data:this.post}).then((resp) => {
+            this.$auth.loginWith('jwt', {data:this.post}).then(resp => {
                 this.loading = false;
                 this.$emit('success', resp.data);
-                this.$root.forceUpdate();
+                this.post = {};
+
                 if (this.redirect) {
                     this.$router.push(this.redirect);
                 }
-                this.post = {};
             }).catch(err => {
                 this.loading = false;
                 this.error = err.response.data.error;

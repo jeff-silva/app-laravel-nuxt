@@ -2,6 +2,7 @@ export { default as UiAuthLogin } from '../..\\client\\components\\ui-auth-login
 export { default as UiAuthPassword } from '../..\\client\\components\\ui-auth-password.vue'
 export { default as UiAuthRegister } from '../..\\client\\components\\ui-auth-register.vue'
 export { default as UiField } from '../..\\client\\components\\ui-field.vue'
+export { default as UiUpload } from '../..\\client\\components\\ui-upload.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

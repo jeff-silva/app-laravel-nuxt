@@ -10,3 +10,4 @@ You can directly use them in pages and other components without the need to impo
 - `<UiAuthPassword>` | `<ui-auth-password>` (components/ui-auth-password.vue)
 - `<UiAuthRegister>` | `<ui-auth-register>` (components/ui-auth-register.vue)
 - `<UiField>` | `<ui-field>` (components/ui-field.vue)
+- `<UiUpload>` | `<ui-upload>` (components/ui-upload.vue)

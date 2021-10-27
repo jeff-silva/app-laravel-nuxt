@@ -31,7 +31,7 @@ export default function (nuxt) {
         //     config.baseURL = nuxt.env.APP_URL;
         // }
 
-        console.log(config);
+        // console.log(config);
         return config;
     });
 };

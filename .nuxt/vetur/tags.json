@@ -10,5 +10,8 @@
   },
   "UiField": {
     "description": "Auto imported from components/ui-field.vue"
+  },
+  "UiUpload": {
+    "description": "Auto imported from components/ui-upload.vue"
   }
 }

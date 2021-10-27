@@ -1,14 +1,14 @@
 <template>
     <div>
         <el-drawer title="" :visible.sync="drawer" :with-header="false" direction="ltr" size="200px">
-            <el-menu style="height:100vh;" :default-active="0">
+            <el-menu style="height:100vh;" default-active="0">
                 <template v-for="(m, i) in menuItems">
                     <el-menu-item v-if="m.children.length==0">
                         <i class="el-icon-location"></i>
                         <nuxt-link :to="m.to">{{ m.title }}</nuxt-link>
                     </el-menu-item>
 
-                    <el-submenu :key="i" :index="i" v-else>
+                    <el-submenu :key="i" :index="''+i" v-else>
                         <template #title>
                             <i class="el-icon-location"></i>
                             <nuxt-link :to="m.to">{{ m.title }}</nuxt-link>
@@ -26,14 +26,14 @@
 
         <div class="d-flex">
             <div class="d-none d-md-flex" style="min-width:200px; max-width:200px;">
-                <el-menu style="width:100%; height:100vh;" :default-active="0">
+                <el-menu style="width:100%; height:100vh;" default-active="0">
                     <template v-for="(m, i) in menuItems">
                         <el-menu-item v-if="m.children.length==0">
                             <i class="el-icon-location"></i>
                             <nuxt-link :to="m.to">{{ m.title }}</nuxt-link>
                         </el-menu-item>
 
-                        <el-submenu :key="i" :index="i" v-else>
+                        <el-submenu :key="i" :index="''+i" v-else>
                             <template #title>
                                 <i class="el-icon-location"></i>
                                 <nuxt-link :to="m.to">{{ m.title }}</nuxt-link>
@@ -68,7 +68,7 @@
                                     <nuxt-link :to="m.to">{{ m.title }}</nuxt-link>
                                 </el-dropdown-item>
                                 <el-dropdown-item divided>
-                                    Sair
+                                    <a href="javascript:;" @click="$auth.logout()">Sair</a>
                                 </el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
