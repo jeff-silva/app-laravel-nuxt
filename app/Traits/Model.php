@@ -6,7 +6,7 @@ trait Model
 {
     public static function bootModel() {
         self::saving(function($model) {
-            $data = array_merge(request()->all(), $model->toArray());
+            $data = $model->toArray();
             $validate = $model->validate($data);
 
             if ($validate->fails()) {

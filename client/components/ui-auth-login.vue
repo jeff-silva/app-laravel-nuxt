@@ -1,21 +1,20 @@
 <template>
     <div>
         <form @submit.prevent="submit()">
-            <div class="alert alert-danger" v-if="error">{{ error }}</div>
-
-            <slot name="after" :loading="loading" :error="error"></slot>
-
             <slot name="fields" :loading="loading" :error="error">
-                <ui-field>
-                    <input type="text" class="form-control mb-3" v-model="post.email" placeholder="E-mail">
+                <ui-field :error="validator.error.email">
+                    <input type="text" class="form-control" v-model="post.email" placeholder="E-mail"
+                        @change="validator.validate(post, 'email')">
                 </ui-field>
-                <ui-field>
-                    <input type="password" class="form-control mb-3" v-model="post.password" placeholder="Password">
+
+                <ui-field :error="validator.error.password">
+                    <input type="password" class="form-control" v-model="post.password" placeholder="Password"
+                        @change="validator.validate(post, 'password')">
                 </ui-field>
             </slot>
 
             <slot name="action" :loading="loading" :error="error">
-                <button type="submit" class="btn btn-primary w-100">
+                <button type="submit" class="btn btn-primary w-100" :disabled="validator.invalid()">
                     <i class="fas fa-spin fa-spinner me-1" v-if="loading"></i> Login
                 </button>
             </slot>
@@ -34,13 +33,26 @@ export default {
     data() {
         return {
             loading: false,
-            error: false,
+            error: {},
             post: {},
+
+            validator: this.$validator({
+                email: {
+                    presence: true,
+                    email: true
+                },
+                password: {
+                    presence: true,
+                },
+            }),
         };
     },
 
     methods: {
         submit() {
+            this.validator.validate(this.post);
+            if (this.validator.invalid()) return;
+
             this.loading = true;
             this.error = false;
             this.$auth.loginWith('jwt', {data:this.post}).then(resp => {

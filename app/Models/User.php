@@ -90,7 +90,6 @@ class User extends Authenticatable implements JWTSubject
         else {
             $rules['email'][] = 'unique:users,email';
             $rules['password'] = ['required'];
-            // $rules['password_confirmation'] = ['required', 'same:password'];
         }
 
         return \Validator::make($data, $rules);

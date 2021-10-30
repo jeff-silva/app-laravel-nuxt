@@ -3,8 +3,7 @@
     "name": "admin",
     "path": "/admin",
     "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\admin\\\\index.vue",
-    "chunkName": "pages/admin/index",
-    "_name": "_c3caf2b8"
+    "chunkName": "pages/admin/index"
   },
   {
     "path": "/dev",
@@ -15,52 +14,44 @@
         "name": "dev-index",
         "path": "",
         "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\index.vue",
-        "chunkName": "pages/dev/index/index",
-        "_name": "_d7684b38"
+        "chunkName": "pages/dev/index/index"
       },
       {
         "name": "dev-index-auth",
         "path": "auth",
         "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\auth.vue",
-        "chunkName": "pages/dev/index/auth",
-        "_name": "_930a45f4"
+        "chunkName": "pages/dev/index/auth"
       },
       {
         "name": "dev-index-endpoints",
         "path": "endpoints",
         "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\endpoints.vue",
-        "chunkName": "pages/dev/index/endpoints",
-        "_name": "_53de8410"
+        "chunkName": "pages/dev/index/endpoints"
       },
       {
         "name": "dev-index-example",
         "path": "example",
         "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\example.vue",
-        "chunkName": "pages/dev/index/example",
-        "_name": "_2bd1a07c"
+        "chunkName": "pages/dev/index/example"
       },
       {
         "name": "dev-index-files",
         "path": "files",
         "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\files.vue",
-        "chunkName": "pages/dev/index/files",
-        "_name": "_77041189"
+        "chunkName": "pages/dev/index/files"
       }
-    ],
-    "_name": "_b86b1744"
+    ]
   },
   {
     "name": "admin-settings",
     "path": "/admin/settings",
     "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\admin\\\\settings\\\\index.vue",
-    "chunkName": "pages/admin/settings/index",
-    "_name": "_480c4aa1"
+    "chunkName": "pages/admin/settings/index"
   },
   {
     "name": "index",
     "path": "/",
     "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_5dd9bc21"
+    "chunkName": "pages/index"
   }
 ]
