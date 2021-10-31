@@ -68,6 +68,14 @@ trait Model
         return $this;
     }
 
+    public function clone() {
+        // 
+    }
+
+    public function export() {
+        // 
+    }
+
 
     public function scopeSelectExcept($query, $fields=[]) {
         $select = [];

@@ -73,7 +73,7 @@ class AppMakeModels extends AppBase
             }
 
             foreach($methods as $method_name=>$method_content) {
-                $this->classWriteMethod($table, $method_name, $method_content);
+                $this->classWriteMethod("{$table['ModelNamespace']}\\{$table['Model']}", $method_name, $method_content);
             }
         }
     }

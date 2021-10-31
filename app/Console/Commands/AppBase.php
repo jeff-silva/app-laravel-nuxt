@@ -63,14 +63,34 @@ class AppBase extends Command
         return $fileContents;
     }
 
-    public function classWriteMethod($table, $method_name, $method_content) {
+    public function classWriteMethod($class, $method_name, $method_content) {
+        $file = (new \ReflectionClass($class))->getFileName();
+        
+        if (is_string($class)) {
+            $class = app($class);
+        }
+        
+        $source = $this->classSource($class);
+
+        if (method_exists($class, $method_name)) {
+            $source = preg_replace("/\t+public function {$method_name}(.+?)\}/s", $method_content, $source);
+        }
+        else {
+            $source = rtrim(rtrim($source), '}') ."\n{$method_content}\n}";
+        }
+
+        file_put_contents($file, $source);
+    }
+
+    public function classWriteMethodOld($class, $method_name, $method_content) {
         $class = "{$table['ModelNamespace']}\\{$table['Model']}";
 
         if (is_string($class)) {
             $class = app($class);
         }
-
+        
         $source = $this->classSource($class);
+        dd($source);
 
         if (method_exists($class, $method_name)) {
             // $source = preg_replace("/\t+public function {$method_name}(.+?)\}/s", $method_content, $source);
