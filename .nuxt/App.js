@@ -10,10 +10,11 @@ import '..\\client\\app.scss'
 
 import '..\\node_modules\\prismjs\\themes\\prism.css'
 
+import _c157211a from '..\\client\\layouts\\admin-old.vue'
 import _77068119 from '..\\client\\layouts\\admin.vue'
 import _6f6c098b from '..\\client\\layouts\\default.vue'
 
-const layouts = { "_admin": sanitizeComponent(_77068119),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_admin-old": sanitizeComponent(_c157211a),"_admin": sanitizeComponent(_77068119),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {
