@@ -32,37 +32,43 @@ class AppMakeControllers extends AppBase
 
             $methods['search'] = implode("\n", [
                 "\tpublic function search() {",
-                "\t\treturn {$table['ModelNamespace']}::querySearch();",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::querySearch();",
                 "\t}",
             ]);
 
             $methods['find'] = implode("\n", [
                 "\tpublic function find(\$id) {",
-                "\t\treturn {$table['ModelNamespace']}::find(\$id);",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::find(\$id);",
                 "\t}",
             ]);
 
             $methods['save'] = implode("\n", [
                 "\tpublic function save() {",
-                "\t\treturn {$table['ModelNamespace']}::fill(request()->all())->save();",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::fill(request()->all())->save();",
+                "\t}",
+            ]);
+
+            $methods['valid'] = implode("\n", [
+                "\tpublic function valid() {",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::new()->validate(request()->all());",
                 "\t}",
             ]);
 
             $methods['delete'] = implode("\n", [
                 "\tpublic function delete(\$id) {",
-                "\t\treturn {$table['ModelNamespace']}::find(\$id)->remove();",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::find(\$id)->remove();",
                 "\t}",
             ]);
 
             $methods['clone'] = implode("\n", [
                 "\tpublic function clone(\$id) {",
-                "\t\treturn {$table['ModelNamespace']}::find(\$id)->clone();",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::find(\$id)->clone();",
                 "\t}",
             ]);
 
             $methods['export'] = implode("\n", [
                 "\tpublic function export(\$id) {",
-                "\t\treturn {$table['ModelNamespace']}::find(\$id)->export();",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::find(\$id)->export();",
                 "\t}",
             ]);
 
