@@ -12187,7 +12187,7 @@ a.list-group-item {
 
 .navbar {
 	border-bottom: 0;
-	box-shadow: 0 0 2rem 0 rgba(33, 37, 41, .1)
+	/* box-shadow: 0 0 2rem 0 rgba(33, 37, 41, .1); */
 }
 
 @media (max-width:767.98px) {
