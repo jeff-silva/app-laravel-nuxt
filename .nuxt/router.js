@@ -11,7 +11,10 @@ const _930a45f4 = () => interopDefault(import('..\\client\\pages\\dev\\index\\au
 const _53de8410 = () => interopDefault(import('..\\client\\pages\\dev\\index\\endpoints.vue' /* webpackChunkName: "pages/dev/index/endpoints" */))
 const _2bd1a07c = () => interopDefault(import('..\\client\\pages\\dev\\index\\example.vue' /* webpackChunkName: "pages/dev/index/example" */))
 const _77041189 = () => interopDefault(import('..\\client\\pages\\dev\\index\\files.vue' /* webpackChunkName: "pages/dev/index/files" */))
+const _8029c27e = () => interopDefault(import('..\\client\\pages\\admin\\settings.vue' /* webpackChunkName: "pages/admin/settings" */))
 const _480c4aa1 = () => interopDefault(import('..\\client\\pages\\admin\\settings\\index.vue' /* webpackChunkName: "pages/admin/settings/index" */))
+const _12de0f2a = () => interopDefault(import('..\\client\\pages\\admin\\settings\\email.vue' /* webpackChunkName: "pages/admin/settings/email" */))
+const _2dbc35cc = () => interopDefault(import('..\\client\\pages\\admin\\settings\\user.vue' /* webpackChunkName: "pages/admin/settings/user" */))
 const _5dd9bc21 = () => interopDefault(import('..\\client\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -55,8 +58,20 @@ export const routerOptions = {
     }]
   }, {
     path: "/admin/settings",
-    component: _480c4aa1,
-    name: "admin-settings"
+    component: _8029c27e,
+    children: [{
+      path: "",
+      component: _480c4aa1,
+      name: "admin-settings"
+    }, {
+      path: "email",
+      component: _12de0f2a,
+      name: "admin-settings-email"
+    }, {
+      path: "user",
+      component: _2dbc35cc,
+      name: "admin-settings-user"
+    }]
   }, {
     path: "/",
     component: _5dd9bc21,

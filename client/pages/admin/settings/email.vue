@@ -1,6 +1,6 @@
 <template>
     <div>
-        Configurações do sistema
+        Configurações de e-mail
     </div>
 </template>
 

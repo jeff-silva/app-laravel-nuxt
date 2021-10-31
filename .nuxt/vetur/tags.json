@@ -8,6 +8,9 @@
   "UiAuthRegister": {
     "description": "Auto imported from components/ui-auth-register.vue"
   },
+  "UiDropdown": {
+    "description": "Auto imported from components/ui-dropdown.vue"
+  },
   "UiField": {
     "description": "Auto imported from components/ui-field.vue"
   },

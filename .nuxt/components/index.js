@@ -1,6 +1,7 @@
 export { default as UiAuthLogin } from '../..\\client\\components\\ui-auth-login.vue'
 export { default as UiAuthPassword } from '../..\\client\\components\\ui-auth-password.vue'
 export { default as UiAuthRegister } from '../..\\client\\components\\ui-auth-register.vue'
+export { default as UiDropdown } from '../..\\client\\components\\ui-dropdown.vue'
 export { default as UiField } from '../..\\client\\components\\ui-field.vue'
 export { default as UiUpload } from '../..\\client\\components\\ui-upload.vue'
 

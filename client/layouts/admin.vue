@@ -36,163 +36,68 @@
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
-				<a class="sidebar-toggle js-sidebar-toggle">
+				<a class="sidebar-toggle js-sidebar-toggle" href="javascript:;" @click="toggleClass('.js-sidebar', 'collapsed')">
 					<i class="align-self-center fas fa-bars"></i>
 				</a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-								<div class="position-relative">
-									<i class="align-middle fas fa-globe"></i>
-									<span class="indicator">4</span>
-								</div>
-							</a>
-							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
-								<div class="dropdown-menu-header">
-									4 New Notifications
-								</div>
-								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="text-danger" data-feather="alert-circle"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">Update completed</div>
-												<div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
-												<div class="text-muted small mt-1">30m ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="text-warning" data-feather="bell"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">Lorem ipsum</div>
-												<div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
-												<div class="text-muted small mt-1">2h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="text-primary" data-feather="home"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">Login from 192.186.1.8</div>
-												<div class="text-muted small mt-1">5h ago</div>
-											</div>
-										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<i class="text-success" data-feather="user-plus"></i>
-											</div>
-											<div class="col-10">
-												<div class="text-dark">New connection</div>
-												<div class="text-muted small mt-1">Christina accepted your request.</div>
-												<div class="text-muted small mt-1">14h ago</div>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="dropdown-menu-footer">
-									<a href="#" class="text-muted">Show all notifications</a>
-								</div>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
-								<div class="position-relative">
-									<i class="align-middle fas fa-globe"></i>
-								</div>
-							</a>
-							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="messagesDropdown">
-								<div class="dropdown-menu-header">
+
+						<!-- <li class="nav-item dropdown">
+							<ui-dropdown v-bind="{right:true}">
+								<a class="nav-icon dropdown-toggle" href="javascript:;">
 									<div class="position-relative">
-										4 New Messages
+										<i class="far fa-comment-alt"></i>
+										<span class="indicator">4</span>
 									</div>
-								</div>
-								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">Vanessa Tucker</div>
-												<div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
-												<div class="text-muted small mt-1">15m ago</div>
+								</a>
+	
+								<template #dropdown>
+									<div class="dropdown-menu dropdown-menu-lg show">
+										<div class="dropdown-menu-header">
+											<div class="position-relative">
+												4 New Messages
 											</div>
 										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle" alt="William Harris">
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">William Harris</div>
-												<div class="text-muted small mt-1">Curabitur ligula sapien euismod vitae.</div>
-												<div class="text-muted small mt-1">2h ago</div>
-											</div>
+										<div class="list-group">
+											<a href="#" class="list-group-item">
+												<div class="row g-0 align-items-center">
+													<div class="col-2">
+														<img src="img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
+													</div>
+													<div class="col-10 ps-2">
+														<div class="text-dark">Vanessa Tucker</div>
+														<div class="text-muted small mt-1">Nam pretium turpis et arcu. Duis arcu tortor.</div>
+														<div class="text-muted small mt-1">15m ago</div>
+													</div>
+												</div>
+											</a>
 										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle" alt="Christina Mason">
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">Christina Mason</div>
-												<div class="text-muted small mt-1">Pellentesque auctor neque nec urna.</div>
-												<div class="text-muted small mt-1">4h ago</div>
-											</div>
+										<div class="dropdown-menu-footer">
+											<a href="#" class="text-muted">Show all messages</a>
 										</div>
-									</a>
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
-											<div class="col-2">
-												<img src="img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
-											</div>
-											<div class="col-10 ps-2">
-												<div class="text-dark">Sharon Lessman</div>
-												<div class="text-muted small mt-1">Aenean tellus metus, bibendum sed, posuere ac, mattis non.</div>
-												<div class="text-muted small mt-1">5h ago</div>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="dropdown-menu-footer">
-									<a href="#" class="text-muted">Show all messages</a>
-								</div>
-							</div>
-						</li>
+									</div>
+								</template>
+							</ui-dropdown>
+						</li> -->
+
 						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-								<i class="align-middle" data-feather="settings"></i>
-							</a>
+							<ui-dropdown v-bind="{right:true}">
+								<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="javascript:;" data-bs-toggle="dropdown">
+									<!-- <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" :alt="$auth.user.name" /> -->
+									<span class="text-dark me-2">{{ $auth.user.name }}</span>
+								</a>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-								<img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" :alt="$auth.user.name" />
-								<span class="text-dark me-2">{{ $auth.user.name }}</span>
-							</a>
-
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
-							</div>
+								<template #dropdown>
+									<div class="dropdown-menu dropdown-menu-end show">
+										<nuxt-link to="/admin/settings/user" class="dropdown-item">
+											<i class="fas fa-user me-2"></i> Meus dados
+										</nuxt-link>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="javascript:;" @click="$auth.logout()">Log out</a>
+									</div>
+								</template>
+							</ui-dropdown>
 						</li>
 					</ul>
 				</div>
@@ -212,22 +117,18 @@
 					<div class="row text-muted">
 						<div class="col-6 text-start">
 							<p class="mb-0">
-								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>AdminKit</strong></a> &copy;
+								<a class="text-muted" href="https://adminkit.io/" target="_blank">
+									<strong>{{ APP_NAME }}</strong>
+								</a> &copy;
 							</p>
 						</div>
 						<div class="col-6 text-end">
 							<ul class="list-inline">
 								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
+									<nuxt-link class="text-muted" to="/dev">Dev</nuxt-link>
 								</li>
 								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
+									<nuxt-link class="text-muted" to="/swagger">Swagger</nuxt-link>
 								</li>
 							</ul>
 						</div>
@@ -244,6 +145,16 @@ export default {
 		return {
 			APP_NAME: process.env.APP_NAME,
 		};
+	},
+
+	methods: {
+		toggleClass(selector, className) {
+			if (typeof selector=='string') {
+				selector = document.querySelector(selector);
+			}
+
+			selector.classList.toggle(className);
+		},
 	},
 }
 </script>
@@ -3958,8 +3869,8 @@ fieldset:disabled .btn {
 .dropdown-menu {
 	background-clip: padding-box;
 	background-color: #fff;
-	border: 1px solid rgba(0, 0, 0, .15);
-	border-radius: .2rem;
+	/* border: 1px solid rgba(0, 0, 0, .15); */
+	/* border-radius: .2rem; */
 	color: #495057;
 	display: none;
 	font-size: .875rem;
@@ -12109,7 +12020,7 @@ fieldset:disabled .btn {
 	direction: ltr;
 	flex: 1;
 	max-width: 100vw;
-	padding: 1.5rem 1.5rem .75rem;
+	padding: 10px;
 	width: 100vw
 }
 
@@ -12120,14 +12031,14 @@ fieldset:disabled .btn {
 	}
 }
 
-@media (min-width:992px) {
+/* @media (min-width:992px) {
 	.content {
-		padding: 3rem 3rem 1.5rem
+		padding: 5px;
 	}
-}
+} */
 
 .navbar-nav .dropdown-menu {
-	box-shadow: 0 .1rem .2rem rgba(0, 0, 0, .05)
+	box-shadow: 0 .1rem .2rem #00000022;
 }
 
 .dropdown .dropdown-menu.show {

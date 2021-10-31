@@ -1,6 +1,6 @@
 <template>
     <div>
-        Configurações do sistema
+        Configurações de usuário
     </div>
 </template>
 
