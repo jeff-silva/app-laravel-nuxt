@@ -6,7 +6,7 @@ class UsersController extends Controller
 {
 
 	public function search() {
-		return \App\Models\Users::querySearch();
+		return \App\Models\Users::search()->paginate(request('per_page', 10));
 	}
 
 	public function find($id) {
@@ -14,7 +14,7 @@ class UsersController extends Controller
 	}
 
 	public function save() {
-		return \App\Models\Users::fill(request()->all())->save();
+		return (new \App\Models\Users)->store(request()->all());
 	}
 
 	public function valid() {
@@ -29,7 +29,7 @@ class UsersController extends Controller
 		return \App\Models\Users::find($id)->clone();
 	}
 
-	public function export($id) {
-		return \App\Models\Users::find($id)->export();
+	public function export() {
+		return \App\Models\Users::search()->export();
 	}
 }

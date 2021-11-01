@@ -32,7 +32,7 @@ class AppMakeControllers extends AppBase
 
             $methods['search'] = implode("\n", [
                 "\tpublic function search() {",
-                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::querySearch();",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::search()->paginate(request('per_page', 10));",
                 "\t}",
             ]);
 
@@ -44,7 +44,7 @@ class AppMakeControllers extends AppBase
 
             $methods['save'] = implode("\n", [
                 "\tpublic function save() {",
-                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::fill(request()->all())->save();",
+                "\t\treturn (new {$table['ModelNamespace']}\\{$table['Model']})->store(request()->all());",
                 "\t}",
             ]);
 
@@ -67,8 +67,8 @@ class AppMakeControllers extends AppBase
             ]);
 
             $methods['export'] = implode("\n", [
-                "\tpublic function export(\$id) {",
-                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::find(\$id)->export();",
+                "\tpublic function export() {",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::search()->export();",
                 "\t}",
             ]);
 

@@ -11,4 +11,6 @@ You can directly use them in pages and other components without the need to impo
 - `<UiAuthRegister>` | `<ui-auth-register>` (components/ui-auth-register.vue)
 - `<UiDropdown>` | `<ui-dropdown>` (components/ui-dropdown.vue)
 - `<UiField>` | `<ui-field>` (components/ui-field.vue)
+- `<UiForm>` | `<ui-form>` (components/ui-form.vue)
+- `<UiSearch>` | `<ui-search>` (components/ui-search.vue)
 - `<UiUpload>` | `<ui-upload>` (components/ui-upload.vue)

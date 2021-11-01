@@ -6,7 +6,7 @@ class OauthProvidersController extends Controller
 {
 
 	public function search() {
-		return \App\Models\OauthProviders::querySearch();
+		return \App\Models\OauthProviders::search()->paginate(request('per_page', 10));
 	}
 
 	public function find($id) {
@@ -14,7 +14,7 @@ class OauthProvidersController extends Controller
 	}
 
 	public function save() {
-		return \App\Models\OauthProviders::fill(request()->all())->save();
+		return (new \App\Models\OauthProviders)->store(request()->all());
 	}
 
 	public function valid() {
@@ -29,7 +29,7 @@ class OauthProvidersController extends Controller
 		return \App\Models\OauthProviders::find($id)->clone();
 	}
 
-	public function export($id) {
-		return \App\Models\OauthProviders::find($id)->export();
+	public function export() {
+		return \App\Models\OauthProviders::search()->export();
 	}
 }

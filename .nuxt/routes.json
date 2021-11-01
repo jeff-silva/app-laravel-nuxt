@@ -50,6 +50,13 @@
     "_name": "_b86b1744"
   },
   {
+    "name": "admin-pages",
+    "path": "/admin/pages",
+    "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\admin\\\\pages\\\\index.vue",
+    "chunkName": "pages/admin/pages/index",
+    "_name": "_92a0c9a8"
+  },
+  {
     "path": "/admin/settings",
     "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\admin\\\\settings.vue",
     "chunkName": "pages/admin/settings",
@@ -77,6 +84,13 @@
       }
     ],
     "_name": "_8029c27e"
+  },
+  {
+    "name": "admin-pages-id",
+    "path": "/admin/pages/:id",
+    "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\admin\\\\pages\\\\_id.vue",
+    "chunkName": "pages/admin/pages/_id",
+    "_name": "_44fb0ed8"
   },
   {
     "name": "index",

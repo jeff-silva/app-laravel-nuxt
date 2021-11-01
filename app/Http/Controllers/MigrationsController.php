@@ -6,7 +6,7 @@ class MigrationsController extends Controller
 {
 
 	public function search() {
-		return \App\Models\Migrations::querySearch();
+		return \App\Models\Migrations::search()->paginate(request('per_page', 10));
 	}
 
 	public function find($id) {
@@ -14,7 +14,7 @@ class MigrationsController extends Controller
 	}
 
 	public function save() {
-		return \App\Models\Migrations::fill(request()->all())->save();
+		return (new \App\Models\Migrations)->store(request()->all());
 	}
 
 	public function valid() {
@@ -29,7 +29,7 @@ class MigrationsController extends Controller
 		return \App\Models\Migrations::find($id)->clone();
 	}
 
-	public function export($id) {
-		return \App\Models\Migrations::find($id)->export();
+	public function export() {
+		return \App\Models\Migrations::search()->export();
 	}
 }

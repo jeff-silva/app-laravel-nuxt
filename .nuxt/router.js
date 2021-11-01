@@ -11,10 +11,12 @@ const _930a45f4 = () => interopDefault(import('..\\client\\pages\\dev\\index\\au
 const _53de8410 = () => interopDefault(import('..\\client\\pages\\dev\\index\\endpoints.vue' /* webpackChunkName: "pages/dev/index/endpoints" */))
 const _2bd1a07c = () => interopDefault(import('..\\client\\pages\\dev\\index\\example.vue' /* webpackChunkName: "pages/dev/index/example" */))
 const _77041189 = () => interopDefault(import('..\\client\\pages\\dev\\index\\files.vue' /* webpackChunkName: "pages/dev/index/files" */))
+const _92a0c9a8 = () => interopDefault(import('..\\client\\pages\\admin\\pages\\index.vue' /* webpackChunkName: "pages/admin/pages/index" */))
 const _8029c27e = () => interopDefault(import('..\\client\\pages\\admin\\settings.vue' /* webpackChunkName: "pages/admin/settings" */))
 const _480c4aa1 = () => interopDefault(import('..\\client\\pages\\admin\\settings\\index.vue' /* webpackChunkName: "pages/admin/settings/index" */))
 const _12de0f2a = () => interopDefault(import('..\\client\\pages\\admin\\settings\\email.vue' /* webpackChunkName: "pages/admin/settings/email" */))
 const _2dbc35cc = () => interopDefault(import('..\\client\\pages\\admin\\settings\\user.vue' /* webpackChunkName: "pages/admin/settings/user" */))
+const _44fb0ed8 = () => interopDefault(import('..\\client\\pages\\admin\\pages\\_id.vue' /* webpackChunkName: "pages/admin/pages/_id" */))
 const _5dd9bc21 = () => interopDefault(import('..\\client\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -57,6 +59,10 @@ export const routerOptions = {
       name: "dev-index-files"
     }]
   }, {
+    path: "/admin/pages",
+    component: _92a0c9a8,
+    name: "admin-pages"
+  }, {
     path: "/admin/settings",
     component: _8029c27e,
     children: [{
@@ -72,6 +78,10 @@ export const routerOptions = {
       component: _2dbc35cc,
       name: "admin-settings-user"
     }]
+  }, {
+    path: "/admin/pages/:id",
+    component: _44fb0ed8,
+    name: "admin-pages-id"
   }, {
     path: "/",
     component: _5dd9bc21,

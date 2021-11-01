@@ -6,7 +6,7 @@ class UsersNotificationsController extends Controller
 {
 
 	public function search() {
-		return \App\Models\UsersNotifications::querySearch();
+		return \App\Models\UsersNotifications::search()->paginate(request('per_page', 10));
 	}
 
 	public function find($id) {
@@ -14,7 +14,7 @@ class UsersNotificationsController extends Controller
 	}
 
 	public function save() {
-		return \App\Models\UsersNotifications::fill(request()->all())->save();
+		return (new \App\Models\UsersNotifications)->store(request()->all());
 	}
 
 	public function valid() {
@@ -29,7 +29,7 @@ class UsersNotificationsController extends Controller
 		return \App\Models\UsersNotifications::find($id)->clone();
 	}
 
-	public function export($id) {
-		return \App\Models\UsersNotifications::find($id)->export();
+	public function export() {
+		return \App\Models\UsersNotifications::search()->export();
 	}
 }

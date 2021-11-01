@@ -6,7 +6,7 @@ class PasswordResetsController extends Controller
 {
 
 	public function search() {
-		return \App\Models\PasswordResets::querySearch();
+		return \App\Models\PasswordResets::search()->paginate(request('per_page', 10));
 	}
 
 	public function find($id) {
@@ -14,7 +14,7 @@ class PasswordResetsController extends Controller
 	}
 
 	public function save() {
-		return \App\Models\PasswordResets::fill(request()->all())->save();
+		return (new \App\Models\PasswordResets)->store(request()->all());
 	}
 
 	public function valid() {
@@ -29,7 +29,7 @@ class PasswordResetsController extends Controller
 		return \App\Models\PasswordResets::find($id)->clone();
 	}
 
-	public function export($id) {
-		return \App\Models\PasswordResets::find($id)->export();
+	public function export() {
+		return \App\Models\PasswordResets::search()->export();
 	}
 }

@@ -3,6 +3,8 @@ export { default as UiAuthPassword } from '../..\\client\\components\\ui-auth-pa
 export { default as UiAuthRegister } from '../..\\client\\components\\ui-auth-register.vue'
 export { default as UiDropdown } from '../..\\client\\components\\ui-dropdown.vue'
 export { default as UiField } from '../..\\client\\components\\ui-field.vue'
+export { default as UiForm } from '../..\\client\\components\\ui-form.vue'
+export { default as UiSearch } from '../..\\client\\components\\ui-search.vue'
 export { default as UiUpload } from '../..\\client\\components\\ui-upload.vue'
 
 // nuxt/nuxt.js#8607

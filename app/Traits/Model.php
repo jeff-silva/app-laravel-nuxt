@@ -6,6 +6,7 @@ trait Model
 {
     public static function bootModel() {
         self::saving(function($model) {
+
             $data = $model->toArray();
             $validate = $model->validate($data);
 
@@ -17,9 +18,10 @@ trait Model
             if (in_array('slug', $model->getFillable()) AND !$model->slug) {
                 $model->slug = \Str::slug($model->name);
             }
+
+            return $model;
         });
     }
-    
     
     public function validate($data=[]) {
         return \Validator::make($data, []);
@@ -38,10 +40,7 @@ trait Model
         $id = isset($data[$table_pk])? $data[$table_pk]: false;
 
         if ($validator = $this->validate($data) AND $validator->fails()) {
-            throw new \Exception(json_encode([
-                'message' => 'Há erros de validação',
-                'fields' => $validator->errors(),
-            ]));
+            throw new \Exception(json_encode($validator->errors()));
         }
 
         if ($id AND $save=self::find($id)) {
@@ -72,8 +71,8 @@ trait Model
         // 
     }
 
-    public function export() {
-        // 
+    public function scopeExport($query) {
+        return $query;
     }
 
 
@@ -114,14 +113,15 @@ trait Model
         ], // where ((age = 35) or (age = 36))
         'name' => ['op' => 'like', 'value' => 'john'], // where name like '%john%'
     ] */
-    public function scopeQuerySearch($query, $params=null) {
+    public function scopeSearch($query, $params=null) {
         $params = $params? $params: request()->all();
         $params = array_merge([
             'q' => '',
             'relation' => 'or',
             'page' => 1,
             'perpage' => 20,
-            'orderby' => 'updated_at:desc',
+            'orderby' => 'updated_at',
+            'order' => 'desc',
         ], $params);
 
         $operators = [
@@ -168,6 +168,7 @@ trait Model
         };
 
         foreach($params as $field=>$value) {
+            if (! $value) continue;
             if (! in_array($field, $this->fillable)) continue;
             
             if (is_array($value)) {
@@ -191,13 +192,8 @@ trait Model
         }
 
 
-        // ?orderby=id:desc
-        // ?orderby[]=id:desc&updated_at[]=id:desc
-        $orders = is_array($params['orderby'])? $params['orderby']: [$params['orderby']];
-        foreach($orders as $orderby) {
-            list($field, $order) = explode(':', $orderby);
-            $query = $query->orderBy($field, $order);
-        }
+        // ?orderby=id&order=desc
+        $query->orderBy($params['orderby'], $params['order']);
 
         // ?q=term+search
         if ($params['q']) {
@@ -215,6 +211,6 @@ trait Model
             });
         }
 
-        return $query->paginate($params['perpage']);
+        return $query;
     }
 }

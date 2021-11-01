@@ -6,7 +6,7 @@ class SettingsController extends Controller
 {
 
 	public function search() {
-		return \App\Models\Settings::querySearch();
+		return \App\Models\Settings::search()->paginate(request('per_page', 10));
 	}
 
 	public function find($id) {
@@ -14,7 +14,7 @@ class SettingsController extends Controller
 	}
 
 	public function save() {
-		return \App\Models\Settings::fill(request()->all())->save();
+		return (new \App\Models\Settings)->store(request()->all());
 	}
 
 	public function valid() {
@@ -29,7 +29,7 @@ class SettingsController extends Controller
 		return \App\Models\Settings::find($id)->clone();
 	}
 
-	public function export($id) {
-		return \App\Models\Settings::find($id)->export();
+	public function export() {
+		return \App\Models\Settings::search()->export();
 	}
 }

@@ -6,7 +6,7 @@ class EmailsController extends Controller
 {
 
 	public function search() {
-		return \App\Models\Emails::querySearch();
+		return \App\Models\Emails::search()->paginate(request('per_page', 10));
 	}
 
 	public function find($id) {
@@ -14,7 +14,7 @@ class EmailsController extends Controller
 	}
 
 	public function save() {
-		return \App\Models\Emails::fill(request()->all())->save();
+		return (new \App\Models\Emails)->store(request()->all());
 	}
 
 	public function valid() {
@@ -29,7 +29,7 @@ class EmailsController extends Controller
 		return \App\Models\Emails::find($id)->clone();
 	}
 
-	public function export($id) {
-		return \App\Models\Emails::find($id)->export();
+	public function export() {
+		return \App\Models\Emails::search()->export();
 	}
 }
