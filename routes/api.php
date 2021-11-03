@@ -35,3 +35,4 @@ Route::post('pages/valid', 'App\Http\Controllers\PagesController@valid');
 Route::get('pages/delete/{id}', 'App\Http\Controllers\PagesController@delete');
 Route::get('pages/clone/{id}', 'App\Http\Controllers\PagesController@clone');
 Route::get('pages/export', 'App\Http\Controllers\PagesController@export');
+Route::get('pages/page', 'App\Http\Controllers\PagesController@page');

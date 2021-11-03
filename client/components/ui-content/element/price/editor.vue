@@ -91,7 +91,16 @@ export default {
         props: {deep:true, handler(props) {
             this._preventReceiveProps = true;
             setTimeout(() => {
-                for(let i in props) { this.$emit(`update:${i}`, props[i]); }
+                for(let i in props) {
+                    if (i=='value') {
+                        console.log(i, props[i]);
+                        this.$emit('value', props[i]);
+                        this.$emit('input', props[i]);
+                        this.$emit('change', props[i]);
+                        continue;
+                    }
+                    this.$emit(`update:${i}`, props[i]);
+                }
                 this._preventReceiveProps = false;
             }, 100);
         }},

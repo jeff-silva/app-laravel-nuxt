@@ -24,3 +24,6 @@ You can directly use them in pages and other components without the need to impo
 - `<UiContentElementPriceEditor>` | `<ui-content-element-price-editor>` (components/ui-content/element/price/editor.vue)
 - `<UiContentElementPriceInfo>` | `<ui-content-element-price-info>` (components/ui-content/element/price/info.js)
 - `<UiContentElementPriceRender>` | `<ui-content-element-price-render>` (components/ui-content/element/price/render.vue)
+- `<UiContentElementTitleEditor>` | `<ui-content-element-title-editor>` (components/ui-content/element/title/editor.vue)
+- `<UiContentElementTitleInfo>` | `<ui-content-element-title-info>` (components/ui-content/element/title/info.js)
+- `<UiContentElementTitleRender>` | `<ui-content-element-title-render>` (components/ui-content/element/title/render.vue)

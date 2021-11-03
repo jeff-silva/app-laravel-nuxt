@@ -3,7 +3,7 @@
         <ui-form v-model="page"
             method="post"
             action="/api/pages/save"
-            #default="{validator, loading}"
+            #default="{validator, loading, submit}"
             @success="$router.push(`/admin/pages/${$event.id}`); page=$event;"
             success-message="Dados salvos"
         >
@@ -13,6 +13,7 @@
                         <div class="input-group">
                             <div class="input-group-text bg-white">site.com/</div>
                             <input type="text" class="form-control" v-model="page.slug">
+                            <div class="input-group-text bg-white"><a :href="`/${page.slug}`" target="_blank">Visitar</a></div>
                         </div>
                     </ui-field>
                 </div>
@@ -39,7 +40,7 @@
                     </div>
                     
                     <ui-field label="Conteúdo" :error="validator.error.content">
-                        <ui-content v-model="page.content" :edit="edit"></ui-content>
+                        <ui-content v-model="page.content" :edit="edit" @change="submit()"></ui-content>
                     </ui-field>
                 </div>
             </div>

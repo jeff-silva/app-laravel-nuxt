@@ -52,5 +52,14 @@
   },
   "UiContentElementPriceRender": {
     "description": "Auto imported from components/ui-content/element/price/render.vue"
+  },
+  "UiContentElementTitleEditor": {
+    "description": "Auto imported from components/ui-content/element/title/editor.vue"
+  },
+  "UiContentElementTitleInfo": {
+    "description": "Auto imported from components/ui-content/element/title/info.js"
+  },
+  "UiContentElementTitleRender": {
+    "description": "Auto imported from components/ui-content/element/title/render.vue"
   }
 }

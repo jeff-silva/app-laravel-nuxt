@@ -16,6 +16,9 @@ export { default as UiContentElementHtmlRender } from '../..\\client\\components
 export { default as UiContentElementPriceEditor } from '../..\\client\\components\\ui-content\\element\\price\\editor.vue'
 export { default as UiContentElementPriceInfo } from '../..\\client\\components\\ui-content\\element\\price\\info.js'
 export { default as UiContentElementPriceRender } from '../..\\client\\components\\ui-content\\element\\price\\render.vue'
+export { default as UiContentElementTitleEditor } from '../..\\client\\components\\ui-content\\element\\title\\editor.vue'
+export { default as UiContentElementTitleInfo } from '../..\\client\\components\\ui-content\\element\\title\\info.js'
+export { default as UiContentElementTitleRender } from '../..\\client\\components\\ui-content\\element\\title\\render.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

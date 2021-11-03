@@ -29,7 +29,7 @@ class Pages extends \Illuminate\Database\Eloquent\Model
 		}
 
 		if (! is_array($value)) {
-			return ['elements'=>''];
+			return ['elements'=>[]];
 		}
 		
 		return $value;
