@@ -19,7 +19,7 @@
                             :page-size.sync="search.params.per_page"
                             :pager-count="11"
                             :total="search.results.total"
-                            :page-sizes="[2, 3, 5, 10, 25, 50, 100]"
+                            :page-sizes="[10, 25, 50, 100]"
                             @size-change="searchItems()"
                             @current-change="searchItems()"
                             @prev-click="searchItems()"
@@ -27,8 +27,10 @@
                         ></el-pagination>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary" v-loading="search.loading">
-                            Buscar <i class="fas fa-search ms-2"></i>
+                        <button type="submit" class="btn btn-primary">
+                            Buscar
+                            <i class="fas fa-spin fa-spinner ms-2" v-if="search.loading"></i>
+                            <i class="fas fa-search ms-2" v-else></i>
                         </button>
                     </div>
                 </div>

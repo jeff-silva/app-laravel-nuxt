@@ -6,6 +6,13 @@ export { default as UiField } from '../..\\client\\components\\ui-field.vue'
 export { default as UiForm } from '../..\\client\\components\\ui-form.vue'
 export { default as UiSearch } from '../..\\client\\components\\ui-search.vue'
 export { default as UiUpload } from '../..\\client\\components\\ui-upload.vue'
+export { default as UiContentDraggable } from '../..\\client\\components\\ui-content\\draggable.vue'
+export { default as UiContent } from '../..\\client\\components\\ui-content\\index.vue'
+export { default as UiContentStyleEditor } from '../..\\client\\components\\ui-content\\style-editor.vue'
+export { default as UiContentElementHtmlEditor } from '../..\\client\\components\\ui-content\\element\\html\\editor.vue'
+export { default as UiContentElementHtmlRender } from '../..\\client\\components\\ui-content\\element\\html\\render.vue'
+export { default as UiContentElementPriceEditor } from '../..\\client\\components\\ui-content\\element\\price\\editor.vue'
+export { default as UiContentElementPriceRender } from '../..\\client\\components\\ui-content\\element\\price\\render.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

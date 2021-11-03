@@ -22,5 +22,26 @@
   },
   "UiUpload": {
     "description": "Auto imported from components/ui-upload.vue"
+  },
+  "UiContentDraggable": {
+    "description": "Auto imported from components/ui-content/draggable.vue"
+  },
+  "UiContent": {
+    "description": "Auto imported from components/ui-content/index.vue"
+  },
+  "UiContentStyleEditor": {
+    "description": "Auto imported from components/ui-content/style-editor.vue"
+  },
+  "UiContentElementHtmlEditor": {
+    "description": "Auto imported from components/ui-content/element/html/editor.vue"
+  },
+  "UiContentElementHtmlRender": {
+    "description": "Auto imported from components/ui-content/element/html/render.vue"
+  },
+  "UiContentElementPriceEditor": {
+    "description": "Auto imported from components/ui-content/element/price/editor.vue"
+  },
+  "UiContentElementPriceRender": {
+    "description": "Auto imported from components/ui-content/element/price/render.vue"
   }
 }

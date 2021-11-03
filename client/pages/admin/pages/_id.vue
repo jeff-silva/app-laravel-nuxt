@@ -32,8 +32,13 @@
                 </div>
 
                 <div class="col-12 col-md-12">
+                    <div class="d-flex mb-3">
+                        <div><a href="">refresh</a></div>
+                        <div><el-checkbox v-model="edit">Editavel</el-checkbox></div>
+                    </div>
+                    
                     <ui-field label="Conteúdo" :error="validator.error.content">
-                        <textarea class="form-control" v-model="page.content"></textarea>
+                        <ui-content v-model="page.content" :edit="edit"></ui-content>
                     </ui-field>
                 </div>
             </div>
@@ -57,6 +62,7 @@ export default {
 
     data() {
         return {
+            edit: true,
             page: {},
         };
     },

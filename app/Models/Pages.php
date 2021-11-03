@@ -22,4 +22,16 @@ class Pages extends \Illuminate\Database\Eloquent\Model
 			'name' => ['required'],
 		]);
 	}
+
+	public function getContentAttribute($value) {
+		if (is_string($value)) {
+			$value = json_decode($value, true);
+		}
+
+		if (! is_array($value)) {
+			return ['elements'=>''];
+		}
+		
+		return $value;
+	}
 }
