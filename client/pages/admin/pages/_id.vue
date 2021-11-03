@@ -5,6 +5,7 @@
             action="/api/pages/save"
             #default="{validator, loading}"
             @success="$router.push(`/admin/pages/${$event.id}`); page=$event;"
+            success-message="Dados salvos"
         >
             <div class="row">
                 <div class="col-12 col-md-8">

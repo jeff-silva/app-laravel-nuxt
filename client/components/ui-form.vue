@@ -17,6 +17,7 @@ export default {
         method: {default:'get'},
         action: {default:''},
         validator: Object,
+        successMessage: {default:''},
     },
 
     data() {
@@ -41,6 +42,9 @@ export default {
             axios.then(resp => {
                 this.loading = false;
                 this.$emit('success', resp.data);
+                if (this.successMessage) {
+                    this.$swal.fire('', this.successMessage, 'success');
+                }
             }).catch(err => {
                 this.loading = false;
                 this.validate.setError(err.response.data.fields);

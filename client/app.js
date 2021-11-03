@@ -1,9 +1,12 @@
 // require('dotenv').config();
 
 import Vue from 'vue';
+
+import Swal from 'sweetalert2';
+Vue.prototype.$swal = Swal;
+
 import Element from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en';
-
 Vue.use(Element, { locale });
 
 // https://axios.nuxtjs.org/
@@ -94,4 +97,11 @@ Vue.prototype.$validator = function(rules) {
             this.errorReal = errors;
         }
     })(rules);
+};
+
+
+Vue.prototype.$log = function() {
+    Array.prototype.slice.call(arguments).forEach(item => {
+        console.log(item);
+    });
 };

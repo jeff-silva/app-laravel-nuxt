@@ -65,7 +65,7 @@ export default {
     ['@nuxtjs/auth-next', {
       // https://dev.auth.nuxtjs.org/api/options#redirect
       redirect: {
-        login: '/auth',
+        login: '/',
         logout: '/',
         callback: false,
         home: false,

@@ -4,23 +4,23 @@
             No prices
         </div>
 
-        <div class="row">
+        <div class="container p-0 row">
             <div class="col" v-for="p in prices">
-                <div class="card text-center" style="height:100%;">
-                    <p class="ribbon ribbon-top-right" v-if="p.ribbon"><span>{{ p.ribbon }}</span></p>
-                    <p class="py-4 fw-bold">{{ p.title }}</p>
-                    <p class="d-flex justify-content-center align-text-top p-blue ">
+                <div class="card my-0 mx-auto text-center" :style="`height:100%; max-width:${cardMaxWidth};`">
+                    <p class="ribbon ribbon-top-right" v-if="p.ribbon">
+                        <span :style="`background:${p.backgroundColor}; color:${p.textColor};`">{{ p.ribbon }}</span>
+                    </p>
+                    <p class="py-4 text-uppercase fw-bold">{{ p.title }}</p>
+                    <p class="d-flex justify-content-center align-text-top text-primary">
                         <span class=" fas fa-dollar-sign textmuted pe-1 h6 mt-2 m-0"></span>
                         <span class="h1 m-0">{{ p.price }}</span>
                     </p>
                     <p class="text-muted">{{ p.subtitle }}</p>
-                    <P class="fs-10 mb-1"><span class="fw-bold">Unlimited</span><span> Storage</span></P>
-                    <P class="fs-10 mb-1"><span class="fw-bold">Unlimited</span><span> List,Board and calender views</span> </P>
-                    <P class="fs-10 mb-1"><span class="fw-bold">Unlimited </span><span> Integrations</span></P>
-                    <P class="fs-10 mb-1"><span class="fw-bold">Unlimited </span><span> Dashboards</span></P>
-                    <p class="fs-10 mb-1"><span class="fw-bold">Guests </span>and<span class="fw-bold"> Permissions</span> </p>
-                    <p class="fs-10 mb-1 mb-2 "> <span class="fw-bold">Goals,portfolios </span>and <span class="fw-bold">Custom Fields</span> </p>
-                    <div class="btn btn-primary my-2">Start Trial</div> <a href="" class="fs-10"><span class="fas fa-percentage"></span><span class="bottom">Or let's make a deal</span></a>
+                    <div v-if="p.content" v-html="p.content"></div>
+
+                    <a :href="p.linkUrl" class="btn py-2 mt-3" :style="`background:${p.backgroundColor}; color:${p.textColor};`">
+                        {{ p.linkLabel }}
+                    </a>
                 </div>
             </div>
         </div>
@@ -30,19 +30,13 @@
 <script>
 export default {
     props: {
+        cardMaxWidth: {default:'100%'},
         prices: Array,
     },
 }
 </script>
 
 <style>
-
-.ribon {
-    width: 30px;
-    transform: rotate(90deg);
-    transform-origin: 100% 0%
-}
-
 .card {
     position: relative;
     background: #fff;
@@ -52,12 +46,14 @@ export default {
     border: none
 }
 
-.vertical-align {
-    vertical-align: text-top
+.ribon {
+    width: 30px;
+    transform: rotate(90deg);
+    transform-origin: 100% 0%
 }
 
-.p-blue {
-    color: #4f84f5
+.vertical-align {
+    vertical-align: text-top
 }
 
 .ribbon {
@@ -72,7 +68,6 @@ export default {
     width: 225px;
     height: 30px;
     padding: 6px 0;
-    background-color: #812eca;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     color: #fff;
     font-size: 11px;
@@ -91,52 +86,13 @@ export default {
     transform: rotate(45deg)
 }
 
-.text-muted {
-    font-size: 12px
-}
-
 .fs-10 {
     font-size: 12px
-}
-
-a {
-    text-decoration: none;
-    color: #812eca
-}
-
-a:hover {
-    color: #9842e4
 }
 
 .bottom {
     margin: 0%;
     border-bottom: 1px dashed #812eca
-}
-
-.card .btn.btn-primary {
-    background-color: #812eca;
-    height: 40px;
-    padding: 10px 0;
-    outline: none;
-    box-shadow: none;
-    border: none;
-    font-size: 12px;
-    font-weight: bold
-}
-
-.ribon .btn.btn-primary {
-    background-color: #812eca;
-    height: 30px;
-    width: 100px;
-    outline: none;
-    box-shadow: none;
-    border: none;
-    font-size: 12px;
-    font-weight: bold
-}
-
-.btn.btn-primary:hover {
-    background-color: #9842e4
 }
 
 .fas.fa-percentage {
@@ -152,17 +108,6 @@ a:hover {
         width: 95px;
         transform: rotate(0);
         transform-origin: -100% 0
-    }
-
-    .ribon .btn.btn-primary {
-        background-color: #812eca;
-        height: 30px;
-        text-align: center;
-        outline: none;
-        box-shadow: none;
-        border: none;
-        font-size: 12px;
-        font-weight: bold
     }
 }
 </style>
