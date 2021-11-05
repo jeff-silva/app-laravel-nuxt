@@ -36,3 +36,6 @@ Route::get('pages/delete/{id}', 'App\Http\Controllers\PagesController@delete');
 Route::get('pages/clone/{id}', 'App\Http\Controllers\PagesController@clone');
 Route::get('pages/export', 'App\Http\Controllers\PagesController@export');
 Route::get('pages/page', 'App\Http\Controllers\PagesController@page');
+
+Route::post('settings/save-all', 'App\Http\Controllers\SettingsController@saveAll');
+Route::get('settings/get-all', 'App\Http\Controllers\SettingsController@getAll');

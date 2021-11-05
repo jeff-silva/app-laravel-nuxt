@@ -8,8 +8,7 @@
                 </ui-field>
 
                 <ui-field :error="validator.error.password">
-                    <input type="password" class="form-control" v-model="post.password" placeholder="Password"
-                        @change="validator.validate(post, 'password')">
+                    <ui-password v-model="post.password" @change.native="validator.validate(post, 'password')"></ui-password>
                 </ui-field>
             </slot>
 

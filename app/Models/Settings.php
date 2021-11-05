@@ -18,4 +18,17 @@ class Settings extends \Illuminate\Database\Eloquent\Model
 			'name' => ['required'],
 		]);
 	}
+
+	public function saveAll($data=[]) {
+		$return = [];
+		foreach($data as $name=>$value) {
+			$this->firstOrNew(['name' => $name])->fill(['value' => $value])->save();
+			$return[ $name ] = $value;
+		}
+		return $return;
+	}
+
+	public function getAll() {
+		return (object) self::select(['name', 'value'])->get()->pluck('value', 'name')->toArray();
+	}
 }
