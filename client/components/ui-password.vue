@@ -1,6 +1,6 @@
 <template>
     <div class="input-group form-control p-0">
-        <input :type="props.show? 'text': 'password'" class="form-control border-0" v-model="props.value" @keyup="emitvalue()">
+        <input :type="props.show? 'text': 'password'" :placeholder="props.placeholder" class="form-control border-0" v-model="props.value" @keyup="emitvalue()">
 
         <div class="input-group-btn">
             <button type="button" class="btn" @click="props.show=!props.show">
@@ -16,6 +16,7 @@ export default {
     props: {
         value: {default:''},
         show: {default:false},
+        placeholder: {default:''},
     },
 
     data() {

@@ -20,6 +20,9 @@
   "UiForm": {
     "description": "Auto imported from components/ui-form.vue"
   },
+  "UiModal": {
+    "description": "Auto imported from components/ui-modal.vue"
+  },
   "UiPassword": {
     "description": "Auto imported from components/ui-password.vue"
   },

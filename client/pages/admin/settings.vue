@@ -13,7 +13,7 @@
             </div>
 
             <div class="col-10">
-                <ui-form method="post" action="/api/settings/save-all" v-model="settings" #default="{loading}">
+                <ui-form method="post" action="/api/settings/save-all" v-model="settings" #default="{loading}" success-message="Configurações alteradas">
                     <div class="p-3">
                         <nuxt-child :settings="settings" :settings-get-all="settingsGetAll" :settings-save-all="settingsSaveAll"></nuxt-child>
                     </div>

@@ -134,4 +134,8 @@ class AppController extends \App\Http\Controllers\Controller
 
         return $user;
     }
+
+    public function emailTest() {
+        return \App\Utils::email(request('to'), request('subject'), request('body'));
+    }
 }

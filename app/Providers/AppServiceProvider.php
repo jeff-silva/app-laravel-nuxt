@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        foreach(\App\Models\Settings::select(['name', 'value'])->get() as $set) {
+            \Config::set($set->name, $set->value);
+        }
     }
 }
