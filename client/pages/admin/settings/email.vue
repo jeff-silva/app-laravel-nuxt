@@ -54,11 +54,11 @@
         <div class="row mt-5">
             <div class="col-8">
                 <ui-field label="Cabeçalho de e-mail">
-                    <ckeditor v-model="settings['mail.header']"></ckeditor>
+                    <ui-code v-model="settings['mail.header']"></ui-code>
                 </ui-field>
         
                 <ui-field label="Rodapé de e-mail">
-                    <ckeditor v-model="settings['mail.footer']"></ckeditor>
+                    <ui-code v-model="settings['mail.footer']"></ui-code>
                 </ui-field>
             </div>
 

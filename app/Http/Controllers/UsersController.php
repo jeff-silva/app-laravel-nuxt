@@ -6,30 +6,30 @@ class UsersController extends Controller
 {
 
 	public function search() {
-		return \App\Models\Users::search()->paginate(request('per_page', 10));
+		return \App\Models\User::search()->paginate(request('per_page', 10));
 	}
 
 	public function find($id) {
-		return \App\Models\Users::find($id);
+		return \App\Models\User::find($id);
 	}
 
 	public function save() {
-		return (new \App\Models\Users)->store(request()->all());
+		return (new \App\Models\User)->store(request()->all());
 	}
 
 	public function valid() {
-		return \App\Models\Users::new()->validate(request()->all());
+		return \App\Models\User::new()->validate(request()->all());
 	}
 
 	public function delete($id) {
-		return \App\Models\Users::find($id)->remove();
+		return \App\Models\User::find($id)->remove();
 	}
 
 	public function clone($id) {
-		return \App\Models\Users::find($id)->clone();
+		return \App\Models\User::find($id)->clone();
 	}
 
 	public function export() {
-		return \App\Models\Users::search()->export();
+		return \App\Models\User::search()->export();
 	}
 }

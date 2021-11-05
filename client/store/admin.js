@@ -6,6 +6,10 @@ export default {
                 {to:"/admin/pages", icon:"fas fa-globe", title:"Buscar", children:[]},
                 {to:"/admin/pages/new", icon:"fas fa-globe", title:"Criar", children:[]},
             ]},
+            {to:"/admin/users", icon:"fas fa-globe", title:"Usuários", children:[
+                {to:"/admin/users", icon:"fas fa-globe", title:"Buscar", children:[]},
+                {to:"/admin/users/new", icon:"fas fa-globe", title:"Criar", children:[]},
+            ]},
             {to:"/admin/settings", icon:"fas fa-globe", title:"Configurações", children:[]},
         ],
 

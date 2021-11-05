@@ -40,3 +40,11 @@ Route::get('pages/page', 'App\Http\Controllers\PagesController@page');
 
 Route::post('settings/save-all', 'App\Http\Controllers\SettingsController@saveAll');
 Route::get('settings/get-all', 'App\Http\Controllers\SettingsController@getAll');
+
+Route::get('users/search', 'App\Http\Controllers\UsersController@search');
+Route::get('users/find/{id}', 'App\Http\Controllers\UsersController@find');
+Route::post('users/save', 'App\Http\Controllers\UsersController@save');
+Route::post('users/valid', 'App\Http\Controllers\UsersController@valid');
+Route::get('users/delete/{id}', 'App\Http\Controllers\UsersController@delete');
+Route::get('users/clone/{id}', 'App\Http\Controllers\UsersController@clone');
+Route::get('users/export', 'App\Http\Controllers\UsersController@export');
