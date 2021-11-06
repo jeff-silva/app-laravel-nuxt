@@ -1,5 +1,5 @@
 {
-  "title": "",
+  "title": "app-laravel-nuxt",
   "meta": [
     {
       "hid": "charset",
@@ -16,9 +16,19 @@
       "content": "yes"
     },
     {
+      "hid": "apple-mobile-web-app-title",
+      "name": "apple-mobile-web-app-title",
+      "content": "app-laravel-nuxt"
+    },
+    {
+      "hid": "author",
+      "name": "author",
+      "content": "jeferson.i.silva@gmail.com"
+    },
+    {
       "hid": "description",
       "name": "description",
-      "content": "Download/clone application, then:"
+      "content": "APP_DESCRIPTION"
     },
     {
       "hid": "og:type",
@@ -27,10 +37,22 @@
       "content": "website"
     },
     {
+      "hid": "og:title",
+      "name": "og:title",
+      "property": "og:title",
+      "content": "app-laravel-nuxt"
+    },
+    {
+      "hid": "og:site_name",
+      "name": "og:site_name",
+      "property": "og:site_name",
+      "content": "app-laravel-nuxt"
+    },
+    {
       "hid": "og:description",
       "name": "og:description",
       "property": "og:description",
-      "content": "Download/clone application, then:"
+      "content": "APP_DESCRIPTION"
     }
   ],
   "link": [
@@ -47,7 +69,7 @@
     },
     {
       "rel": "manifest",
-      "href": "/_nuxt/manifest.6acf5819.json",
+      "href": "/_nuxt/manifest.7f319d74.webmanifest",
       "hid": "manifest"
     }
   ],

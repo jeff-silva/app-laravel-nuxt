@@ -16,10 +16,10 @@ import { createStore } from './store.js'
 import nuxt_plugin_plugin_2d13d3b7 from 'nuxt_plugin_plugin_2d13d3b7' // Source: .\\components\\plugin.js (mode: 'all')
 import nuxt_plugin_pluginclient_cb32fe26 from 'nuxt_plugin_pluginclient_cb32fe26' // Source: .\\content\\plugin.client.js (mode: 'client')
 import nuxt_plugin_pluginserver_001ff275 from 'nuxt_plugin_pluginserver_001ff275' // Source: .\\content\\plugin.server.js (mode: 'server')
+import nuxt_plugin_axios_5159e25a from 'nuxt_plugin_axios_5159e25a' // Source: .\\axios.js (mode: 'all')
 import nuxt_plugin_workbox_3789ae14 from 'nuxt_plugin_workbox_3789ae14' // Source: .\\workbox.js (mode: 'client')
 import nuxt_plugin_metaplugin_3140c776 from 'nuxt_plugin_metaplugin_3140c776' // Source: .\\pwa\\meta.plugin.js (mode: 'all')
 import nuxt_plugin_iconplugin_35e86cea from 'nuxt_plugin_iconplugin_35e86cea' // Source: .\\pwa\\icon.plugin.js (mode: 'all')
-import nuxt_plugin_axios_5159e25a from 'nuxt_plugin_axios_5159e25a' // Source: .\\axios.js (mode: 'all')
 import nuxt_plugin_app_9bbb624a from 'nuxt_plugin_app_9bbb624a' // Source: ..\\client\\app.js (mode: 'all')
 import nuxt_plugin_auth_79f71396 from 'nuxt_plugin_auth_79f71396' // Source: .\\auth.js (mode: 'all')
 
@@ -86,7 +86,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"app-laravel-nuxt","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""},{"name":"format-detection","content":"telephone=no"},{"hid":"charset","charset":"utf-8"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:description","name":"og:description","property":"og:description","content":"Download\u002Fclone application, then:"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"hid":"shortcut-icon","rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64x64.e3e9fb.png"},{"hid":"apple-touch-icon","rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512x512.e3e9fb.png","sizes":"512x512"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.6acf5819.json","hid":"manifest"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
+    head: {"title":"app-laravel-nuxt","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
 
     store,
     router,
@@ -227,6 +227,10 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_pluginserver_001ff275(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_axios_5159e25a === 'function') {
+    await nuxt_plugin_axios_5159e25a(app.context, inject)
+  }
+
   if (process.client && typeof nuxt_plugin_workbox_3789ae14 === 'function') {
     await nuxt_plugin_workbox_3789ae14(app.context, inject)
   }
@@ -237,10 +241,6 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_iconplugin_35e86cea === 'function') {
     await nuxt_plugin_iconplugin_35e86cea(app.context, inject)
-  }
-
-  if (typeof nuxt_plugin_axios_5159e25a === 'function') {
-    await nuxt_plugin_axios_5159e25a(app.context, inject)
   }
 
   if (typeof nuxt_plugin_app_9bbb624a === 'function') {

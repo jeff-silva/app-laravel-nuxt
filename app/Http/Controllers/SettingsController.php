@@ -33,10 +33,6 @@ class SettingsController extends Controller
 		return \App\Models\Settings::search()->export();
 	}
 
-	public function saveAll() {
-		return (new \App\Models\Settings)->saveAll(request()->all());
-	}
-
 	public function getAll() {
 		return (new \App\Models\Settings)->getAll();
 	}

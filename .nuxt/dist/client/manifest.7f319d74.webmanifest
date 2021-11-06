@@ -1,7 +1,7 @@
 {
-  "name": "",
-  "short_name": "",
-  "description": "Download/clone application, then:",
+  "name": "app-laravel-nuxt",
+  "short_name": "app-laravel-nuxt",
+  "description": "APP_DESCRIPTION",
   "icons": [
     {
       "src": "/_nuxt/icons/icon_64x64.e3e9fb.png",
@@ -47,7 +47,7 @@
     }
   ],
   "start_url": "/?standalone=true",
-  "display": "standalone",
-  "background_color": "#ffffff",
+  "display": "fullscreen",
+  "background_color": "#222222",
   "lang": "en"
 }

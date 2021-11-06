@@ -10,7 +10,9 @@ class Settings extends \Illuminate\Database\Eloquent\Model
 		'id',
 		'name',
 		'value',
-		'model'
+		'model',
+		'updated_at',
+		'created_at'
 	];
 
 	public function validate($data=[]) {

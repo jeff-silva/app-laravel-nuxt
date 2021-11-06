@@ -22,4 +22,8 @@ class OauthProviders extends \Illuminate\Database\Eloquent\Model
 			'name' => ['required'],
 		]);
 	}
+
+	public function user() {
+		return $this->belongsTo(\App\Models\OauthProviders::class, 'user_id', 'id');
+	}
 }

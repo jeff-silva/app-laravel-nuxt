@@ -1,77 +1,90 @@
 <template>
     <div>
-        <ui-field label="Host" layout="horizontal">
-            <div class="d-flex">
-                <input type="text" class="form-control" v-model="settings['mail.mailers.smtp.host']">
-                <input type="text" class="form-control" v-model="settings['mail.mailers.smtp.port']" style="max-width:150px; margin-left:5px;">
-            </div>
-        </ui-field>
-        
-        <ui-field label="Usuário" layout="horizontal">
-            <input type="text" class="form-control" v-model="settings['mail.mailers.smtp.username']">
-        </ui-field>
+        <el-tabs value="smtp">
+            <el-tab-pane label="SMTP" name="smtp">
+                <ui-field label="Host" layout="horizontal">
+                    <div class="d-flex">
+                        <input type="text" class="form-control" v-model="settings['mail.mailers.smtp.host']">
+                        <input type="text" class="form-control" v-model="settings['mail.mailers.smtp.port']" style="max-width:150px; margin-left:5px;">
+                    </div>
+                </ui-field>
+                
+                <ui-field label="Usuário" layout="horizontal">
+                    <input type="text" class="form-control" v-model="settings['mail.mailers.smtp.username']">
+                </ui-field>
 
-        <ui-field label="Senha" layout="horizontal">
-            <ui-password v-model="settings['mail.mailers.smtp.password']"></ui-password>
-        </ui-field>
+                <ui-field label="Senha" layout="horizontal">
+                    <ui-password v-model="settings['mail.mailers.smtp.password']"></ui-password>
+                </ui-field>
 
-        <div class="text-end">
-            <a href="javascript:;" class="btn btn-success" @click="emailTestOpen()">
-                Testar envio de e-mail
-            </a>
-        </div>
+                <ui-field label="De" layout="horizontal">
+                    <div class="d-flex">
+                        <input type="text" class="form-control" v-model="settings['mail.from.address']" placeholder="E-mail">
+                        <input type="text" class="form-control" v-model="settings['mail.from.name']" placeholder="Nome" style="margin-left:5px;">
+                    </div>
+                </ui-field>
 
-        <ui-modal v-model="emailTest">
-            <template #header>Testar envio de e-mail</template>
-            <template #body>
-                <div class="alert alert-success" v-if="emailTest.success">
-                    E-mail enviado
+                <div class="text-end">
+                    <a href="javascript:;" class="btn btn-success" @click="emailTestOpen()">
+                        Testar envio de e-mail
+                    </a>
                 </div>
 
-                <ui-field label="Para" layout="horizontal" label-width="100px">
-                    <input type="text" class="form-control" v-model="emailTest.to">
-                </ui-field>
+                <ui-modal v-model="emailTest">
+                    <template #header>Testar envio de e-mail</template>
+                    <template #body>
+                        <div class="alert alert-success" v-if="emailTest.success">
+                            E-mail enviado
+                        </div>
 
-                <ui-field label="Assunto" layout="horizontal" label-width="100px">
-                    <input type="text" class="form-control" v-model="emailTest.subject">
-                </ui-field>
+                        <ui-field label="Para" layout="horizontal" label-width="100px">
+                            <input type="text" class="form-control" v-model="emailTest.to">
+                        </ui-field>
 
-                <ui-field>
-                    <ckeditor v-model="emailTest.body"></ckeditor>
-                </ui-field>
-            </template>
-            <template #footer>
-                <button type="button" class="btn" @click="emailTest=false">
-                    Fechar
-                </button>
+                        <ui-field label="Assunto" layout="horizontal" label-width="100px">
+                            <input type="text" class="form-control" v-model="emailTest.subject">
+                        </ui-field>
 
-                <button type="button" class="btn btn-primary" v-loading="emailTest.sending" @click="emailTestSend()">
-                    Enviar
-                </button>
-            </template>
-        </ui-modal>
+                        <ui-field>
+                            <ckeditor v-model="emailTest.body"></ckeditor>
+                        </ui-field>
+                    </template>
+                    <template #footer>
+                        <button type="button" class="btn" @click="emailTest=false">
+                            Fechar
+                        </button>
 
-        <div class="row mt-5">
-            <div class="col-8">
-                <ui-field label="Cabeçalho de e-mail">
-                    <ui-code v-model="settings['mail.header']"></ui-code>
-                </ui-field>
+                        <button type="button" class="btn btn-primary" v-loading="emailTest.sending" @click="emailTestSend()">
+                            Enviar
+                        </button>
+                    </template>
+                </ui-modal>
+            </el-tab-pane>
+
+            <el-tab-pane name="template" label="Template">
+                <div class="row">
+                    <div class="col-8">
+                        <ui-field label="Cabeçalho de e-mail">
+                            <ui-code v-model="settings['mail.header']"></ui-code>
+                        </ui-field>
+                
+                        <ui-field label="Rodapé de e-mail">
+                            <ui-code v-model="settings['mail.footer']"></ui-code>
+                        </ui-field>
+                    </div>
         
-                <ui-field label="Rodapé de e-mail">
-                    <ui-code v-model="settings['mail.footer']"></ui-code>
-                </ui-field>
-            </div>
-
-            <div class="col-4">
-                <div class="mb-2">Preview</div>
-
-                <div class="border p-3">
-                    <div v-if="settings['mail.header']" v-html="settings['mail.header']"></div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum beatae mollitia officia unde nihil culpa assumenda, velit alias vero quasi cumque et nam a nostrum rem odit expedita quis? Doloribus?</p>
-                    <div v-if="settings['mail.footer']" v-html="settings['mail.footer']"></div>
+                    <div class="col-4">
+                        <div class="mb-2">Preview</div>
+        
+                        <div class="border p-3">
+                            <div v-if="settings['mail.header']" v-html="settings['mail.header']"></div>
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum beatae mollitia officia unde nihil culpa assumenda, velit alias vero quasi cumque et nam a nostrum rem odit expedita quis? Doloribus?</p>
+                            <div v-if="settings['mail.footer']" v-html="settings['mail.footer']"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </el-tab-pane>
+        </el-tabs>
 
     </div>
 </template>

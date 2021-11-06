@@ -13,7 +13,7 @@
             </div>
 
             <!-- Editor -->
-            <div class="bg-white shadow px-2 pb-3 ms-2" style="min-width:250px; max-width:250px;">
+            <div class="bg-white shadow px-2 pb-3 ms-2" style="min-width:300px; max-width:300px;">
                 <el-tabs v-model="editorTab">
                     <el-tab-pane label="Templates" name="templates">
                         <div class="list-group">

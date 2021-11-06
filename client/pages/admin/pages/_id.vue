@@ -10,11 +10,11 @@
             <div class="row">
                 <div class="col-12 col-md-8">
                     <ui-field label="Slug" :error="validator.error.slug">
-                        <div class="input-group">
-                            <div class="input-group-text bg-white">site.com/</div>
-                            <input type="text" class="form-control" v-model="page.slug">
-                            <div class="input-group-text bg-white"><a :href="`/${page.slug}`" target="_blank">Visitar</a></div>
-                        </div>
+                        <label class="input-group form-control p-0">
+                            <div class="input-group-text border-0 bg-transparent">site.com/</div>
+                            <input type="text" class="form-control border-0" v-model="page.slug" style="border-left:none!important;">
+                            <div class="input-group-btn bg-white"><a :href="`/${page.slug}`" target="_blank" class="btn btn-primary rounded-0">Visitar</a></div>
+                        </label>
                     </ui-field>
                 </div>
 
