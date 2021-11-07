@@ -17,6 +17,9 @@
   "UiField": {
     "description": "Auto imported from components/ui-field.vue"
   },
+  "UiFile": {
+    "description": "Auto imported from components/ui-file.vue"
+  },
   "UiForm": {
     "description": "Auto imported from components/ui-form.vue"
   },

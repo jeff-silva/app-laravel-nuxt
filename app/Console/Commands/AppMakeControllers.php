@@ -24,6 +24,12 @@ class AppMakeControllers extends AppBase
                     '',
                     "class {$table['Controller']} extends Controller",
                     '{',
+                    '',
+                    "\tpublic function __construct() {",
+                    "\t\t\$this->middleware('auth:api', [",
+                    "\t\t\t'except' => [],",
+                    "\t\t]);",
+                    "\t}",
                     '}',
                 ]));
             }

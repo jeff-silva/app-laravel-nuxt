@@ -12,6 +12,7 @@ You can directly use them in pages and other components without the need to impo
 - `<UiCode>` | `<ui-code>` (components/ui-code.vue)
 - `<UiDropdown>` | `<ui-dropdown>` (components/ui-dropdown.vue)
 - `<UiField>` | `<ui-field>` (components/ui-field.vue)
+- `<UiFile>` | `<ui-file>` (components/ui-file.vue)
 - `<UiForm>` | `<ui-form>` (components/ui-form.vue)
 - `<UiModal>` | `<ui-modal>` (components/ui-modal.vue)
 - `<UiPassword>` | `<ui-password>` (components/ui-password.vue)
