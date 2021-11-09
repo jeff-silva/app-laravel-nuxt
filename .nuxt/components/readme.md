@@ -18,6 +18,7 @@ You can directly use them in pages and other components without the need to impo
 - `<UiPassword>` | `<ui-password>` (components/ui-password.vue)
 - `<UiSearch>` | `<ui-search>` (components/ui-search.vue)
 - `<UiUpload>` | `<ui-upload>` (components/ui-upload.vue)
+- `<UiUserCard>` | `<ui-user-card>` (components/ui-user-card.vue)
 - `<UiContent>` | `<ui-content>` (components/ui-content/index.vue)
 - `<UiContentStyle>` | `<ui-content-style>` (components/ui-content/style.vue)
 - `<UiContentElement>` | `<ui-content-element>` (components/ui-content/element/index.js)

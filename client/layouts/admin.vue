@@ -90,8 +90,8 @@
 
 								<template #dropdown>
 									<div class="dropdown-menu dropdown-menu-end show">
-										<nuxt-link to="/admin/settings/user" class="dropdown-item">
-											<i class="fas fa-user me-2"></i> Meus dados
+										<nuxt-link :to="o.to" class="dropdown-item" :key="i" v-for="(o, i) in $store.state.admin.userOptions">
+											<i :class="o.icon" class="me-2"></i> {{ o.title }}
 										</nuxt-link>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="javascript:;" @click="$auth.logout()">Log out</a>

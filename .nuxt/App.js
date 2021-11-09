@@ -8,8 +8,6 @@ import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import '..\\client\\app.scss'
 
-import '..\\node_modules\\prismjs\\themes\\prism.css'
-
 import _77068119 from '..\\client\\layouts\\admin.vue'
 import _6f6c098b from '..\\client\\layouts\\default.vue'
 

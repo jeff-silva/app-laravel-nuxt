@@ -3,13 +3,19 @@
         
         <!-- Browser -->
         <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    Arquivo
-                </div>
+            <div class="input-group-btn">
+                <button type="button" class="btn rounded-0" @click="browser()">
+                    <i class="fas fa-upload"></i>
+                </button>
             </div>
 
-            <div class="form-control">{{ props.value || 'Sem arquivo' }}</div>
+            <div class="input-group-btn">
+                <button type="button" class="btn rounded-0" @click="modal=true">
+                    <i class="fas fa-link"></i>
+                </button>
+            </div>
+
+            <div class="form-control" style="overflow:hidden;">{{ props.value || 'Sem arquivo' }}</div>
         </div>
 
         <!-- Progress -->
@@ -18,7 +24,9 @@
         </div>
 
         <!-- Drop/preview -->
-        <div @click="browser()" class="mt-2" :style="`height:${height}; background:#f5f5f5; border:dashed 3px #ccc; display:flex; align-items:center; justify-content:center; cursor:pointer;`">
+        <div @click="browser()" class="mt-2" v-if="preview"
+            :style="`height:${height}; background:#f5f5f5; border:dashed 3px #ccc; display:flex; align-items:center; justify-content:center; cursor:pointer;`"
+        >
             <div v-if="!compValue" >
                 <small class="d-block text-muted">Soltar arquivo</small>
             </div>
@@ -33,6 +41,21 @@
             </div>
         </div>
 
+        <!-- Modal URL -->
+        <ui-modal v-model="modal">
+            <template #header>header</template>
+            <template #body>
+                <ui-field label="URL">
+                    <input type="text" class="form-control" v-model="props.value">
+                </ui-field>
+            </template>
+            <template #footer>
+                <button type="button" class="btn btn-primary" @click="modal=false; emitValue();">
+                    Ok
+                </button>
+            </template>
+        </ui-modal>
+
         <div class="text-end" v-if="compValue">
             <a href="javascript:;" class="ms-2" @click="props.value=''">Apagar</a>
             <a :href="compValue.url" target="_blank" class="ms-2">Abrir nova aba</a>
@@ -46,6 +69,13 @@ export default {
     props: {
         value: {default:''},
         height: {default:'150px'},
+        preview: {default:true},
+    },
+
+    watch: {
+        $props: {deep:true, handler(value) {
+            this.props = JSON.parse(JSON.stringify(value));
+        }},
     },
 
     methods: {
@@ -120,6 +150,7 @@ export default {
             props: JSON.parse(JSON.stringify(this.$props)),
             progress: 0,
             file: false,
+            modal: false,
         };
     },
 }

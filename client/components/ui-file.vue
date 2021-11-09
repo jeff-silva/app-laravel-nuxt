@@ -1,18 +1,81 @@
 <template>
-    <div class="row g-0 border">
-        <div class="col-3 p-2 bg-white">
-            Pastas
-        </div>
-        <div class="col-9 p-2 bg-light" v-if="files">
-            <div class="row">
-                <div class="col-3 mb-2" v-for="f in files.data" :key="f.id" @click="selectToggle(f)">
-                    <div class="p-2" :class="{'bg-primary':(props.value.indexOf(f) >=0)}" style="cursor:pointer;">
-                        <img :src="f.url" alt="" style="width:100%; height:150px; object-fit:cover;" v-if="['jpg', 'jpeg', 'png', 'bmp', 'svg', 'gif', 'webp'].indexOf(f.ext) >=0">
-                        <div v-else style="height:150px;">{{ f.name }}</div>
+    <div>
+        <div class="d-flex g-0 border">
+            <div class="bg-white border-end" style="min-width:200px; max-width:200px;">
+                <div class="list-group list-group-flush" v-if="files">
+                    <div class="list-group-item list-group-item-primary">Pastas</div>
+                    <a href="javascript:;" class="list-group-item" v-for="f in files.folders" @click="filesParams.folder=f.folder; refresh();">
+                        {{ f.folder || '/' }}
+                    </a>
+                </div>
+            </div>
+            <div class="flex-grow-1 bg-light" style="max-width:100%; overflow:auto;">
+                <div class="bg-white p-2 d-flex align-items-center border-bottom">
+                    <div>{{ filesParams.folder || '/' }}</div>
+
+                    <div class="flex-grow-1"><div class="btn">&nbsp;</div></div>
+
+                    <div class="ms-1" v-if="props.value.length">
+                        <a href="javascript:;" class="btn btn-sm btn-light" @click="props.value=[]; emitValue();">
+                            Limpar seleções
+                        </a>
+                    </div>
+
+                    <div class="ms-1" v-if="props.value.length">
+                        <a href="javascript:;" class="btn btn-sm btn-danger" @click="selectedsDelete()">
+                            Deletar {{ props.value.length }}
+                        </a>
+                    </div>
+                </div>
+    
+                <div class="p-2 text-center text-muted py-5" v-if="!files">
+                    <i class="fas fa-spin fa-spinner"></i> Carregando...
+                </div>
+    
+                <div class="p-2 text-center text-muted py-5" v-if="files && files.length==0">
+                    Sem arquivos
+                </div>
+    
+                <div v-if="files">
+                    <div v-for="f in files.data" :key="f.id"
+                        class="d-inline-flex bg-white shadow-sm m-2"
+                        :class="fileClass(f)"
+                        style="min-width:150px; max-width:150px; cursor:pointer;"
+                    >
+                        <div style="width:100%;">
+                            <div class="p-2" style="height:150px;" @click.self="selectToggle(f)">
+                                {{ f.name }}
+                            </div>
+        
+                            <a href="javascript:;" class="btn btn-sm btn-primary w-100 rounded-0" @click="edit=f">
+                                Editar
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Edit -->
+        <ui-modal v-model="edit">
+            <template #header>Editar</template>
+            <template #body>
+                <ui-field label="Descrição">
+                    <input type="text" class="form-control" v-model="edit.name">
+                </ui-field>
+
+                <ui-field label="Pasta">
+                    <el-select v-model="edit.folder" class="w-100" filterable allow-create>
+                        <el-option :value="f.folder" v-for="f in files.folders" :key="f.folder">{{ f.folder || '/' }}</el-option>
+                    </el-select>
+                </ui-field>
+            </template>
+            <template #footer>
+                <button type="button" class="btn btn-primary" @click="fileSave()">
+                    Salvar
+                </button>
+            </template>
+        </ui-modal>
     </div>
 </template>
 
@@ -25,7 +88,12 @@ export default {
     data() {
         return {
             props: JSON.parse(JSON.stringify(this.$props)),
+            filesParams: {
+                q: '',
+                folder: '',
+            },
             files: false,
+            edit: false,
         };
     },
 
@@ -37,7 +105,8 @@ export default {
         },
 
         refresh() {
-            this.$axios.get('/api/files/search').then(resp => {
+            let params = this.filesParams;
+            this.$axios.get('/api/files/search', {params}).then(resp => {
                 this.files = resp.data;
             });
         },
@@ -47,6 +116,37 @@ export default {
             if (index>=0) { this.props.value.splice(index, 1); }
             else { this.props.value.push(file); }
             this.emitValue();
+        },
+
+        selectedsDelete() {
+            this.$confirm(`Deseja deletar ${this.props.value.length} arquivos?`).then(resp => {
+                let params = {id: this.props.value.map(file => file.id)};
+                this.$axios.post('/api/files/delete', params).then(resp => {
+                    this.refresh();
+                    this.props.value = [];
+                });
+            });
+        },
+
+        fileClass(file) {
+            let classes = [];
+
+            if (this.props.value.indexOf(file) >=0) {
+                classes.push('border border-primary');
+            }
+            else {
+                classes.push('border border-white');
+            }
+
+            return classes;
+        },
+
+        fileSave() {
+            this.$axios.post('/api/files/save', this.edit).then(resp => {
+                this.edit = false;
+                this.refresh();
+                this.$swal.fire('', 'Arquivo salvo', 'success');
+            });
         },
     },
 

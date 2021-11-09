@@ -21,8 +21,8 @@ class UsersNotificationsController extends Controller
 		return \App\Models\UsersNotifications::new()->validate(request()->all());
 	}
 
-	public function delete($id) {
-		return \App\Models\UsersNotifications::find($id)->remove();
+	public function delete() {
+		return \App\Models\UsersNotifications::search()->delete();
 	}
 
 	public function clone($id) {

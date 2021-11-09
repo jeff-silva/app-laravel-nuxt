@@ -62,7 +62,7 @@ class AppMakeControllers extends AppBase
 
             $methods['delete'] = implode("\n", [
                 "\tpublic function delete(\$id) {",
-                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::find(\$id)->remove();",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::search()->remove();",
                 "\t}",
             ]);
 
@@ -74,7 +74,7 @@ class AppMakeControllers extends AppBase
 
             $methods['export'] = implode("\n", [
                 "\tpublic function export() {",
-                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::search()->export();",
+                "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::search()->export(export('format', 'csv'));",
                 "\t}",
             ]);
 

@@ -13,6 +13,10 @@ export default {
             {to:"/admin/settings", icon:"fas fa-globe", title:"Configurações", children:[]},
         ],
 
+        userOptions: [
+            {to:"/admin/users/me", icon:"fas fa-cog", title:"Meus dados", children:[]},
+        ],
+
         settings: [
             {to:"/admin/settings", icon:"fas fa-cog", title:"Sistema", children:[]},
             {to:"/admin/settings/email", icon:"fas fa-cog", title:"E-mail", children:[]},

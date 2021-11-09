@@ -35,6 +35,9 @@
   "UiUpload": {
     "description": "Auto imported from components/ui-upload.vue"
   },
+  "UiUserCard": {
+    "description": "Auto imported from components/ui-user-card.vue"
+  },
   "UiContent": {
     "description": "Auto imported from components/ui-content/index.vue"
   },

@@ -166,7 +166,7 @@ return [
     'files' => [
       'Name' => 'files',
       'Engine' => 'InnoDB',
-      'Auto_increment' => 11,
+      'Auto_increment' => 21,
       'Collation' => 'utf8_unicode_ci',
       'Comment' => '',
       'Model' => 'Files',
@@ -175,7 +175,7 @@ return [
       'Controller' => 'FilesController',
       'ControllerNamespace' => '\\App\\Http\\Controllers',
       'ControllerFile' => '\\app\\Http\\Controllers\\FilesController.php',
-      'Sql' => 'CREATE TABLE IF NOT EXISTS `files` (  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `mime` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `ext` varchar(5) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `size` int(11) DEFAULT NULL,  `folder` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `url` text COLLATE utf8_unicode_ci NOT NULL,  `base64` longtext COLLATE utf8_unicode_ci,  `created_at` datetime DEFAULT NULL,  `updated_at` datetime DEFAULT NULL,  `deleted_at` datetime DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci',
+      'Sql' => 'CREATE TABLE IF NOT EXISTS `files` (  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `mime` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `ext` varchar(5) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `size` int(11) DEFAULT NULL,  `folder` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT \'\',  `url` text COLLATE utf8_unicode_ci NOT NULL,  `base64` longtext COLLATE utf8_unicode_ci,  `created_at` datetime DEFAULT NULL,  `updated_at` datetime DEFAULT NULL,  `deleted_at` datetime DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci',
       'Fields' => [
         'id' => [
           'Field' => 'id',
@@ -631,7 +631,7 @@ return [
       'Controller' => 'UsersController',
       'ControllerNamespace' => '\\App\\Http\\Controllers',
       'ControllerFile' => '\\app\\Http\\Controllers\\UsersController.php',
-      'Sql' => 'CREATE TABLE IF NOT EXISTS `users` (  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,  `email_verified_at` timestamp NULL DEFAULT NULL,  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,  `created_at` timestamp NULL DEFAULT NULL,  `updated_at` timestamp NULL DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci',
+      'Sql' => 'CREATE TABLE IF NOT EXISTS `users` (  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,  `photo` varchar(255) COLLATE utf8_unicode_ci NOT NULL,  `email_verified_at` timestamp NULL DEFAULT NULL,  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,  `created_at` timestamp NULL DEFAULT NULL,  `updated_at` timestamp NULL DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci',
       'Fields' => [
         'id' => [
           'Field' => 'id',
@@ -653,6 +653,15 @@ return [
         ],
         'email' => [
           'Field' => 'email',
+          'Type' => 'varchar(255)',
+          'Null' => 'NO',
+          'Key' => '',
+          'Default' => NULL,
+          'Extra' => '',
+          'Sql' => 'varchar(255) NOT NULL',
+        ],
+        'photo' => [
+          'Field' => 'photo',
           'Type' => 'varchar(255)',
           'Null' => 'NO',
           'Key' => '',

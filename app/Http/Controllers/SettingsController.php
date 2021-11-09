@@ -21,8 +21,8 @@ class SettingsController extends Controller
 		return \App\Models\Settings::new()->validate(request()->all());
 	}
 
-	public function delete($id) {
-		return \App\Models\Settings::find($id)->remove();
+	public function delete() {
+		return \App\Models\Settings::search()->delete();
 	}
 
 	public function clone($id) {

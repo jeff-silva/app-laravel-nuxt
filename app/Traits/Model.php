@@ -86,109 +86,55 @@ trait Model
     }
     
 
-    /* [
-        // Predefined fields
-        'select' => 'id,name',
-        'orderby' => 'id:desc', // order by id desc
-        'orderby' => ['id:desc', 'name:asc'], // order by id desc, name asc
-        'page' => 1,
-        'perpage' => 10,
-        'q' => 'test', // where any field like '%{$q}%'
-
-        // if field is a $fillable item:
-        'age' => 35, // where age=35
-        'age' => [35,36], // where age in (35, 36)
-        'age' => ['op' => '=', 'value' => 35], // where age=35
-        'age' => ['op' => '>', 'value' => 35], // where age > 35
-        'age' => ['op' => '>=', 'value' => 35], // where age >= 35
-        'age' => ['op' => '<', 'value' => 35], // where age < 35
-        'age' => ['op' => '<=', 'value' => 35], // where age <= 35
-        'age' => ['op' => 'in', 'value' => [35, 36]], // where age in (35, 36)
-        'age' => ['op' => 'between', 'value' => [35, 36]], // where age between (35, 36)
-        'age' => ['op' => 'empty'], // where (age is null or age='')
-        'age' => [
-            'relation' => 'or',
-            ['field'=>'age', 'op'=>'=', 'value'=>35],
-            ['field'=>'age', 'op'=>'=', 'value'=>36],
-        ], // where ((age = 35) or (age = 36))
-        'name' => ['op' => 'like', 'value' => 'john'], // where name like '%john%'
-    ] */
     public function scopeSearch($query, $params=null) {
         $params = $params? $params: request()->all();
         $params = array_merge([
             'q' => '',
-            'relation' => 'or',
             'page' => 1,
             'perpage' => 20,
             'orderby' => 'updated_at',
             'order' => 'desc',
         ], $params);
 
-        $operators = [
-            '=' => function($q, $field, $values=[]) {
-                return $q->where($field, '=', $values[0]);
-            },
-            '!=' => function($q, $field, $values=[]) {
-                return $q->where($field, '!=', $values[0]);
-            },
-            '>' => function($q, $field, $values=[]) {
-                return $q->where($field, '>', $values[0]);
-            },
-            '>=' => function($q, $field, $values=[]) {
-                return $q->where($field, '>=', $values[0]);
-            },
-            '<' => function($q, $field, $values=[]) {
-                return $q->where($field, '<', $values[0]);
-            },
-            '<=' => function($q, $field, $values=[]) {
-                return $q->where($field, '<=', $values[0]);
-            },
-            'empty' => function($q, $field, $values=[]) {
-                return $q->where(function($q) use($field) {
-                    $q->whereNull($field);
-                    $q->orWhere($field, '');
-                });
-            },
-            'between' => function($q, $field, $values=[]) {
-                return $q->whereBetween($field, $values);
-            },
-            'in' => function($q, $field, $values=[]) {
-                return $q->whereIn($field, $values);
-            },
-        ];
-
-        $_operate = function($query, $field, $values) use($operators) {
-            $operator = array_shift($values);
-
-            if (isset($operators[ $operator ])) {
-                $query = call_user_func($operators[ $operator ], $query, $field, $values);
-            }
-
-            return $query;
-        };
-
         foreach($params as $field=>$value) {
             if (! $value) continue;
             if (! in_array($field, $this->fillable)) continue;
-            
+
+            $operator = isset($params["{$field}_op"])? $params["{$field}_op"]: false;
+
             if (is_array($value)) {
-                if (in_array($value[0], array_keys($operators))) {
-                    $query = $_operate($query, $field, $value);
-                    continue;
-                }
-
-                // foreach($value as $value2) {
-                //     if (in_array($value2[0], array_keys($operators))) {
-                //         $query = $_operate($query, $field, $value2);
-                //         continue;
-                //     }
-                // }
-                
-                continue;
+                $query->whereIn($field, $value);
             }
-
-            // ?field=value
-            $query = $query->where($field, $value);
+            else if ($operator=='lt') {
+                $query->where($field, '<', $value);
+            }
+            else if ($operator=='lte') {
+                $query->where($field, '<=', $value);
+            }
+            else if ($operator=='gt') {
+                $query->where($field, '>', $value);
+            }
+            else if ($operator=='gte') {
+                $query->where($field, '>=', $value);
+            }
+            else if ($operator=='neq') {
+                $query->where($field, '!=', $value);
+            }
+            else if ($operator=='like') {
+                $query->where($field, 'like', "%{$value}%");
+            }
+            else if ($operator=='not_like') {
+                $query->where($field, 'not like', "%{$value}%");
+            }
+            else if ($operator=='between') {
+                $query->whereBetween($field, $value);
+            }
+            else if ($operator=='not_between') {
+                $query->whereNotBetween($field, $value);
+            }
+            else {
+                $query->where($field, $value);
+            }
         }
 
 

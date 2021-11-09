@@ -21,8 +21,8 @@ class EmailsController extends Controller
 		return \App\Models\Emails::new()->validate(request()->all());
 	}
 
-	public function delete($id) {
-		return \App\Models\Emails::find($id)->remove();
+	public function delete() {
+		return \App\Models\Emails::search()->delete();
 	}
 
 	public function clone($id) {

@@ -8,7 +8,13 @@
             success-message="Usuário salvo"
         >
             <div class="row">
-                <div class="col-12 col-md-12">
+                <div class="col-12 col-md-4">
+                    <ui-user-card :user="post"></ui-user-card>
+                    <div class="mt-2"></div>
+                    <ui-upload v-model="post.photo" :preview="false"></ui-upload>
+                </div>
+                
+                <div class="col-12 col-md-8">
                     <ui-field label="Nome" :error="validator.error.name">
                         <input type="text" class="form-control" v-model="post.name">
                     </ui-field>
@@ -38,23 +44,25 @@ export default {
 
     data() {
         return {
-            edit: true,
+            userId: (this.$route.params.id || false),
             post: {},
         };
     },
 
     methods: {
-        postLoad() {
-            let id = parseInt(this.$route.params.id) || null;
-            if (! id) return;
-            this.$axios.get(`/api/users/find/${id}`).then(resp => {
+        userLoad() {
+            if (! parseInt(this.userId)) return;
+            this.$axios.get(`/api/users/find/${this.userId}`).then(resp => {
                 this.post = resp.data;
             });
         },
     },
 
     mounted() {
-        this.postLoad();
+        if (this.userId=='me') {
+            this.userId = this.$store.state.auth.user.id;
+        }
+        this.userLoad();
     },
 }
 </script>

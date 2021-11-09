@@ -21,6 +21,10 @@ class Files extends \Illuminate\Database\Eloquent\Model
 		'deleted_at'
 	];
 
+	protected $hidden = [
+		'base64',
+	];
+
 	public function validate($data=[]) {
 		return \Validator::make($data, [
 			'name' => ['required'],

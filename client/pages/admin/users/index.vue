@@ -25,11 +25,13 @@
             </template> -->
 
             <template #header="">
+                <th width="50px"></th>
                 <th data-orderby="name">Nome</th>
                 <th data-orderby="updated_at" width="200px">Alterado em</th>
             </template>
 
             <template #item="{item}">
+                <td><img :src="item.photo" alt="" v-if="item.photo" style="width:30px; height:30px; object-fit:cover; border-radius:50%;"></td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.updated_at }}</td>
             </template>

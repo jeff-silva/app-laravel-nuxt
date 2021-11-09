@@ -21,8 +21,8 @@ class PasswordResetsController extends Controller
 		return \App\Models\PasswordResets::new()->validate(request()->all());
 	}
 
-	public function delete($id) {
-		return \App\Models\PasswordResets::find($id)->remove();
+	public function delete() {
+		return \App\Models\PasswordResets::search()->delete();
 	}
 
 	public function clone($id) {

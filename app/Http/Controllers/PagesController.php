@@ -29,8 +29,8 @@ class PagesController extends Controller
 		return \App\Models\Pages::new()->validate(request()->all());
 	}
 
-	public function delete($id) {
-		return \App\Models\Pages::find($id)->remove();
+	public function delete() {
+		return \App\Models\Pages::search()->delete();
 	}
 
 	public function clone($id) {

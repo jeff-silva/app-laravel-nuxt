@@ -98,39 +98,39 @@ export default {
 		['@nuxtjs/pwa', {}],
 
 		// https://go.nuxtjs.dev/content
-		['@nuxt/content', {}],
+		// ['@nuxt/content', {}],
 
 		// https://auth.nuxtjs.org/
 		['@nuxtjs/auth-next', {
 			// https://dev.auth.nuxtjs.org/api/options#redirect
 			redirect: {
-			login: '/',
-			logout: '/',
-			callback: false,
-			home: false,
+				login: '/',
+				logout: '/',
+				callback: false,
+				home: false,
 			},
 
 			strategies: {
-			// https://dev.auth.nuxtjs.org/providers/laravel-jwt
-			// https://github.com/nuxt-community/auth-module/blob/dev/src/providers/laravel/jwt/index.ts
-			'jwt': {
-				provider: 'laravel/jwt',
-				url: '/',
-				name: 'jwt',
-				endpoints: {
-				login: {method:'POST', url:'/api/login'},
-				refresh: {method:'POST', url:'/api/refresh'},
-				logout: {method:'POST', url:'/api/logout'},
-				user: {method:'POST', url:'/api/me'},
+				// https://dev.auth.nuxtjs.org/providers/laravel-jwt
+				// https://github.com/nuxt-community/auth-module/blob/dev/src/providers/laravel/jwt/index.ts
+				'jwt': {
+					provider: 'laravel/jwt',
+					url: '/',
+					name: 'jwt',
+					endpoints: {
+						login: {method:'POST', url:'/api/login'},
+						refresh: {method:'POST', url:'/api/refresh'},
+						logout: {method:'POST', url:'/api/logout'},
+						user: {method:'POST', url:'/api/me'},
+					},
+					token: {
+						property: 'access_token',
+						maxAge: (60 * 60),
+					},
+					refreshToken: {
+						maxAge: (20160 * 60),
+					},
 				},
-				token: {
-				property: 'access_token',
-				maxAge: (60 * 60),
-				},
-				refreshToken: {
-				maxAge: (20160 * 60),
-				},
-			},
 			},
 		}],
 	],
