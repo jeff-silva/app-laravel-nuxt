@@ -59,15 +59,19 @@ export default {
 
     watch: {
         $props: {deep:true, handler(value) {
+            if (this.propsBlock) return;
             this.props = JSON.parse(JSON.stringify(value));
         }},
     },
 
     methods: {
         emitValue() {
-            this.$emit('value', this.props.value);
-            this.$emit('input', this.props.value);
-            this.$emit('change', this.props.value);
+            this.propsBlock = true;
+            console.log('ui-upload:emitValue');
+            // this.$emit('value', this.props.value);
+            // this.$emit('input', this.props.value);
+            // this.$emit('change', this.props.value);
+            this.propsBlock = false;
         },
 
         browser() {
@@ -138,6 +142,7 @@ export default {
     data() {
         return {
             props: JSON.parse(JSON.stringify(this.$props)),
+            propsBlock: false,
             progress: 0,
             file: false,
         };
