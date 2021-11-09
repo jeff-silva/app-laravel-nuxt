@@ -43,8 +43,9 @@
                         style="min-width:150px; max-width:150px; cursor:pointer;"
                     >
                         <div style="width:100%;">
-                            <div class="p-2" style="height:150px;" @click.self="selectToggle(f)">
-                                {{ f.name }}
+                            <div style="height:150px;" @click.self="selectToggle(f)">
+                                <img :src="f.url" :alt="f.name" :title="f.name" :key="f.id" v-if="strContains(f.mime, 'image')" style="width:100%; height:100%; object-fit:cover;">
+                                <div v-else>{{ f.name }}</div>
                             </div>
         
                             <a href="javascript:;" class="btn btn-sm btn-primary w-100 rounded-0" @click="edit=f">
@@ -52,6 +53,21 @@
                             </a>
                         </div>
                     </div>
+                </div>
+
+                <div class="bg-white border-top p-2">
+                    <el-pagination
+                        v-if="files"
+                        background
+                        :current-page.sync="filesParams.page"
+                        :page-size.sync="filesParams.per_page"
+                        :total="files.total"
+                        layout="prev, pager, next"
+                        @size-change="refresh()"
+                        @current-change="refresh()"
+                        @prev-click="refresh()"
+                        @next-click="refresh()"
+                    ></el-pagination>
                 </div>
             </div>
         </div>
@@ -82,7 +98,7 @@
 <script>
 export default {
     props: {
-        value: Array,
+        value: {default: () => ([])},
     },
 
     data() {
@@ -91,6 +107,8 @@ export default {
             filesParams: {
                 q: '',
                 folder: '',
+                page: 1,
+                per_page: 20,
             },
             files: false,
             edit: false,

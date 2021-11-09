@@ -40,6 +40,10 @@
                 <nuxt-link :to="`/admin/users/${item.id}`" class="btn btn-primary">
                     <i class="fas fa-fw fa-edit"></i>
                 </nuxt-link>
+
+                <nuxt-link :to="`/admin/users/${item.id}`" class="btn btn-danger">
+                    <i class="fas fa-fw fa-times"></i>
+                </nuxt-link>
             </template>
         </ui-search>
     </div>

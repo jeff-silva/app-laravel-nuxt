@@ -42,24 +42,17 @@ class FilesController extends Controller
 	}
 
 	public function upload() {
-		if (request()->hasFile('file') AND $file = request()->file('file')) {
-			$data['name'] = $file->getClientOriginalName();
-			$data['slug'] = uniqid() .'.'. $file->extension();
-			$data['mime'] = $file->getMimeType();
-			$data['ext'] = $file->extension();
-			$data['size'] = $file->getSize();
-			$data['url'] = "/api/file/{$data['slug']}";
-			$data['base64'] =  "data:{$data['mime']};base64,". base64_encode(file_get_contents($file));
-			return \App\Models\Files::create($data);
-		}
-
-		return false;
+		return (new \App\Models\Files)->upload('file');
 	}
 
 	public function file($slug) {
 		if ($file = \App\Models\Files::where('slug', $slug)->first()) {
 			$content = explode(',', $file->base64);
 			$content = base64_decode($content[1]);
+			
+			if ($file->mime=='image/svg') {
+				$file->mime = 'image/svg+xml';
+			}
 
 			return response($content)
                 ->withHeaders([

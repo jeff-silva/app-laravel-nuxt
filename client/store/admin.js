@@ -10,7 +10,10 @@ export default {
                 {to:"/admin/users", icon:"fas fa-globe", title:"Buscar", children:[]},
                 {to:"/admin/users/new", icon:"fas fa-globe", title:"Criar", children:[]},
             ]},
-            {to:"/admin/settings", icon:"fas fa-globe", title:"Configurações", children:[]},
+            {to:"/admin/settings", icon:"fas fa-cog", title:"Sistema", children:[
+                {to:"/admin/files", icon:"fas fa-globe", title:"Arquivos", children:[]},
+                {to:"/admin/settings", icon:"fas fa-globe", title:"Configurações", children:[]},
+            ]},
         ],
 
         userOptions: [

@@ -2,20 +2,26 @@
     <div @drop.prevent="dropFile" @dragover.prevent>
         
         <!-- Browser -->
-        <div class="input-group">
+        <div class="input-group form-control p-0">
             <div class="input-group-btn">
                 <button type="button" class="btn rounded-0" @click="browser()">
                     <i class="fas fa-upload"></i>
                 </button>
             </div>
 
-            <div class="input-group-btn">
-                <button type="button" class="btn rounded-0" @click="modal=true">
+            <input type="text" class="form-control" v-model="props.value" placeholder="Sem arquivo" style="border:none!important;">
+
+            <div class="input-group-btn" v-if="compValue">
+                <a :href="props.value" class="btn" target="_blank">
                     <i class="fas fa-link"></i>
-                </button>
+                </a>
             </div>
 
-            <div class="form-control" style="overflow:hidden;">{{ props.value || 'Sem arquivo' }}</div>
+            <div class="input-group-btn" v-if="compValue">
+                <button type="button" class="btn btn-danger rounded-0" @click="props.value=''; emitValue();">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
 
         <!-- Progress -->
@@ -39,27 +45,6 @@
                     {{ compValue.type }}
                 </div>
             </div>
-        </div>
-
-        <!-- Modal URL -->
-        <ui-modal v-model="modal">
-            <template #header>header</template>
-            <template #body>
-                <ui-field label="URL">
-                    <input type="text" class="form-control" v-model="props.value">
-                </ui-field>
-            </template>
-            <template #footer>
-                <button type="button" class="btn btn-primary" @click="modal=false; emitValue();">
-                    Ok
-                </button>
-            </template>
-        </ui-modal>
-
-        <div class="text-end" v-if="compValue">
-            <a href="javascript:;" class="ms-2" @click="props.value=''">Apagar</a>
-            <a :href="compValue.url" target="_blank" class="ms-2">Abrir nova aba</a>
-            <a :href="compValue.url" :download="compValue.url" class="ms-2">Download</a>
         </div>
     </div>
 </template>
@@ -126,6 +111,11 @@ export default {
             //     };
             // };
         },
+
+        clear() {
+            this.props.value = '';
+            this.emitValue();
+        },
     },
 
     computed: {
@@ -150,7 +140,6 @@ export default {
             props: JSON.parse(JSON.stringify(this.$props)),
             progress: 0,
             file: false,
-            modal: false,
         };
     },
 }

@@ -70,8 +70,18 @@
                     <slot name="item" :item="item">
                         <td>{{ item }}</td>
                     </slot>
-                    <td>
-                        <slot name="actions" :item="item"></slot>
+                    <td width="10px">
+                        <div class="ui-search-actions" style="position:relative;">
+                            <div class="d-flex" style="position:absolute; top:-20px; right:0;">
+                                <div class="d-flex ui-search-actions-hidden">
+                                    <slot name="actions" :item="item"></slot>
+                                </div>
+    
+                                <a href="javascript:;" class="btn bg-white" style="box-shadow:0 0 10px #00000022;">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -175,4 +185,7 @@ export default {
 .ui-search th[data-orderby] {cursor:pointer !important;}
 .ui-search-orderby-asc:after {margin-left:5px; font-family: "Font Awesome 5 Free"; content:"\f0dd";}
 .ui-search-orderby-desc:after {margin-left:5px; font-family: "Font Awesome 5 Free"; content:"\f0de";}
+.ui-search-actions .btn {width:40px !important; height:40px !important; padding:6px; border-radius:50% !important; margin-left:5px;}
+.ui-search-actions-hidden {display:none!important;}
+.ui-search-actions:hover .ui-search-actions-hidden {display:flex!important;}
 </style>

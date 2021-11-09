@@ -11,6 +11,7 @@ const _930a45f4 = () => interopDefault(import('..\\client\\pages\\dev\\index\\au
 const _53de8410 = () => interopDefault(import('..\\client\\pages\\dev\\index\\endpoints.vue' /* webpackChunkName: "pages/dev/index/endpoints" */))
 const _2bd1a07c = () => interopDefault(import('..\\client\\pages\\dev\\index\\example.vue' /* webpackChunkName: "pages/dev/index/example" */))
 const _77041189 = () => interopDefault(import('..\\client\\pages\\dev\\index\\files.vue' /* webpackChunkName: "pages/dev/index/files" */))
+const _fe5a846e = () => interopDefault(import('..\\client\\pages\\admin\\files.vue' /* webpackChunkName: "pages/admin/files" */))
 const _92a0c9a8 = () => interopDefault(import('..\\client\\pages\\admin\\pages\\index.vue' /* webpackChunkName: "pages/admin/pages/index" */))
 const _8029c27e = () => interopDefault(import('..\\client\\pages\\admin\\settings.vue' /* webpackChunkName: "pages/admin/settings" */))
 const _480c4aa1 = () => interopDefault(import('..\\client\\pages\\admin\\settings\\index.vue' /* webpackChunkName: "pages/admin/settings/index" */))
@@ -60,6 +61,10 @@ export const routerOptions = {
       component: _77041189,
       name: "dev-index-files"
     }]
+  }, {
+    path: "/admin/files",
+    component: _fe5a846e,
+    name: "admin-files"
   }, {
     path: "/admin/pages",
     component: _92a0c9a8,

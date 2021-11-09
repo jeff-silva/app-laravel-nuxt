@@ -14,14 +14,16 @@
 
             <div class="col-10">
                 <ui-form method="post" action="/api/settings/save-all" v-model="settings" #default="{loading}" success-message="Configurações alteradas">
-                    <div class="p-3">
-                        <nuxt-child :settings="settings" :settings-get-all="settingsGetAll" :settings-save-all="settingsSaveAll"></nuxt-child>
-                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <nuxt-child :settings="settings" :settings-get-all="settingsGetAll" :settings-save-all="settingsSaveAll"></nuxt-child>
+                        </div>
 
-                    <div class="text-end bg-light p-3">
-                        <button type="submit" class="btn btn-primary" v-loading="loading">
-                            Salvar
-                        </button>
+                        <div class="card-footer text-end">
+                            <button type="submit" class="btn btn-primary" v-loading="loading">
+                                Salvar
+                            </button>
+                        </div>
                     </div>
                 </ui-form>
             </div>

@@ -9,29 +9,39 @@
         >
             <div class="row">
                 <div class="col-12 col-md-4">
-                    <ui-user-card :user="post"></ui-user-card>
-                    <div class="mt-2"></div>
-                    <ui-upload v-model="post.photo" :preview="false"></ui-upload>
+                    <div class="bg-white shadow rounded">
+                        <div class="text-center py-4">
+                            <img :src="post.photo" alt=""
+                                v-if="post.photo"
+                                style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
+                            
+                            <div class="fw-bold mt-4 text-uppercase">{{ post.name }}</div>
+                            <ui-upload v-model="post.photo" :preview="false" class="mx-3 mt-4"></ui-upload>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="col-12 col-md-8">
-                    <ui-field label="Nome" :error="validator.error.name">
-                        <input type="text" class="form-control" v-model="post.name">
-                    </ui-field>
+                    <div class="card">
+                        <div class="card-body">
+                            <ui-field label="Nome" :error="validator.error.name">
+                                <input type="text" class="form-control" v-model="post.name">
+                            </ui-field>
+        
+                            <ui-field label="E-mail" :error="validator.error.email">
+                                <input type="text" class="form-control" v-model="post.email">
+                            </ui-field>
+                        </div>
 
-                    <ui-field label="E-mail" :error="validator.error.email">
-                        <input type="text" class="form-control" v-model="post.email">
-                    </ui-field>
+                        <div class="card-footer text-end">
+                            <nuxt-link to="/admin/users" class="btn">Voltar</nuxt-link>
+                
+                            <button type="submit" class="btn btn-primary" v-loading="loading">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-
-            <div class="text-end">
-                <nuxt-link to="/admin/users" class="btn">Voltar</nuxt-link>
-
-                <button type="submit" class="btn btn-primary" v-loading="loading">
-                    Salvar
-                </button>
             </div>
         </ui-form>
     </div>
