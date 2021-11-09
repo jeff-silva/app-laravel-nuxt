@@ -59,19 +59,18 @@ export default {
 
     watch: {
         $props: {deep:true, handler(value) {
-            if (this.propsBlock) return;
-            this.props = JSON.parse(JSON.stringify(value));
+            this.props = JSON.parse(JSON.stringify(this.$props));
         }},
     },
 
     methods: {
         emitValue() {
-            this.propsBlock = true;
-            console.log('ui-upload:emitValue');
-            // this.$emit('value', this.props.value);
-            // this.$emit('input', this.props.value);
-            // this.$emit('change', this.props.value);
-            this.propsBlock = false;
+            if (this._preventRecursive) return;
+            this._preventRecursive = true;
+            this.$emit('value', this.props.value);
+            this.$emit('input', this.props.value);
+            this.$emit('change', this.props.value);
+            this._preventRecursive = false;
         },
 
         browser() {
@@ -100,20 +99,6 @@ export default {
                 this.props.value = resp.data.url;
                 this.emitValue();
             });
-            
-            // let reader = new FileReader();
-            // reader.readAsDataURL(file);
-            // reader.onerror = error => { this.file = false; };
-            // reader.onload = () => {
-            //     this.file = {
-            //         name: file.name.replace(/[^a-zA-Z0-9]/g, ' '),
-            //         size: file.size,
-            //         mime: file.type,
-            //         type: (file.type.split('/')[0] || false),
-            //         ext: file.name.split('.').pop(),
-            //         url: reader.result,
-            //     };
-            // };
         },
 
         clear() {
@@ -142,7 +127,6 @@ export default {
     data() {
         return {
             props: JSON.parse(JSON.stringify(this.$props)),
-            propsBlock: false,
             progress: 0,
             file: false,
         };

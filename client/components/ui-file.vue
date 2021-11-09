@@ -5,7 +5,7 @@
                 <div class="list-group list-group-flush" v-if="files">
                     <div class="list-group-item list-group-item-primary">Pastas</div>
                     <a href="javascript:;" class="list-group-item" v-for="f in files.folders" @click="filesParams.folder=f.folder; refresh();">
-                        {{ f.folder || '/' }}
+                        /{{ f.folder || '' }}
                     </a>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <i class="fas fa-spin fa-spinner"></i> Carregando...
                 </div>
     
-                <div class="p-2 text-center text-muted py-5" v-if="files && files.length==0">
+                <div class="p-2 text-center text-muted py-5" v-if="files && files.data.length==0">
                     Sem arquivos
                 </div>
     
@@ -82,11 +82,14 @@
 
                 <ui-field label="Pasta">
                     <el-select v-model="edit.folder" class="w-100" filterable allow-create>
-                        <el-option :value="f.folder" v-for="f in files.folders" :key="f.folder">{{ f.folder || '/' }}</el-option>
+                        <el-option :value="f.folder" v-for="f in files.folders" :key="f.folder">/{{ f.folder || '' }}</el-option>
                     </el-select>
                 </ui-field>
             </template>
             <template #footer>
+                <button type="button" class="btn btn-danger" @click="selectedsDelete(edit.id)">
+                    Deletar
+                </button>
                 <button type="button" class="btn btn-primary" @click="fileSave()">
                     Salvar
                 </button>
@@ -123,9 +126,13 @@ export default {
         },
 
         refresh() {
+            if (this._refreshing) return;
+            this._refreshing = true;
+
             let params = this.filesParams;
             this.$axios.get('/api/files/search', {params}).then(resp => {
                 this.files = resp.data;
+                this._refreshing = false;
             });
         },
 
@@ -136,12 +143,17 @@ export default {
             this.emitValue();
         },
 
-        selectedsDelete() {
+        selectedsDelete(id=null) {
             this.$confirm(`Deseja deletar ${this.props.value.length} arquivos?`).then(resp => {
-                let params = {id: this.props.value.map(file => file.id)};
-                this.$axios.post('/api/files/delete', params).then(resp => {
+
+                if (this.props.value.length>0) {
+                    id = this.props.value.map(file => file.id);
+                }
+
+                this.$axios.post('/api/files/remove', {id}).then(resp => {
                     this.refresh();
                     this.props.value = [];
+                    this.edit = false;
                 });
             });
         },

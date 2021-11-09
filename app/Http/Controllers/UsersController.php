@@ -21,8 +21,8 @@ class UsersController extends Controller
 		return \App\Models\User::new()->validate(request()->all());
 	}
 
-	public function delete() {
-		return \App\Models\User::search()->delete();
+	public function remove() {
+		return \App\Models\User::search()->remove();
 	}
 
 	public function clone($id) {

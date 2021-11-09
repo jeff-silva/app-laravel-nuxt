@@ -29,8 +29,8 @@ class FilesController extends Controller
 		return \App\Models\Files::new()->validate(request()->all());
 	}
 
-	public function delete() {
-		return \App\Models\Files::search()->delete();
+	public function remove() {
+		return \App\Models\Files::search()->remove();
 	}
 
 	public function clone($id) {
@@ -46,22 +46,23 @@ class FilesController extends Controller
 	}
 
 	public function file($slug) {
-		if ($file = \App\Models\Files::where('slug', $slug)->first()) {
-			$content = explode(',', $file->base64);
-			$content = base64_decode($content[1]);
-			
-			if ($file->mime=='image/svg') {
-				$file->mime = 'image/svg+xml';
-			}
+		$file = \Cache::remember("file-{$slug}", 60*30*24, function() use($slug) {
+			return \App\Models\Files::where('slug', $slug)->first();
+		});
 
-			return response($content)
-                ->withHeaders([
-                    'Content-Type' => $file->mime,
-                    // 'Cache-Control' => 'no-store, no-cache',
-                    // 'Content-Disposition' => 'attachment; filename="logs.txt',
-                ]);
+		if (! $file) return '';
+
+		$content = explode(',', $file->base64);
+		$content = base64_decode($content[1]);
+		
+		if ($file->mime=='image/svg') {
+			$file->mime = 'image/svg+xml';
 		}
 
-		return false;
+		return response($content)->withHeaders([
+			'Content-Type' => $file->mime,
+			// 'Cache-Control' => 'no-store, no-cache',
+			// 'Content-Disposition' => 'attachment; filename="logs.txt',
+		]);
 	}
 }

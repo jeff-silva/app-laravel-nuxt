@@ -49,4 +49,8 @@ class Files extends \Illuminate\Database\Eloquent\Model
 
 		return \App\Models\Files::create($data);
 	}
+
+	public function setFolderAttribute($value) {
+		$this->attributes['folder'] = trim($value, '/');
+	}
 }

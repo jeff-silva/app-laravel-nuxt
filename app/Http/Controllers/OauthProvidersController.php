@@ -21,8 +21,8 @@ class OauthProvidersController extends Controller
 		return \App\Models\OauthProviders::new()->validate(request()->all());
 	}
 
-	public function delete() {
-		return \App\Models\OauthProviders::search()->delete();
+	public function remove() {
+		return \App\Models\OauthProviders::search()->remove();
 	}
 
 	public function clone($id) {

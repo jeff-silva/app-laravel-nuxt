@@ -21,8 +21,8 @@ class MigrationsController extends Controller
 		return \App\Models\Migrations::new()->validate(request()->all());
 	}
 
-	public function delete() {
-		return \App\Models\Migrations::search()->delete();
+	public function remove() {
+		return \App\Models\Migrations::search()->remove();
 	}
 
 	public function clone($id) {

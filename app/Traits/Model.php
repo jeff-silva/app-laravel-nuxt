@@ -5,7 +5,7 @@ namespace App\Traits;
 trait Model
 {
     public static function bootModel() {
-        self::saving(function($model) {
+        static::saving(function($model) {
 
             $data = $model->toArray();
             $validate = $model->validate($data);
@@ -54,25 +54,25 @@ trait Model
     }
 
 
-    public function remove($forced=false) {
-        if (! $this->id) return false;
-        
-        if ($forced==false AND \Schema::hasColumn($this->getTable(), 'deleted_at')) {
-            $this->deleted_at = date('Y-m-d H:i:s');
-            $this->store();
-            return $this;
-        }
-
-        $this->delete();
-        return $this;
-    }
-
     public function clone() {
         // 
     }
 
     public function scopeExport($query) {
         return $query;
+    }
+
+    // TODO: Remover apenas se existir condições where
+    public function scopeRemove($query) {
+        if (\Schema::hasColumn($this->getTable(), 'deleted_at')) {
+            return $query->get()->transform(function($item) {
+                $item->deleted_at = date('Y-m-d H:i:s');
+                $item->save();
+                return $item;
+            });
+        }
+
+        return $query->delete();
     }
 
 
@@ -94,6 +94,7 @@ trait Model
             'perpage' => 20,
             'orderby' => 'updated_at',
             'order' => 'desc',
+            'deleted' => '',
         ], $params);
 
         foreach($params as $field=>$value) {
@@ -154,6 +155,14 @@ trait Model
                 foreach($whereLikes as $w) {
                     $q->orWhere($w[0], $w[1], $w[2]);
                 }
+            });
+        }
+
+        // ?deleted=1
+        if (! $params['deleted']) {
+            $query->where(function($q) {
+                $q->whereNull('deleted_at');
+                $q->orWhere('deleted_at', '');
             });
         }
 

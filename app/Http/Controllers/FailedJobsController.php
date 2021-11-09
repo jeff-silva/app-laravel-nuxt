@@ -21,8 +21,8 @@ class FailedJobsController extends Controller
 		return \App\Models\FailedJobs::new()->validate(request()->all());
 	}
 
-	public function delete() {
-		return \App\Models\FailedJobs::search()->delete();
+	public function remove() {
+		return \App\Models\FailedJobs::search()->remove();
 	}
 
 	public function clone($id) {
