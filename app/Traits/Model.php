@@ -159,7 +159,7 @@ trait Model
         }
 
         // ?deleted=1
-        if (! $params['deleted']) {
+        if (!$params['deleted'] AND in_array('deleted_at', $this->fillable)) {
             $query->where(function($q) {
                 $q->whereNull('deleted_at');
                 $q->orWhere('deleted_at', '');
