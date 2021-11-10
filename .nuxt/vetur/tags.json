@@ -26,6 +26,9 @@
   "UiModal": {
     "description": "Auto imported from components/ui-modal.vue"
   },
+  "UiNav": {
+    "description": "Auto imported from components/ui-nav.vue"
+  },
   "UiPassword": {
     "description": "Auto imported from components/ui-password.vue"
   },

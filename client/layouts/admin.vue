@@ -8,29 +8,7 @@
 					</span>
 				</a>
 
-				<ul class="sidebar-nav">
-					<template v-for="m in $store.state.admin.menu">
-						<li class="sidebar-header" v-if="m.children.length>0">
-							{{ m.title }}
-						</li>
-
-						<li class="sidebar-item" v-else>
-							<nuxt-link :to="m.to" class="sidebar-link">
-								<i :class="`align-middle ${m.icon}`"></i>
-								<span class="align-middle">{{ m.title }}</span>
-							</nuxt-link>
-						</li>
-
-						<template v-for="mm in m.children">
-							<li class="sidebar-item">
-								<nuxt-link :to="mm.to" class="sidebar-link">
-									<i :class="`align-middle ${mm.icon}`"></i>
-									<span class="align-middle">{{ mm.title }}</span>
-								</nuxt-link>
-							</li>
-						</template>
-					</template>
-				</ul>
+				<ui-nav :items="$store.state.admin.menu" mode="vertical" text-color="#fff"></ui-nav>
 			</div>
 		</nav>
 

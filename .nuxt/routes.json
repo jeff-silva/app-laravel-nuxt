@@ -39,6 +39,12 @@
         "path": "files",
         "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\files.vue",
         "chunkName": "pages/dev/index/files"
+      },
+      {
+        "name": "dev-index-nav",
+        "path": "nav",
+        "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\nav.vue",
+        "chunkName": "pages/dev/index/nav"
       }
     ]
   },

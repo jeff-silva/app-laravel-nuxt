@@ -33,6 +33,7 @@ export default {
                 {to:"/dev/endpoints", title:"Endpoints"},
                 {to:"/dev/auth", title:"Autenticações"},
                 {to:"/dev/files", title:"Arquivos"},
+                {to:"/dev/nav", title:"Nav"},
                 {to:"/dev/example", title:"Exemplo"},
             ],
         };

@@ -15,6 +15,7 @@ You can directly use them in pages and other components without the need to impo
 - `<UiFile>` | `<ui-file>` (components/ui-file.vue)
 - `<UiForm>` | `<ui-form>` (components/ui-form.vue)
 - `<UiModal>` | `<ui-modal>` (components/ui-modal.vue)
+- `<UiNav>` | `<ui-nav>` (components/ui-nav.vue)
 - `<UiPassword>` | `<ui-password>` (components/ui-password.vue)
 - `<UiSearch>` | `<ui-search>` (components/ui-search.vue)
 - `<UiUpload>` | `<ui-upload>` (components/ui-upload.vue)

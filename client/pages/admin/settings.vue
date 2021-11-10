@@ -2,14 +2,7 @@
     <div>
         <div class="row g-0 bg-white">
             <div class="col-2 bg-dark">
-                <div class="list-group list-group-flush">
-                    <template v-for="n in $store.state.admin.settings">
-                        <nuxt-link class="list-group-item text-white bg-transparent" :to="n.to">
-                            <i :class="n.icon" class="me-2"></i>
-                            {{ n.title }}
-                        </nuxt-link>
-                    </template>
-                </div>
+                <ui-nav :items="$store.state.admin.settings" mode="vertical" text-color="#fff"></ui-nav>
             </div>
 
             <div class="col-10">
