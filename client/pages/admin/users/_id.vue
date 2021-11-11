@@ -53,7 +53,7 @@
                     </el-tabs>
 
                     <div class="card">
-                        <div class="card-footer text-end">
+                        <div class="card-footer border-0 text-end">
                             <nuxt-link to="/admin/users" class="btn">Voltar</nuxt-link>
                 
                             <button type="submit" class="btn btn-primary" v-loading="loading">

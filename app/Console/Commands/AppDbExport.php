@@ -40,6 +40,12 @@ class AppDbExport extends AppBase
             $table->Model = ((string) \Str::of($table->Name)->slug()->studly());
             $table->ModelNamespace = '\App\Models';
             $table->ModelFile = '\app\Models\\'. ((string) \Str::of($table->Name)->slug()->studly()) .'.php';
+            
+            if ($table->Name=='users') {
+                $table->Model = ((string) \Str::of($table->Name)->slug()->singular()->studly());
+                $table->ModelNamespace = '\App\Models';
+                $table->ModelFile = '\app\Models\\'. ((string) \Str::of($table->Name)->slug()->singular()->studly()) .'.php';
+            }
 
             $table->Controller = ((string) \Str::of($table->Name)->slug()->studly()) .'Controller';
             $table->ControllerNamespace = '\App\Http\Controllers';

@@ -20,12 +20,17 @@ class User extends Authenticatable implements JWTSubject
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'email',
-        'photo',
-        'password',
-        'address_id',
-    ];
+		'id',
+		'name',
+		'email',
+		'photo',
+		'email_verified_at',
+		'password',
+		'address_id',
+		'remember_token',
+		'created_at',
+		'updated_at'
+	];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -100,4 +105,16 @@ class User extends Authenticatable implements JWTSubject
     public function getVerifyLink() {
         return \URL::to("/verification/xxx/");
     }
+
+	public function oauthProviders() {
+		return $this->hasMany(\App\Models\User::class, 'user_id', 'id');
+	}
+
+	public function address() {
+		return $this->belongsTo(\App\Models\User::class, 'address_id', 'id');
+	}
+
+	public function usersNotifications() {
+		return $this->hasMany(\App\Models\User::class, 'user_id', 'id');
+	}
 }

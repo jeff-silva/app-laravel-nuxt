@@ -30,4 +30,8 @@ class Addresses extends \Illuminate\Database\Eloquent\Model
 			'route' => ['required'],
 		]);
 	}
+
+	public function users() {
+		return $this->hasMany(\App\Models\Addresses::class, 'address_id', 'id');
+	}
 }

@@ -17,7 +17,6 @@ class AppMakeModels extends AppBase
         $schema = config('database-schema', []);
 
         foreach($schema['tables'] as $table_name=>$table) {
-            if ($table_name=='users') continue;
             
             if (! file_exists(base_path($table['ModelFile']))) {
                 file_put_contents(base_path($table['ModelFile']), implode("\n", [
@@ -42,15 +41,15 @@ class AppMakeModels extends AppBase
 
             $content = file_get_contents(base_path($table['ModelFile']));
             $me = $this;
-
+            
             // Criando protected $fillable
             $content = preg_replace_callback('/protected \$fillable(.+?);/s', function($finds) use($me, $table) {
                 $fillable = "'". implode("',\n\t\t'", array_keys($table['Fields'])) ."'";
                 return "protected \$fillable = [\n\t\t{$fillable}\n\t];";
             }, $content);
-
+            
             file_put_contents(base_path($table['ModelFile']), $content);
-
+            
             // Criando métodos belongsTo e hasMany
             $methods = [];
             $fks = config('database-schema.fks', []);
