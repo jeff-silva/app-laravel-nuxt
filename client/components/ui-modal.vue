@@ -24,7 +24,7 @@
 <script>
 export default {
     props: {
-        value: Boolean,
+        value: [Boolean, String, Array, Object],
     },
 
     watch: {

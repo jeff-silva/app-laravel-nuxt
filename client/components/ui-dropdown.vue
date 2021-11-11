@@ -2,9 +2,11 @@
     <div style="position:relative;">
         <slot></slot>
 
-        <div v-if="props.value" :class="{'ui-dropdown-content':true, 'ui-dropdown-content-right':props.right, 'ui-dropdown-content-top':props.top}">
-            <slot name="dropdown"></slot>
-        </div>
+        <transition enter-active-class="animate__animated animate__fadeIn" leave-active-class="animate__animated animate__fadeOut">
+            <div v-if="props.value" style="animation-duration:200ms; z-index:9;" :class="{'ui-dropdown-content':true, 'ui-dropdown-content-right':props.right, 'ui-dropdown-content-top':props.top}">
+                <slot name="dropdown"></slot>
+            </div>
+        </transition>
     </div>
 </template>
 
