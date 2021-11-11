@@ -2,10 +2,6 @@ export default {
     state: {
         menu: [
             {to:"/admin", icon:"fas fa-globe", label:"Dashboard", children:[]},
-            {to:"/admin/pages", icon:"fas fa-globe", label:"Páginas", children:[
-                {to:"/admin/pages", icon:"fas fa-globe", label:"Buscar", children:[]},
-                {to:"/admin/pages/new", icon:"fas fa-globe", label:"Criar", children:[]},
-            ]},
             {to:"/admin/users", icon:"fas fa-globe", label:"Usuários", children:[
                 {to:"/admin/users", icon:"fas fa-globe", label:"Buscar", children:[]},
                 {to:"/admin/users/new", icon:"fas fa-globe", label:"Criar", children:[]},

@@ -1,3 +1,4 @@
+export { default as UiAddress } from '../..\\client\\components\\ui-address.vue'
 export { default as UiAuthLogin } from '../..\\client\\components\\ui-auth-login.vue'
 export { default as UiAuthPassword } from '../..\\client\\components\\ui-auth-password.vue'
 export { default as UiAuthRegister } from '../..\\client\\components\\ui-auth-register.vue'

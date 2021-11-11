@@ -32,4 +32,8 @@ class OauthProvidersController extends Controller
 	public function export() {
 		return \App\Models\OauthProviders::search()->export();
 	}
+
+	public function delete($id) {
+		return \App\Models\OauthProviders::search()->remove();
+	}
 }

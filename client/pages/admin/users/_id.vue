@@ -22,8 +22,8 @@
                 </div>
                 
                 <div class="col-12 col-md-8">
-                    <div class="card">
-                        <div class="card-body">
+                    <el-tabs type="border-card">
+                        <el-tab-pane label="Acesso">
                             <ui-field label="Nome" :error="validator.error.name">
                                 <input type="text" class="form-control" v-model="post.name">
                             </ui-field>
@@ -31,8 +31,14 @@
                             <ui-field label="E-mail" :error="validator.error.email">
                                 <input type="text" class="form-control" v-model="post.email">
                             </ui-field>
-                        </div>
+                        </el-tab-pane>
+                        
+                        <el-tab-pane label="Endereço">
+                            <ui-address v-model="post.address_id"></ui-address>
+                        </el-tab-pane>
+                    </el-tabs>
 
+                    <div class="card">
                         <div class="card-footer text-end">
                             <nuxt-link to="/admin/users" class="btn">Voltar</nuxt-link>
                 

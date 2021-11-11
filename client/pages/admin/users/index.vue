@@ -1,8 +1,5 @@
 <template>
     <div>
-        <nuxt-link to="/admin/users/new">Novo</nuxt-link>
-        <hr>
-
         <ui-search action="/api/users/search" :params="{status:''}">
             <!-- <template #fields="{params}">
                 <div class="row">
@@ -24,19 +21,25 @@
                 </div>
             </template> -->
 
-            <template #header="">
+            <template #search-actions>
+                <nuxt-link to="/admin/users/new" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Criar
+                </nuxt-link>
+            </template>
+
+            <template #table-header="">
                 <th width="50px"></th>
                 <th data-orderby="name">Nome</th>
                 <th data-orderby="updated_at" width="200px">Alterado em</th>
             </template>
 
-            <template #item="{item}">
+            <template #table-row="{item}">
                 <td><img :src="item.photo" alt="" v-if="item.photo" style="width:30px; height:30px; object-fit:cover; border-radius:50%;"></td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.updated_at }}</td>
             </template>
 
-            <template #actions="{item}">
+            <template #table-actions="{item}">
                 <nuxt-link :to="`/admin/users/${item.id}`" class="btn btn-primary">
                     <i class="fas fa-fw fa-edit"></i>
                 </nuxt-link>

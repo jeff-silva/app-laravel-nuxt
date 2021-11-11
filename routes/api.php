@@ -29,6 +29,14 @@ Route::post('password-reset-start', 'App\Http\Controllers\AppController@password
 Route::post('password-reset-change', 'App\Http\Controllers\AppController@passwordResetChange');
 Route::post('email-test', 'App\Http\Controllers\AppController@emailTest');
 
+Route::get('addresses/search', 'App\Http\Controllers\AddressesController@search');
+Route::get('addresses/find/{id}', 'App\Http\Controllers\AddressesController@find');
+Route::post('addresses/save', 'App\Http\Controllers\AddressesController@save');
+Route::post('addresses/valid', 'App\Http\Controllers\AddressesController@valid');
+Route::post('addresses/remove', 'App\Http\Controllers\AddressesController@remove');
+Route::get('addresses/clone/{id}', 'App\Http\Controllers\AddressesController@clone');
+Route::get('addresses/export', 'App\Http\Controllers\AddressesController@export');
+
 Route::get('pages/search', 'App\Http\Controllers\PagesController@search');
 Route::get('pages/find/{id}', 'App\Http\Controllers\PagesController@find');
 Route::post('pages/save', 'App\Http\Controllers\PagesController@save');

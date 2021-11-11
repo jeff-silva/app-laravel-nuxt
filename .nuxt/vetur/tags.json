@@ -1,4 +1,7 @@
 {
+  "UiAddress": {
+    "description": "Auto imported from components/ui-address.vue"
+  },
   "UiAuthLogin": {
     "description": "Auto imported from components/ui-auth-login.vue"
   },

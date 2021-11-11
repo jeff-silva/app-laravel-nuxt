@@ -1,8 +1,8 @@
 <template>
     <div>
-        <ui-upload ref="upload" @change="$refs.upload.clear(); $refs.file.refresh();"></ui-upload>
+        <lazy-ui-upload ref="upload" @change="$refs.upload.clear(); $refs.file.refresh();"></lazy-ui-upload>
         <div class="mb-3"></div>
-        <ui-file ref="file"></ui-file>
+        <lazy-ui-file ref="file"></lazy-ui-file>
     </div>
 </template>
 

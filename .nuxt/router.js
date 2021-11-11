@@ -13,13 +13,11 @@ const _2bd1a07c = () => interopDefault(import('..\\client\\pages\\dev\\index\\ex
 const _77041189 = () => interopDefault(import('..\\client\\pages\\dev\\index\\files.vue' /* webpackChunkName: "pages/dev/index/files" */))
 const _61e980b5 = () => interopDefault(import('..\\client\\pages\\dev\\index\\nav.vue' /* webpackChunkName: "pages/dev/index/nav" */))
 const _fe5a846e = () => interopDefault(import('..\\client\\pages\\admin\\files.vue' /* webpackChunkName: "pages/admin/files" */))
-const _92a0c9a8 = () => interopDefault(import('..\\client\\pages\\admin\\pages\\index.vue' /* webpackChunkName: "pages/admin/pages/index" */))
 const _8029c27e = () => interopDefault(import('..\\client\\pages\\admin\\settings.vue' /* webpackChunkName: "pages/admin/settings" */))
 const _480c4aa1 = () => interopDefault(import('..\\client\\pages\\admin\\settings\\index.vue' /* webpackChunkName: "pages/admin/settings/index" */))
 const _12de0f2a = () => interopDefault(import('..\\client\\pages\\admin\\settings\\email.vue' /* webpackChunkName: "pages/admin/settings/email" */))
 const _2dbc35cc = () => interopDefault(import('..\\client\\pages\\admin\\settings\\user.vue' /* webpackChunkName: "pages/admin/settings/user" */))
 const _6e3bab30 = () => interopDefault(import('..\\client\\pages\\admin\\users\\index.vue' /* webpackChunkName: "pages/admin/users/index" */))
-const _44fb0ed8 = () => interopDefault(import('..\\client\\pages\\admin\\pages\\_id.vue' /* webpackChunkName: "pages/admin/pages/_id" */))
 const _e770b260 = () => interopDefault(import('..\\client\\pages\\admin\\users\\_id.vue' /* webpackChunkName: "pages/admin/users/_id" */))
 const _5dd9bc21 = () => interopDefault(import('..\\client\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -71,10 +69,6 @@ export const routerOptions = {
     component: _fe5a846e,
     name: "admin-files"
   }, {
-    path: "/admin/pages",
-    component: _92a0c9a8,
-    name: "admin-pages"
-  }, {
     path: "/admin/settings",
     component: _8029c27e,
     children: [{
@@ -94,10 +88,6 @@ export const routerOptions = {
     path: "/admin/users",
     component: _6e3bab30,
     name: "admin-users"
-  }, {
-    path: "/admin/pages/:id",
-    component: _44fb0ed8,
-    name: "admin-pages-id"
   }, {
     path: "/admin/users/:id",
     component: _e770b260,

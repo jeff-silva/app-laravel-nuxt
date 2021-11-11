@@ -32,4 +32,8 @@ class FailedJobsController extends Controller
 	public function export() {
 		return \App\Models\FailedJobs::search()->export();
 	}
+
+	public function delete($id) {
+		return \App\Models\FailedJobs::search()->remove();
+	}
 }

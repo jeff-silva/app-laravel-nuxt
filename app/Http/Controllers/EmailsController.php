@@ -32,4 +32,8 @@ class EmailsController extends Controller
 	public function export() {
 		return \App\Models\Emails::search()->export();
 	}
+
+	public function delete($id) {
+		return \App\Models\Emails::search()->remove();
+	}
 }

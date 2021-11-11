@@ -3,30 +3,23 @@
         <form @submit.prevent="searchItems()" @change="searchItems()">
             <div class="card mb-3">
                 <div class="card-body">
-                    <slot name="fields" :loading="search.loading" :params="search.params">
-                        <ui-field label="Busca" style="max-width:400px;">
-                            <input type="search" class="form-control" v-model="search.params.q">
-                        </ui-field>
-                    </slot>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <ui-field label="Buscar por" style="max-width:400px;">
+                                <input type="search" class="form-control" v-model="search.params.q" placeholder="Termo">
+                            </ui-field>
+                        </div>
+
+                        <slot name="search-fields" :loading="search.loading" :params="search.params"></slot>
+                    </div>
                 </div>
     
-                <div class="card-footer d-flex">
-                    <div class="flex-grow-1">
-                        <el-pagination
-                            background
-                            layout="prev, pager, next, sizes"
-                            :current-page.sync="search.params.page"
-                            :page-size.sync="search.params.per_page"
-                            :pager-count="11"
-                            :total="search.results.total"
-                            :page-sizes="[10, 25, 50, 100]"
-                            @size-change="searchItems()"
-                            @current-change="searchItems()"
-                            @prev-click="searchItems()"
-                            @next-click="searchItems()"
-                        ></el-pagination>
-                    </div>
-                    <div>
+                <div class="card-footer d-flex align-items-center">
+                    <div class="flex-grow-1"></div>
+
+                    <slot name="search-actions"></slot>
+
+                    <div class="ms-2">
                         <button type="submit" class="btn btn-primary">
                             Buscar
                             <i class="fas fa-spin fa-spinner ms-2" v-if="search.loading"></i>
@@ -41,7 +34,7 @@
             <thead>
                 <tr>
                     <!-- <th width="50px"></th> -->
-                    <slot name="header">
+                    <slot name="table-header">
                         <th>Item</th>
                     </slot>
                     <th width="50px"></th>
@@ -59,7 +52,7 @@
 
                 <tr v-if="search.results.data && search.results.data.length==0">
                     <td :colspan="headersTotal">
-                        <slot name="empty">
+                        <slot name="table-empty">
                             <small class="d-block text-muted text-center">Nenhum dado</small>
                         </slot>
                     </td>
@@ -67,14 +60,14 @@
 
                 <tr v-for="item in (search.results.data || [])">
                     <!-- <td><input type="checkbox"></td> -->
-                    <slot name="item" :item="item">
+                    <slot name="table-row" :item="item">
                         <td>{{ item }}</td>
                     </slot>
                     <td width="10px">
                         <div class="ui-search-actions" style="position:relative;">
                             <div class="d-flex" style="position:absolute; top:-20px; right:0;">
                                 <div class="d-flex ui-search-actions-hidden">
-                                    <slot name="actions" :item="item"></slot>
+                                    <slot name="table-actions" :item="item"></slot>
                                 </div>
     
                                 <a href="javascript:;" class="btn bg-white" style="box-shadow:0 0 10px #00000022;">

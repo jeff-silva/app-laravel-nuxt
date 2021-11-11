@@ -32,4 +32,8 @@ class MigrationsController extends Controller
 	public function export() {
 		return \App\Models\Migrations::search()->export();
 	}
+
+	public function delete($id) {
+		return \App\Models\Migrations::search()->remove();
+	}
 }

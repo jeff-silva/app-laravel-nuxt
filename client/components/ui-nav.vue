@@ -83,6 +83,7 @@ export default {
 </script>
 
 <style>
+.ui-nav .el-menu {border: none !important;}
 .ui-nav .el-menu-item:hover, .ui-nav .el-submenu__title:hover {background: none !important;}
 .ui-nav a {color: inherit !important;}
 .ui-nav-submenu {background: #fff !important;}

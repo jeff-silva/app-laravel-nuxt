@@ -47,4 +47,8 @@ class PagesController extends Controller
 			'status' => 'publish',
 		])->first();
 	}
+
+	public function delete($id) {
+		return \App\Models\Pages::search()->remove();
+	}
 }
