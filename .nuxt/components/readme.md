@@ -19,6 +19,7 @@ You can directly use them in pages and other components without the need to impo
 - `<UiNav>` | `<ui-nav>` (components/ui-nav.vue)
 - `<UiPassword>` | `<ui-password>` (components/ui-password.vue)
 - `<UiSearch>` | `<ui-search>` (components/ui-search.vue)
+- `<UiSidebar>` | `<ui-sidebar>` (components/ui-sidebar.vue)
 - `<UiUpload>` | `<ui-upload>` (components/ui-upload.vue)
 - `<UiContent>` | `<ui-content>` (components/ui-content/index.vue)
 - `<UiContentStyle>` | `<ui-content-style>` (components/ui-content/style.vue)

@@ -85,8 +85,8 @@ export default {
 <style>
 .ui-nav .el-menu {border: none !important;}
 .ui-nav .el-menu-item:hover, .ui-nav .el-submenu__title:hover {background: none !important;}
-.ui-nav a {color: inherit !important;}
+.ui-nav a, .ui-nav i {color: inherit !important; text-decoration: none !important;}
 .ui-nav-submenu {background: #fff !important;}
 .ui-nav-submenu .el-menu-item, .ui-nav-submenu .el-submenu__title {background: none !important; color: #666 !important;}
-.ui-nav-submenu a {color: inherit !important;}
+.ui-nav-submenu a, .ui-nav-submenu i {color: inherit !important; text-decoration: none !important;}
 </style>

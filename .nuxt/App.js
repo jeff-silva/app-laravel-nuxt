@@ -9,9 +9,10 @@ import NuxtBuildIndicator from './components/nuxt-build-indicator'
 import '..\\client\\app.scss'
 
 import _77068119 from '..\\client\\layouts\\admin.vue'
+import _622dcc46 from '..\\client\\layouts\\adminkit\\admin.vue'
 import _6f6c098b from '..\\client\\layouts\\default.vue'
 
-const layouts = { "_admin": sanitizeComponent(_77068119),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_admin": sanitizeComponent(_77068119),"_adminkit/admin": sanitizeComponent(_622dcc46),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {

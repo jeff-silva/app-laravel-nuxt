@@ -38,6 +38,9 @@
   "UiSearch": {
     "description": "Auto imported from components/ui-search.vue"
   },
+  "UiSidebar": {
+    "description": "Auto imported from components/ui-sidebar.vue"
+  },
   "UiUpload": {
     "description": "Auto imported from components/ui-upload.vue"
   },
