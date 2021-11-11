@@ -8,12 +8,14 @@
             success-message="Usuário salvo"
         >
             <div class="row">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-4 mb-3">
                     <div class="bg-white shadow rounded">
                         <div class="text-center py-4">
                             <img :src="post.photo" alt=""
                                 v-if="post.photo"
                                 style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
+
+                            <div v-if="!post.photo" class="d-inline-block" style="width:100px; height:100px; border-radius:50%; background:#eee"></div>
                             
                             <div class="fw-bold mt-4 text-uppercase">{{ post.name }}</div>
                             <ui-upload v-model="post.photo" :preview="false" class="mx-3 mt-4"></ui-upload>
@@ -34,8 +36,8 @@
                         </el-tab-pane>
 
                         <el-tab-pane label="Senha">
-                            <ui-field label="Senha atual" :error="validator.error.name">
-                                <ui-password></ui-password>
+                            <ui-field label="Senha atual" :error="validator.error.password">
+                                <ui-password v-model="post.password"></ui-password>
                             </ui-field>
         
                             <ui-field label="Nova senha" :error="validator.error.email">

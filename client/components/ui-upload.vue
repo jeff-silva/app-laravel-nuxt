@@ -9,7 +9,7 @@
                 </button>
             </div>
 
-            <input type="text" class="form-control" v-model="props.value" placeholder="Sem arquivo" style="border:none!important;">
+            <input type="text" class="form-control border-0" v-model="props.value" placeholder="Sem arquivo" @keyup="emitValue()">
 
             <div class="input-group-btn" v-if="compValue">
                 <a :href="props.value" class="btn" target="_blank">

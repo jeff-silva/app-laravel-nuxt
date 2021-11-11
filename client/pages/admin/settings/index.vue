@@ -6,6 +6,7 @@
         
         <ui-field label="Tempo de autenticação (em minutos)" layout="horizontal">
             <input type="text" class="form-control" v-model="settings['jwt.ttl']">
+            <small class="text-muted">Deixe em branco para autenticação infinita</small>
         </ui-field>
     </div>
 </template>

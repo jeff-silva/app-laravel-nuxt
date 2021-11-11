@@ -23,8 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        foreach(\App\Models\Settings::select(['name', 'value'])->get() as $set) {
-            \Config::set($set->name, $set->value);
-        }
+        $settings = \Cache::remember('settings-1', 60*60, function() {
+            return \App\Models\Settings::select(['name', 'value'])->get()->pluck('value', 'name')->toArray();
+        });
+        
+        config($settings);
     }
 }

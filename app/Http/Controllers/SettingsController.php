@@ -36,4 +36,8 @@ class SettingsController extends Controller
 	public function getAll() {
 		return (new \App\Models\Settings)->getAll();
 	}
+
+	public function saveAll() {
+		return (new \App\Models\Settings)->saveAll(request()->all());
+	}
 }

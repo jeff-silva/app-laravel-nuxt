@@ -5,11 +5,11 @@
                 <input type="text" class="form-control" placeholder="Rua" v-model="address.route" @change="searchAddressBy('route')">
             </div>
 
-            <div class="col-12 col-md-4">
+            <div class="col-6 col-md-4">
                 <input type="text" class="form-control" placeholder="Nº" v-model="address.number" @change="addressSave()">
             </div>
 
-            <div class="col-12 col-md-6">
+            <div class="col-6 col-md-6">
                 <input type="text" class="form-control" placeholder="Complemento" v-model="address.complement" @change="addressSave()">
             </div>
 
@@ -25,11 +25,11 @@
                 <input type="text" class="form-control" placeholder="Cidade" v-model="address.city" @change="addressSave()">
             </div>
 
-            <div class="col-12 col-md-6">
+            <div class="col-6 col-md-6">
                 <input type="text" class="form-control" placeholder="Estado" v-model="address.state" readonly>
             </div>
 
-            <div class="col-12 col-md-6">
+            <div class="col-6 col-md-6">
                 <input type="text" class="form-control" placeholder="Estado" v-model="address.country" readonly>
             </div>
         </div>
