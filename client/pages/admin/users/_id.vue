@@ -32,6 +32,20 @@
                                 <input type="text" class="form-control" v-model="post.email">
                             </ui-field>
                         </el-tab-pane>
+
+                        <el-tab-pane label="Senha">
+                            <ui-field label="Senha atual" :error="validator.error.name">
+                                <ui-password></ui-password>
+                            </ui-field>
+        
+                            <ui-field label="Nova senha" :error="validator.error.email">
+                                <ui-password></ui-password>
+                            </ui-field>
+
+                            <ui-field label="Repita nova senha" :error="validator.error.email">
+                                <ui-password></ui-password>
+                            </ui-field>
+                        </el-tab-pane>
                         
                         <el-tab-pane label="Endereço">
                             <ui-address v-model="post.address_id"></ui-address>

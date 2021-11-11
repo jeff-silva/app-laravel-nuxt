@@ -1,35 +1,35 @@
 <template>
     <div>
-        <div class="row g-1">
-            <div class="col-12 col-md-8 mb-1">
+        <div class="row g-3">
+            <div class="col-12 col-md-8">
                 <input type="text" class="form-control" placeholder="Rua" v-model="address.route" @change="searchAddressBy('route')">
             </div>
 
-            <div class="col-12 col-md-4 mb-1">
+            <div class="col-12 col-md-4">
                 <input type="text" class="form-control" placeholder="Nº" v-model="address.number" @change="addressSave()">
             </div>
 
-            <div class="col-12 col-md-6 mb-1">
+            <div class="col-12 col-md-6">
                 <input type="text" class="form-control" placeholder="Complemento" v-model="address.complement" @change="addressSave()">
             </div>
 
-            <div class="col-12 col-md-6 mb-1">
+            <div class="col-12 col-md-6">
                 <input type="text" class="form-control" placeholder="Bairro" v-model="address.district" @change="addressSave()">
             </div>
 
-            <div class="col-12 col-md-6 mb-1">
+            <div class="col-12 col-md-6">
                 <input type="text" class="form-control" placeholder="CEP" v-model="address.zipcode">
             </div>
 
-            <div class="col-12 col-md-6 mb-1">
+            <div class="col-12 col-md-6">
                 <input type="text" class="form-control" placeholder="Cidade" v-model="address.city" @change="addressSave()">
             </div>
 
-            <div class="col-12 col-md-6 mb-1">
+            <div class="col-12 col-md-6">
                 <input type="text" class="form-control" placeholder="Estado" v-model="address.state" readonly>
             </div>
 
-            <div class="col-12 col-md-6 mb-1">
+            <div class="col-12 col-md-6">
                 <input type="text" class="form-control" placeholder="Estado" v-model="address.country" readonly>
             </div>
         </div>
