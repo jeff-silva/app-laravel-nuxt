@@ -27,7 +27,7 @@ class AddressesController extends Controller
 		return \App\Models\Addresses::new()->validate(request()->all());
 	}
 
-	public function delete($id) {
+	public function remove() {
 		return \App\Models\Addresses::search()->remove();
 	}
 

@@ -32,8 +32,4 @@ class PasswordResetsController extends Controller
 	public function export() {
 		return \App\Models\PasswordResets::search()->export();
 	}
-
-	public function delete($id) {
-		return \App\Models\PasswordResets::search()->remove();
-	}
 }

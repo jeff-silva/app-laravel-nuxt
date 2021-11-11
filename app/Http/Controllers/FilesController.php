@@ -65,8 +65,4 @@ class FilesController extends Controller
 			// 'Content-Disposition' => 'attachment; filename="logs.txt',
 		]);
 	}
-
-	public function delete($id) {
-		return \App\Models\Files::search()->remove();
-	}
 }

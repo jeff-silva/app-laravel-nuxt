@@ -32,8 +32,4 @@ class UsersNotificationsController extends Controller
 	public function export() {
 		return \App\Models\UsersNotifications::search()->export();
 	}
-
-	public function delete($id) {
-		return \App\Models\UsersNotifications::search()->remove();
-	}
 }

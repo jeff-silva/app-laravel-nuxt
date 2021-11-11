@@ -60,8 +60,8 @@ class AppMakeControllers extends AppBase
                 "\t}",
             ]);
 
-            $methods['delete'] = implode("\n", [
-                "\tpublic function delete(\$id) {",
+            $methods['remove'] = implode("\n", [
+                "\tpublic function remove(\$id) {",
                 "\t\treturn {$table['ModelNamespace']}\\{$table['Model']}::search()->remove();",
                 "\t}",
             ]);

@@ -32,8 +32,4 @@ class UsersController extends Controller
 	public function export() {
 		return \App\Models\User::search()->export();
 	}
-
-	public function delete($id) {
-		return \App\Models\Users::search()->remove();
-	}
 }
