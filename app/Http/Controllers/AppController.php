@@ -4,6 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
+/*
+Route::get('aaa/search', 'App\Http\Controllers\AaaController@search');
+Route::get('aaa/find/{id}', 'App\Http\Controllers\AaaController@find');
+Route::post('aaa/save', 'App\Http\Controllers\AaaController@save');
+Route::post('aaa/valid', 'App\Http\Controllers\AaaController@valid');
+Route::post('aaa/remove', 'App\Http\Controllers\AaaController@remove');
+Route::get('aaa/clone/{id}', 'App\Http\Controllers\AaaController@clone');
+Route::get('aaa/export', 'App\Http\Controllers\AaaController@export');
+*/
+
 class AppController extends \App\Http\Controllers\Controller
 {
     /**
@@ -137,5 +147,25 @@ class AppController extends \App\Http\Controllers\Controller
 
     public function emailTest() {
         return \App\Utils::email(request('to'), request('subject'), request('body'));
+    }
+
+    public function emailsTemplates() {
+        $files = \File::allFiles(app_path('Mail'));
+        
+        return array_filter(array_map(function($file) {
+            if ($file->isDir()) return false;
+
+            $namespace = "\App\Mail\\". $file->getFilenameWithoutExtension();
+            $class = app($namespace);
+
+            $item['id'] = $file->getFilenameWithoutExtension();
+            $item['subject_key'] = "email.templates.{$item['id']}.subject";
+            $item['subject'] = $class->getSubject();
+            $item['template_key'] = "email.templates.{$item['id']}.template";
+            $item['template'] = $class->getTemplate();
+            $item['params'] = $class->getParams();
+
+            return $item;
+        }, $files));
     }
 }

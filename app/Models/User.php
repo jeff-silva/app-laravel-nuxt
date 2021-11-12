@@ -56,22 +56,6 @@ class User extends Authenticatable implements JWTSubject
         });
     }
 
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
-
-    public function setPasswordAttribute($value) {
-		if (! $value) return;
-		if (! \Hash::needsRehash($value)) return;
-		return $this->attributes['password'] = \Hash::make($value);
-	}
-
     public function passwordResetStart() {
         if (! $this->id) return;
         $this->remember_token = uniqid();
@@ -104,6 +88,24 @@ class User extends Authenticatable implements JWTSubject
 
     public function getVerifyLink() {
         return \URL::to("/verification/xxx/");
+    }
+
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims() {
+        return [];
+    }
+
+    public function setPasswordAttribute($value) {
+		if (! $value) return;
+		if (! \Hash::needsRehash($value)) return;
+		return $this->attributes['password'] = \Hash::make($value);
+	}
+
+    public function getPhotoAttribute($value) {
+        return $value? $value: config('user.photo_default');
     }
 
 	public function oauthProviders() {

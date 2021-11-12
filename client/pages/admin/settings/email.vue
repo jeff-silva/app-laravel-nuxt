@@ -84,6 +84,26 @@
                     </div>
                 </div>
             </el-tab-pane>
+            
+            <el-tab-pane name="templates" label="Templates" v-if="emailsTemplates[0]">
+                <el-tabs :value="emailsTemplates[0].id" tab-position="left">
+                    <el-tab-pane :name="t.id" :label="t.subject" v-for="t in emailsTemplates" :key="t.id">
+                        <ui-field label="Assunto">
+                            <input type="text" class="form-control" v-model="t.subject">
+                        </ui-field>
+
+                        <ui-field label="Template">
+                            <ui-code v-model="t.template"></ui-code>
+                        </ui-field>
+
+                        <div>
+                            <a href="javascript:;" class="badge bg-primary text-white me-2" v-for="p in t.params">
+                                {{ p.source }}
+                            </a>
+                        </div>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-tab-pane>
         </el-tabs>
 
     </div>
@@ -108,6 +128,7 @@ export default {
         return {
             propsSettings: JSON.parse(JSON.stringify(this.settings)),
             emailTest: false,
+            emailsTemplates: [],
         };
     },
 
@@ -134,6 +155,16 @@ export default {
                 this.emailTest.success = true;
             });
         },
+
+        emailsTemplatesList() {
+            this.$axios.get('/api/emails-templates').then(resp => {
+                this.emailsTemplates = resp.data;
+            });
+        },
+    },
+
+    mounted() {
+        this.emailsTemplatesList();
     },
 }
 </script>

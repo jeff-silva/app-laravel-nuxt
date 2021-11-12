@@ -7,7 +7,6 @@ class UserPasswordReset extends \Illuminate\Mail\Mailable
     use \App\Traits\Mail;
 
     public $user = false;
-    public $verify_link = false;
 
     public function __construct(\App\Models\User $user) {
         $this->user = $user;

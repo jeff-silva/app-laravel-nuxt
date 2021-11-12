@@ -28,6 +28,7 @@ Route::get('endpoints', 'App\Http\Controllers\AppController@endpoints');
 Route::post('password-reset-start', 'App\Http\Controllers\AppController@passwordResetStart');
 Route::post('password-reset-change', 'App\Http\Controllers\AppController@passwordResetChange');
 Route::post('email-test', 'App\Http\Controllers\AppController@emailTest');
+Route::get('emails-templates', 'App\Http\Controllers\AppController@emailsTemplates');
 
 Route::get('addresses/search', 'App\Http\Controllers\AddressesController@search');
 Route::get('addresses/find/{id}', 'App\Http\Controllers\AddressesController@find');

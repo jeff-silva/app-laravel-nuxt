@@ -4,7 +4,7 @@
             method="post"
             action="/api/users/save"
             #default="{validator, loading, submit}"
-            @success="$router.push(`/admin/users/${$event.id}`); post=$event;"
+            @success="onSuccess($event)"
             success-message="Usuário salvo"
         >
             <div class="row">
@@ -76,6 +76,7 @@ export default {
 
     data() {
         return {
+            loading: false,
             userId: (this.$route.params.id || false),
             post: {},
         };
@@ -84,9 +85,19 @@ export default {
     methods: {
         userLoad() {
             if (! parseInt(this.userId)) return;
+            this.loading = true;
             this.$axios.get(`/api/users/find/${this.userId}`).then(resp => {
+                this.loading = false;
                 this.post = resp.data;
             });
+        },
+
+        onSuccess(user) {
+            this.$router.push(`/admin/users/${user.id}`);
+            this.post = user;
+            if (user.id==this.$store.state.auth.user.id) {
+                this.$auth.fetchUser();
+            }
         },
     },
 

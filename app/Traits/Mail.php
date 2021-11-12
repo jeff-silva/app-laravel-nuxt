@@ -12,22 +12,35 @@ trait Mail {
         return 'no template';
     }
 
+    static function getParamsMerge() {
+        return [];
+    }
+
     static function getParams() {
         $parent = array_keys(get_class_vars(get_parent_class(get_class())));
         $self = array_keys(get_class_vars(get_class()));
         $params = array_diff($self, $parent);
-
+        
+        $return = [];
         foreach((new \ReflectionClass(__class__))->getConstructor()->getParameters() as $param) {
             if ($type = $param->getType()) {
                 $model = app($type->getName());
                 foreach($model->getFillable() as $field) {
-                    $params[] = "{$param->name}.{$field}";
+                    $return["\${$param->name}->{$field}"] = "Campo {$field}";
                 }
             }
         }
 
-        sort($params);
-        return $params;
+        $return = array_merge($return, self::getParamsMerge());
+
+        // ksort($return);
+        return array_map(function($label, $name) {
+            return [
+                'id' => $name,
+                'label' => $label,
+                'source' => "{{ $name }}",
+            ];
+        }, $return, array_keys($return));
     }
 
     public function getParamsValues() {

@@ -21,7 +21,7 @@
 				</ui-sidebar>
 			</div>
 
-			<div class="flex-grow-1" style="min-width:100%; max-width:100%; overflow:auto;">
+			<div class="flex-grow-1" style="overflow:auto;">
 				<div class="d-flex align-items-center bg-dark p-3 text-white">
 					<div>
 						<a href="javascript:;" class="text-white" @click="$refs.sidebar.toggleDesktop(); $refs.sidebar.toggleMobile();">
