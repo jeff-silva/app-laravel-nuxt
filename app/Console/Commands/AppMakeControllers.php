@@ -10,7 +10,7 @@ class AppMakeControllers extends AppBase
 
     public function handle()
     {
-        // $this->comment('⚙️  Criando/alterando models');
+        $this->comment('⚙️  Criando/alterando controllers');
 
         $tables = config('database-schema.tables', []);
 

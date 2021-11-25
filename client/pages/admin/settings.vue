@@ -2,7 +2,7 @@
     <div>
         <div class="row g-0 bg-white">
             <div class="col-2 bg-dark">
-                <ui-nav :items="$store.state.admin.settings" mode="vertical" text-color="#fff"></ui-nav>
+                <ui-nav :items="compRoutes" mode="vertical" text-color="#fff"></ui-nav>
             </div>
 
             <div class="col-10">
@@ -33,6 +33,28 @@ export default {
         return {
             settings: {},
         };
+    },
+
+    computed: {
+        compRoutes() {
+            let routes = [];
+
+            this.$router.options.routes.forEach(route => {
+                if (route.path=='/admin/settings') {
+                    route.children.forEach(route2 => {
+                        let comp = require(`./settings/${route2.path||'index'}.vue`).default;
+                        let label = (typeof comp.head=='function')? (comp.head().title || route2.path): route2.path;
+
+                        routes.push({
+                            to: `/admin/settings/${route2.path}`,
+                            label,
+                        });
+                    });
+                }
+            });
+
+            return routes;
+        },
     },
 
     methods: {

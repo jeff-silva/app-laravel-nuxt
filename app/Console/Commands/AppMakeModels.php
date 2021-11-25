@@ -12,7 +12,7 @@ class AppMakeModels extends AppBase
 
     public function handle()
     {
-        // $this->comment('⚙️  Criando/alterando models');
+        $this->comment('⚙️  Criando/alterando models');
 
         $schema = config('database-schema', []);
 
