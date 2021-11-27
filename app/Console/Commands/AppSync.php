@@ -25,6 +25,9 @@ class AppSync extends AppBase
             'app/Http/Controllers/Controller.php' => [],
             'database/migrations' => [],
             'serve.js' => [],
+            'client/pages/admin/settings.vue' => [],
+            'client/pages/admin/settings/index.vue' => [],
+            'client/pages/admin/settings/email.vue' => [],
         ];
 
         foreach($files as $file => $info) {

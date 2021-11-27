@@ -11,6 +11,10 @@ class FilesController extends Controller
 		]);
 	}
 
+	static function router() {
+		\Route::post('files/upload', 'App\Http\Controllers\FilesController@upload');
+	}
+	
 	public function search() {
 		$search = \App\Models\Files::search()->paginate(request('per_page', 10))->toArray();
 		$search['folders'] = \App\Models\Files::select(['folder'])->groupBy('folder')->get();

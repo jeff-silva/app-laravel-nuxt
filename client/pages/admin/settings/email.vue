@@ -163,6 +163,12 @@ export default {
         },
     },
 
+    head() {
+        return {
+            title: "E-mail",
+        };
+    },
+
     mounted() {
         this.emailsTemplatesList();
     },

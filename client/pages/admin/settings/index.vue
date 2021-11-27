@@ -49,5 +49,11 @@ export default {
             propsSettings: JSON.parse(JSON.stringify(this.settings)),
         };
     },
+
+    head() {
+        return {
+            title: "Geral",
+        };
+    },
 }
 </script>

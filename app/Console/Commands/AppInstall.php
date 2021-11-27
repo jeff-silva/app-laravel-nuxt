@@ -17,5 +17,6 @@ class AppInstall extends AppBase
         $this->call('app:db-export');
         $this->call('app:make-controllers');
         $this->call('app:make-models');
+        $this->call('app:make-routes');
     }
 }

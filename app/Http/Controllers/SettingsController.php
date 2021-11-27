@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 class SettingsController extends Controller
 {
-
+	static function router() {
+		\Route::post('settings/save-all', 'App\Http\Controllers\SettingsController@saveAll');
+		\Route::get('settings/get-all', 'App\Http\Controllers\SettingsController@getAll');
+	}
+	
 	public function search() {
 		return \App\Models\Settings::search()->paginate(request('per_page', 10));
 	}
