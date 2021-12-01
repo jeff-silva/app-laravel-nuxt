@@ -11,9 +11,6 @@
   "UiAuthRegister": {
     "description": "Auto imported from components/ui-auth-register.vue"
   },
-  "UiCode": {
-    "description": "Auto imported from components/ui-code.vue"
-  },
   "UiDropdown": {
     "description": "Auto imported from components/ui-dropdown.vue"
   },
@@ -35,6 +32,9 @@
   "UiPassword": {
     "description": "Auto imported from components/ui-password.vue"
   },
+  "UiPlayground": {
+    "description": "Auto imported from components/ui-playground.vue"
+  },
   "UiSearch": {
     "description": "Auto imported from components/ui-search.vue"
   },
@@ -49,6 +49,15 @@
   },
   "UiContentStyle": {
     "description": "Auto imported from components/ui-content/style.vue"
+  },
+  "UiEditorCode": {
+    "description": "Auto imported from components/ui-editor/code.vue"
+  },
+  "UiEditorHtml": {
+    "description": "Auto imported from components/ui-editor/html.vue"
+  },
+  "UiEditor": {
+    "description": "Auto imported from components/ui-editor/index.vue"
   },
   "UiContentElement": {
     "description": "Auto imported from components/ui-content/element/index.js"

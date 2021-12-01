@@ -1,7 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "dev": "node serve.js",
+        "serve": "node serve.js",
+        "dev": "nuxt",
         "build": "nuxt build",
         "generate": "nuxt generate",
         "start": "nuxt start",
@@ -26,6 +27,7 @@
         "sass": "^1.43.2",
         "sass-loader": "^10.1.1",
         "sweetalert2": "^11.1.9",
+        "v-runtime-template": "^1.10.0",
         "validate.js": "^0.13.1",
         "vuedraggable": "^2.24.3",
         "webpack": "^4.46.0"

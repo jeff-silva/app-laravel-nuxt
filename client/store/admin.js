@@ -6,10 +6,7 @@ export default {
                 {to:"/admin/users", icon:"fas fa-user-friends", label:"Buscar", children:[]},
                 {to:"/admin/users/new", icon:"fas fa-user-plus", label:"Criar", children:[]},
             ]},
-            {to:"/admin/settings", icon:"fas fa-cog", label:"Sistema", children:[
-                {to:"/admin/files", icon:"fas fa-file-image", label:"Arquivos", children:[]},
-                {to:"/admin/settings", icon:"fas fa-cogs", label:"Configurações", children:[]},
-            ]},
+            {to:"/admin/settings/", icon:"fas fa-cog", label:"Sistema", children:[]},
         ],
 
         userOptions: [

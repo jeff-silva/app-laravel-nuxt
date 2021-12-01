@@ -20,6 +20,7 @@ let store = {};
   store.modules = store.modules || {}
 
   resolveStoreModules(require('..\\client\\store\\admin.js'), 'admin.js')
+  resolveStoreModules(require('..\\client\\store\\env.js'), 'env.js')
 
   // If the environment supports hot reloading...
 
@@ -27,6 +28,7 @@ let store = {};
     // Whenever any Vuex module is updated...
     module.hot.accept([
       '..\\client\\store\\admin.js',
+      '..\\client\\store\\env.js',
       '..\\client\\store\\index.js',
     ], () => {
       // Update `root.modules` with the latest definitions.

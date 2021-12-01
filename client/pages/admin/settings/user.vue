@@ -22,5 +22,11 @@ export default {
             propsSettings: JSON.parse(JSON.stringify(this.settings)),
         };
     },
+
+    head() {
+        return {
+            title: "Usuário",
+        };
+    },
 }
 </script>

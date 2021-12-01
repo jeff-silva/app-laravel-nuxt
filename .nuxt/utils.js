@@ -200,7 +200,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"APP_NAME":"app-laravel-nuxt","APP_URL":"http://127.0.0.1:8000","CLIENT_URL":"http://localhost:3000"}
+      env: {"APP_NAME":"app-laravel-nuxt","APP_URL":"http://127.0.0.1:5001","CLIENT_URL":"http://localhost:5000"}
     }
     // Only set once
 

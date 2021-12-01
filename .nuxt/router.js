@@ -7,7 +7,9 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _c3caf2b8 = () => interopDefault(import('..\\client\\pages\\admin\\index.vue' /* webpackChunkName: "pages/admin/index" */))
 const _b86b1744 = () => interopDefault(import('..\\client\\pages\\dev\\index.vue' /* webpackChunkName: "pages/dev/index" */))
 const _d7684b38 = () => interopDefault(import('..\\client\\pages\\dev\\index\\index.vue' /* webpackChunkName: "pages/dev/index/index" */))
+const _0c81eecc = () => interopDefault(import('..\\client\\pages\\dev\\index\\artisan.vue' /* webpackChunkName: "pages/dev/index/artisan" */))
 const _930a45f4 = () => interopDefault(import('..\\client\\pages\\dev\\index\\auth.vue' /* webpackChunkName: "pages/dev/index/auth" */))
+const _6e829ccb = () => interopDefault(import('..\\client\\pages\\dev\\index\\editor.vue' /* webpackChunkName: "pages/dev/index/editor" */))
 const _53de8410 = () => interopDefault(import('..\\client\\pages\\dev\\index\\endpoints.vue' /* webpackChunkName: "pages/dev/index/endpoints" */))
 const _2bd1a07c = () => interopDefault(import('..\\client\\pages\\dev\\index\\example.vue' /* webpackChunkName: "pages/dev/index/example" */))
 const _77041189 = () => interopDefault(import('..\\client\\pages\\dev\\index\\files.vue' /* webpackChunkName: "pages/dev/index/files" */))
@@ -16,6 +18,7 @@ const _fe5a846e = () => interopDefault(import('..\\client\\pages\\admin\\files.v
 const _8029c27e = () => interopDefault(import('..\\client\\pages\\admin\\settings.vue' /* webpackChunkName: "pages/admin/settings" */))
 const _480c4aa1 = () => interopDefault(import('..\\client\\pages\\admin\\settings\\index.vue' /* webpackChunkName: "pages/admin/settings/index" */))
 const _12de0f2a = () => interopDefault(import('..\\client\\pages\\admin\\settings\\email.vue' /* webpackChunkName: "pages/admin/settings/email" */))
+const _2ac481c6 = () => interopDefault(import('..\\client\\pages\\admin\\settings\\files.vue' /* webpackChunkName: "pages/admin/settings/files" */))
 const _2dbc35cc = () => interopDefault(import('..\\client\\pages\\admin\\settings\\user.vue' /* webpackChunkName: "pages/admin/settings/user" */))
 const _6e3bab30 = () => interopDefault(import('..\\client\\pages\\admin\\users\\index.vue' /* webpackChunkName: "pages/admin/users/index" */))
 const _e770b260 = () => interopDefault(import('..\\client\\pages\\admin\\users\\_id.vue' /* webpackChunkName: "pages/admin/users/_id" */))
@@ -44,9 +47,17 @@ export const routerOptions = {
       component: _d7684b38,
       name: "dev-index"
     }, {
+      path: "artisan",
+      component: _0c81eecc,
+      name: "dev-index-artisan"
+    }, {
       path: "auth",
       component: _930a45f4,
       name: "dev-index-auth"
+    }, {
+      path: "editor",
+      component: _6e829ccb,
+      name: "dev-index-editor"
     }, {
       path: "endpoints",
       component: _53de8410,
@@ -79,6 +90,10 @@ export const routerOptions = {
       path: "email",
       component: _12de0f2a,
       name: "admin-settings-email"
+    }, {
+      path: "files",
+      component: _2ac481c6,
+      name: "admin-settings-files"
     }, {
       path: "user",
       component: _2dbc35cc,

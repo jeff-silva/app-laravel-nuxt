@@ -19,11 +19,25 @@
         "_name": "_d7684b38"
       },
       {
+        "name": "dev-index-artisan",
+        "path": "artisan",
+        "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\artisan.vue",
+        "chunkName": "pages/dev/index/artisan",
+        "_name": "_0c81eecc"
+      },
+      {
         "name": "dev-index-auth",
         "path": "auth",
         "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\auth.vue",
         "chunkName": "pages/dev/index/auth",
         "_name": "_930a45f4"
+      },
+      {
+        "name": "dev-index-editor",
+        "path": "editor",
+        "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\dev\\\\index\\\\editor.vue",
+        "chunkName": "pages/dev/index/editor",
+        "_name": "_6e829ccb"
       },
       {
         "name": "dev-index-endpoints",
@@ -81,6 +95,13 @@
         "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\admin\\\\settings\\\\email.vue",
         "chunkName": "pages/admin/settings/email",
         "_name": "_12de0f2a"
+      },
+      {
+        "name": "admin-settings-files",
+        "path": "files",
+        "component": "D:\\\\@repos\\\\app-laravel-nuxt\\\\client\\\\pages\\\\admin\\\\settings\\\\files.vue",
+        "chunkName": "pages/admin/settings/files",
+        "_name": "_2ac481c6"
       },
       {
         "name": "admin-settings-user",

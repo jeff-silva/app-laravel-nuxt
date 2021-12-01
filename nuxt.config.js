@@ -40,7 +40,7 @@ export default {
 	css: ['@/app.scss'],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-	plugins: ['@/app.js'],
+	plugins: ['@/app.js', '@/plugins/helpers.js'],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: true,
@@ -75,6 +75,11 @@ export default {
 			// https://pwa.nuxtjs.org/workbox
 			workbox: {
 				enabled: true,
+
+				config: {
+					debug: false,
+				},
+
 				runtimeCaching: [
 					{
 						urlPattern: 'https://fonts.googleapis.com/.*',
