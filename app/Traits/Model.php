@@ -58,8 +58,20 @@ trait Model
         // 
     }
 
+    public function import($format, $content) {
+        // 
+    }
+
     public function scopeExport($query) {
-        return $query;
+        $format = request('format', 'json');
+        $class = app('App\Formats\\'. \Str::of($format)->studly());
+        $filename = $class->filename();
+        $content = $class->export($query);
+
+        return \Response::make($content, 200, [
+            'Content-type' => $class->mime(),
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ]);
     }
 
     // TODO: Remover apenas se existir condições where
@@ -86,6 +98,11 @@ trait Model
     }
     
 
+    public function searchParams() {
+        return [];
+    }
+
+
     public function scopeSearch($query, $params=null) {
         $params = $params? $params: request()->all();
         $params = array_merge([
@@ -95,7 +112,7 @@ trait Model
             'orderby' => 'updated_at',
             'order' => 'desc',
             'deleted' => '',
-        ], $params);
+        ], $this->searchParams(), $params);
 
         foreach($params as $field=>$value) {
             if (! $value) continue;

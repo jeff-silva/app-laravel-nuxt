@@ -102,15 +102,3 @@ Vue.prototype.$log = function() {
         console.log(item);
     });
 };
-
-
-let filters = {
-    strContains: function(value, contains) {
-        return (value || '').includes(contains);
-    },
-};
-
-for(let name in filters) {
-    Vue.prototype[name] = filters[name];
-    Vue.filter(name, filters[name]);
-}

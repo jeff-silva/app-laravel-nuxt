@@ -15,6 +15,24 @@
                 </div>
     
                 <div class="card-footer d-flex align-items-center">
+                    <div class="ms-2">
+                        <ui-dropdown>
+                            <button type="button" class="btn btn-outline-light">
+                                <i class="fas fa-download"></i> Exportar
+                            </button>
+
+                            <template #dropdown>
+                                <ul class="dropdown-menu show mt-2" aria-labelledby="btnGroupDrop1">
+                                    <li v-for="f in ($store.state.env.exportExtensions || [])">
+                                        <a :href="url('/export', {format:f.extension})" target="_blank" class="dropdown-item">
+                                            {{ f.name }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </template>
+                        </ui-dropdown>
+                    </div>
+                
                     <div class="flex-grow-1"></div>
 
                     <slot name="search-actions"></slot>
@@ -103,8 +121,14 @@
 <script>
 export default {
     props: {
-        action: {default:''},
+        apiBase: {default:''},
         params: Object,
+    },
+
+    computed: {
+        _apiSearch() {
+            return `${this.apiBase}/search`;
+        },
     },
 
     data() {
@@ -125,9 +149,15 @@ export default {
     },
 
     methods: {
+        url(path, query={}) {
+            query = {...this.search.params, ...query};
+            query = Object.keys(query).map(key => key + '=' + query[key]).join('&');
+            return this.apiBase+ path.replace(/^\//g, '') +'?'+ query;
+        },
+
         searchItems() {
             this.search.loading = true;
-            this.$axios.get(this.action, {params:this.search.params}).then(resp => {
+            this.$axios.get(this._apiSearch, {params:this.search.params}).then(resp => {
                 this.search.loading = false;
 
                 resp.data.per_page = parseInt(resp.data.per_page);

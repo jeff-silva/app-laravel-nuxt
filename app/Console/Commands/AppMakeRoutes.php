@@ -79,6 +79,11 @@ class AppMakeRoutes extends AppBase
             $data[] = "\t\t'params' => ['{$table_route}/clone/{id}', 'App\Http\Controllers\\{$table['Controller']}@clone'],";
             $data[] = "\t],";
 
+            $data[] = "\t'{$table_name}_import' => [";
+            $data[] = "\t\t'call' => ['Illuminate\Support\Facades\Route', 'post'],";
+            $data[] = "\t\t'params' => ['{$table_route}/import', 'App\Http\Controllers\\{$table['Controller']}@import'],";
+            $data[] = "\t],";
+
             $data[] = "\t'{$table_name}_export' => [";
             $data[] = "\t\t'call' => ['Illuminate\Support\Facades\Route', 'get'],";
             $data[] = "\t\t'params' => ['{$table_route}/export', 'App\Http\Controllers\\{$table['Controller']}@export'],";

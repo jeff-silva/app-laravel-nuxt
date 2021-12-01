@@ -1,42 +1,32 @@
 <template>
-  <div>
-    <div class="d-flex">
-        <div class="bg-light border" style="min-width:200px; height:100vh; overflow:auto;">
-            <div class="list-group list-group-flush">
-                <template v-for="l in links">
-                    <nuxt-link :to="l.to" class="list-group-item bg-transparent">{{ l.title }}</nuxt-link>
-                </template>
+    <div>
+        <div class="d-flex">
+            <div class="bg-dark text-white" style="min-width:200px; height:100vh; overflow:auto;">
+                <ui-nav :items="pages" mode="vertical" text-color="#fff"></ui-nav>
             </div>
-        </div>
-        <div class="flex-grow-1 p-2" style="height:100vh; overflow:auto;">
-            <template v-for="l in links">
-                <h2 v-if="l.to==$route.path" class="mb-3">{{ l.title }}</h2>
-            </template>
-
-            <div v-if="$route.path=='/dev'">
-                <!--  -->
+            <div class="flex-grow-1" style="height:100vh; overflow:auto;">
+                <div class="bg-light shadow-sm p-2 px-3 fw-bold text-uppercase" v-for="p in pages" v-if="p.to==$route.path">{{ p.label }}</div>
+                <div class="p-3">
+                    <nuxt-child></nuxt-child>
+                </div>
             </div>
-            
-            <nuxt-child></nuxt-child>
         </div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
     data() {
         return {
-            links: [
-                {to:"/", title:"Home"},
-                {to:"/dev", title:"Desenvolvimento"},
-                {to:"/dev/endpoints", title:"Endpoints"},
-                {to:"/dev/auth", title:"Autenticações"},
-                {to:"/dev/files", title:"Arquivos"},
-                {to:"/dev/nav", title:"Nav"},
-                {to:"/dev/example", title:"Exemplo"},
-            ],
+            pages: [],
         };
+    },
+
+    mounted() {
+        this.$helpers.routes('/dev/').then(links => {
+            this.pages.push({to:"/", label:"Home"});
+            links.forEach(page => this.pages.push(page));
+        });
     },
 }
 </script>

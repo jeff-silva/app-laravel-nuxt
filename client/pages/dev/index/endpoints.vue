@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-sm">
             <thead>
                 <tr>
                     <th>Métodos</th>
@@ -21,6 +21,12 @@
 
 <script>
 export default {
+    head() {
+        return {
+            title: "Endpoints",
+        };
+    },
+
     data() {
         return {
             endpoints: [],
