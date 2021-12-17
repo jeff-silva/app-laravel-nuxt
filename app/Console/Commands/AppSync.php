@@ -20,86 +20,95 @@ class AppSync extends AppBase
             return;
         }
 
-        $files = [
-            '.env.example' => [],
-            'app/Console/Commands' => [],
-            'app/Http/Controllers/Controller.php' => [],
-            'app/Traits' => [],
-            'app/Formats' => [],
-            'database/migrations' => [],
-            'serve.js' => [],
-            'client/app.js' => [],
-            'client/app.scss' => [],
-            'client/plugins/helpers.js' => [],
-            'client/pages/dev' => [],
-            'client/pages/admin/settings.vue' => [],
-            'client/pages/admin/settings/email.vue' => [],
-            'client/pages/admin/settings/files.vue' => [],
-            'client/pages/admin/settings/index.vue' => [],
-            'client/components' => [],
+        $commands = [
+            (object) ['command' => 'commandReplace', 'file' => '.env.example'],
+            (object) ['command' => 'commandReplace', 'file' => 'app/Console/Commands'],
+            (object) ['command' => 'commandReplace', 'file' => 'app/Http/Controllers/Controller.php'],
+            (object) ['command' => 'commandReplace', 'file' => 'app/Traits'],
+            (object) ['command' => 'commandReplace', 'file' => 'app/Formats'],
+            (object) ['command' => 'commandReplace', 'file' => 'database/migrations'],
+            (object) ['command' => 'commandReplace', 'file' => 'serve.js'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/app.js'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/app.scss'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/plugins/helpers.js'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/pages/dev'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/pages/admin/settings.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/pages/admin/settings/email.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/pages/admin/settings/files.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/pages/admin/settings/index.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-content.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-editor.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-address.vue.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-auth-login.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-auth-password.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-auth-register.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-dropdown.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-field.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-form.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-modal.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-nav.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-password.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-playground.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-search.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-sidebar.vue'],
+            (object) ['command' => 'commandReplace', 'file' => 'client/components/ui-upload.vue'],
         ];
 
-        foreach($files as $file => $info) {
-            $from = base_path($file);
-            $to = rtrim($sync_path, '/') .'/'. ltrim($file, '/');
+        $commands2 = [];
+        foreach($commands as $i => $comm) {
+            $comm->ext = pathinfo($comm->file, PATHINFO_EXTENSION);
 
-            $from_ext = pathinfo($file, PATHINFO_EXTENSION);
+            if (! $comm->ext) {
+                foreach(\File::allFiles(base_path($comm->file)) as $file) {
+                    $filepath = $file->getPath() .'/'. $file->getBasename();
+                    $filepath = str_replace(base_path(), '', $filepath);
+                    $filepath = ltrim(preg_replace('/\\\|\//', DIRECTORY_SEPARATOR, $filepath), DIRECTORY_SEPARATOR);
 
-            if (!$from_ext) {
-                if (! file_exists($to)) {
-                    mkdir($to, 0777, true);
+                    $commands2[] = (object) ['command' => $comm->command, 'file' => $filepath];
                 }
-
-                foreach(\File::allFiles($from) as $from_file) {
-                    $from_file = $from_file->getPath() .'/'. $from_file->getBasename();
-                    $from_file = preg_replace('/\\\|\//', DIRECTORY_SEPARATOR, $from_file);
-                    $from_file = ltrim(str_replace(base_path(), '', $from_file), DIRECTORY_SEPARATOR);
-                    $files[ $from_file ] = [];
-                }
-                unset($files[ $file ]);
-                continue;
-            }
-        }
-
-        foreach($files as $file => $info) {
-            $files[ $file ] = [
-                'from' => base_path($file),
-                'to' => rtrim($sync_path, '/') .'/'. ltrim($file, '/'),
-            ];
-        }
-
-        foreach($files as $file => $info) {
-            if (!file_exists($info['to'])) {
-                $this->moveFile('⇈', $info['from'], $info['to']);
                 continue;
             }
 
-            $from_modified = \File::lastModified($info['from']);
-            $from_content = file_get_contents($info['from']);
-            
-            $to_modified = \File::lastModified($info['to']);
-            $to_content = file_get_contents($info['to']);
+            $commands2[] = $comm;
+        }
 
-            if ($from_content==$to_content) { continue; }
+        // define from/to
+        foreach($commands2 as $comm) {
+            $comm->here = base_path($comm->file);
+            $comm->here_modified = (file_exists($comm->here)? \File::lastModified($comm->here): null);
 
-            if ($from_modified > $to_modified) {
-                $this->moveFile('⇈', $info['from'], $info['to']);
-            }
-            else {
-                $this->moveFile('⇊', $info['to'], $info['from']);
-            }
+            $comm->there = rtrim($sync_path, '/') .'/'. ltrim($comm->file, '/');
+            $comm->there_modified = (file_exists($comm->there)? \File::lastModified($comm->there): null);
+
+            call_user_func([$this, $comm->command], $comm);
         }
 
         $this->comment('🎉 Finalizado');
     }
 
-    public function moveFile($icon, $from, $to) {
-        $content = file_get_contents($from);
-        file_put_contents($to, $content);
+    public function commandReplace($comm) {
+        if (!$comm->here_modified OR !$comm->there_modified) {
+            $filename = $comm->here_modified? $comm->here: $comm->there;
+            $this->comment("❌ {$filename}");
+            return;
+        }
 
-        $this->comment("{$icon}  Movendo {$from}");
-        $this->comment("{$icon}     Para {$to}");
-        $this->comment('');
+        $comm->here_content = file_get_contents($comm->here);
+        $comm->there_content = file_get_contents($comm->there);
+
+        if ($comm->here_content==$comm->there_content) {
+            // $this->comment("✅ {$comm->file}");
+            return;
+        }
+        
+        if ($comm->here_modified > $comm->there_modified) {
+            file_put_contents($comm->there, $comm->here_content);
+            $this->comment("⇈  {$comm->here}");
+        }
+
+        else {
+            file_put_contents($comm->here, $comm->there_content);
+            $this->comment("⇊  {$comm->there}");
+        }
     }
-
 }

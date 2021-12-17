@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import moment from 'moment';
 
 
 export default function({app}) {
@@ -49,6 +50,16 @@ export default function({app}) {
     $helpers.strContains = function(value, contains) {
         return (value || '').includes(contains);
     };
+
+    $helpers.dateFormat = function(value, format='DD/MM/YYYY - HH:mm') {
+        let m = moment(value);
+        if (! m.isValid()) return '';
+        return m.format(format);
+    };
+
+    $helpers.numberFormat = function(value, format) {
+        return 'numberFormat';
+    };
     
     $helpers.timeout = function(params = {}) {
         params = {
@@ -83,6 +94,6 @@ export default function({app}) {
     Vue.prototype.$helpers = $helpers;
 
     for(let name in $helpers) {
-        Vue.filter(name, helpers[name]);
+        Vue.filter(name, $helpers[name]);
     }
 };

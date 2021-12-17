@@ -6,6 +6,7 @@ class FilesController extends Controller
 {
 
 	public function __construct() {
+		$this->model = new \App\Models\Files;
 		$this->middleware('auth:api', [
 			'except' => ['file', 'search'],
 		]);
@@ -19,30 +20,6 @@ class FilesController extends Controller
 		$search = \App\Models\Files::search()->paginate(request('per_page', 10))->toArray();
 		$search['folders'] = \App\Models\Files::select(['folder'])->groupBy('folder')->get();
 		return $search;
-	}
-
-	public function find($id) {
-		return \App\Models\Files::find($id);
-	}
-
-	public function save() {
-		return (new \App\Models\Files)->store(request()->all());
-	}
-
-	public function valid() {
-		return \App\Models\Files::new()->validate(request()->all());
-	}
-
-	public function remove() {
-		return \App\Models\Files::search()->remove();
-	}
-
-	public function clone($id) {
-		return \App\Models\Files::find($id)->clone();
-	}
-
-	public function export() {
-		return \App\Models\Files::search()->export();
 	}
 
 	public function upload() {
