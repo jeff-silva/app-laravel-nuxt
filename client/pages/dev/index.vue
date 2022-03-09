@@ -1,15 +1,18 @@
 <template>
     <div>
-        <div class="d-flex">
-            <div class="bg-dark text-white" style="min-width:200px; height:100vh; overflow:auto;">
-                <ui-nav :items="pages" mode="vertical" text-color="#fff"></ui-nav>
+        <div class="d-flex" v-if="$auth.user">
+            <div class="bg-dark" style="height:100vh; width:200px;">
+                <ui-nav :items="navItems" text-color="#fff"></ui-nav>
             </div>
-            <div class="flex-grow-1" style="height:100vh; overflow:auto;">
-                <div class="bg-light shadow-sm p-2 px-3 fw-bold text-uppercase" v-for="p in pages" v-if="p.to==$route.path">{{ p.label }}</div>
-                <div class="p-3">
-                    <nuxt-child></nuxt-child>
-                </div>
+    
+            <div class="flex-grow-1 p-3" style="height:100vh; overflow:auto;">
+                <nuxt-child></nuxt-child>
             </div>
+        </div>
+
+        <div class="mx-auto mt-5" style="max-width:400px;" v-else>
+            <div class="mb-3">É necessário estar logado para visualizar este conteúdo.</div>
+            <ui-auth-login :redirect="$route.path"></ui-auth-login>
         </div>
     </div>
 </template>
@@ -18,15 +21,11 @@
 export default {
     data() {
         return {
-            pages: [],
+            navItems: [
+                {label:"Home", to:"/dev/", children:[]},
+                {label:"Endpoints", to:"/dev/endpoints/", children:[]},
+            ],
         };
-    },
-
-    mounted() {
-        this.$helpers.routes('/dev/').then(links => {
-            this.pages.push({to:"/", label:"Home"});
-            links.forEach(page => this.pages.push(page));
-        });
     },
 }
 </script>

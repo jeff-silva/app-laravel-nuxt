@@ -1,4 +1,4 @@
-# app-laravel-nuxt
+# client
 
 ## Build Setup
 

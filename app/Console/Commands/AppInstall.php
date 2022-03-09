@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Console\Commands;
+// composer require nette/php-generator
+// https://github.com/nette/php-generator
 
-use Illuminate\Console\Command;
+namespace App\Console\Commands;
 
 class AppInstall extends AppBase
 {
-    protected $signature = 'app:install';
-    protected $description = 'Executa a instalação inicial da aplicação';
 
-    public function handle()
-    {   
-        $this->call('optimize');
-        $this->call('migrate');
-        $this->call('optimize');
-        $this->call('db:seed');
-        $this->call('app:db-export');
-        $this->call('app:make-controllers');
-        $this->call('app:make-models');
-        $this->call('app:make-routes');
+    protected $signature = 'app:install';
+    protected $description = 'Instalação da aplicação';
+
+    public function handle() {
+        // $this->call('db:wipe');
+
+        if (! \Schema::hasTable('migrations')) {
+            $this->call('migrate');
+            $this->call('db:seed');
+            return;
+        }
+
+        $this->comment('System already intalled. Run db:wipe to clear tables');
     }
 }

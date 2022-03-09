@@ -11,42 +11,72 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    static function router() {
-        // 
+    static function automaticRoutes($model, $params=[]) {
+        $inst = app($model);
+        $name = (new \ReflectionClass($inst))->getShortName();
+        $prefix = (string) \Str::of($name)->studly()->kebab();
+        
+        \Illuminate\Support\Facades\Route::get("/{$prefix}/search", "\App\Http\Controllers\\{$name}Controller@search")->name("{$prefix}-search");
+        \Illuminate\Support\Facades\Route::get("/{$prefix}/find/{id}", "\App\Http\Controllers\\{$name}Controller@find")->name("{$prefix}-find");
+        \Illuminate\Support\Facades\Route::post("/{$prefix}/save", "\App\Http\Controllers\\{$name}Controller@save")->name("{$prefix}-save");
+        \Illuminate\Support\Facades\Route::post("/{$prefix}/valid", "\App\Http\Controllers\\{$name}Controller@valid")->name("{$prefix}-valid");
+        \Illuminate\Support\Facades\Route::post("/{$prefix}/delete", "\App\Http\Controllers\\{$name}Controller@delete")->name("{$prefix}-delete");
+        \Illuminate\Support\Facades\Route::post("/{$prefix}/restore", "\App\Http\Controllers\\{$name}Controller@restore")->name("{$prefix}-restore");
+        \Illuminate\Support\Facades\Route::get("/{$prefix}/clone/{id}", "\App\Http\Controllers\\{$name}Controller@clone")->name("{$prefix}-clone");
+        \Illuminate\Support\Facades\Route::post("/{$prefix}/import", "\App\Http\Controllers\\{$name}Controller@import")->name("{$prefix}-import");
+        \Illuminate\Support\Facades\Route::get("/{$prefix}/export", "\App\Http\Controllers\\{$name}Controller@export")->name("{$prefix}-export");
     }
 
-    // /api/{$model}/search
-    public function search() {
-		return $this->model->search()->paginate(request('per_page', 10));
-	}
+    public function search()
+    {
+        return $this->model->search()->paginate(request('per_page', 15));
+    }
 
-    // /api/{$model}/find/123
-	public function find($id) {
-        return $this->model->firstOrNew(['id' => $id]);
-	}
 
-    // /api/{$model}/save
-	public function save() {
-		return $this->model->store(request()->all());
-	}
+    public function find($id)
+    {
+        return $this->model->whereDeleted(false)->findIdOrSlug($id);
+    }
 
-    // /api/{$model}/valid
-	public function valid() {
-		return $this->model->validate(request()->all());
-	}
 
-    // /api/{$model}/remove
-	public function remove() {
-		return $this->model->search()->remove();
-	}
+    public function save()
+    {
+        return $this->model->updateOrCreate(['id' => request('id')], request()->all());
+    }
 
-    // /api/{$model}/clone/{$id}
-	public function clone($id) {
-		return $this->model->find($id)->clone();
-	}
 
-    // /api/{$model}/export
-	public function export() {
-		return $this->model->search()->export(export('format', 'csv'));
-	}
+    public function valid()
+    {
+        return ['valid'];
+    }
+
+
+    public function delete()
+    {
+        return $this->model->search()->deleteAll();
+    }
+
+
+    public function restore()
+    {
+        return $this->model->search()->restoreAll();
+    }
+
+
+    public function clone($id)
+    {
+        return ['clone'];
+    }
+
+
+    public function import()
+    {
+        return ['import'];
+    }
+
+
+    public function export()
+    {
+        return $this->model->search()->export();
+    }
 }

@@ -2,121 +2,125 @@
 
 namespace App\Models;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
-    use \App\Traits\Model;
+	use HasApiTokens;
+	use HasFactory;
+	use Notifiable;
+	use \App\Traits\Model;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
-    protected $fillable = [
+	public $fillable = [
 		'id',
 		'name',
 		'email',
-		'photo',
 		'email_verified_at',
 		'password',
-		'address_id',
 		'remember_token',
 		'created_at',
-		'updated_at'
+		'updated_at',
 	];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'remember_token',
-    ];
+	/**
+	 * The attributes that should be hidden for serialization.
+	 *
+	 * @var array<int, string>
+	 */
+	protected $hidden = [
+	    'password',
+	    'remember_token',
+	];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+	/**
+	 * The attributes that should be cast.
+	 *
+	 * @var array<string, string>
+	 */
+	protected $casts = [
+	    'email_verified_at' => 'datetime',
+	];
 
-    public static function booted() {
-        self::created(function($model) {
-            (new \App\Mail\UserWelcome($model))->sendTo($model->email);
-        });
-    }
 
-    public function passwordResetStart() {
-        if (! $this->id) return;
-        $this->remember_token = uniqid();
-        $this->save();
+	public function getJWTIdentifier()
+	{
+		return $this->getKey();
+	}
 
-        (new \App\Mail\UserPasswordReset($this))->sendTo($this->email);
 
-        return $this;
-    }
+	public function getJWTCustomClaims()
+	{
+		return [];
+	}
 
-    public function validate($data=[]) {
-        $rules = [
-            'name' => ['required'],
-            'email' => ['required'],
-        ];
 
-        // update
-        if (isset($data['id']) AND !empty($data['id'])) {
-            // 
-        }
+	public function validationRules()
+	{
+		$rules = [
+		    'name' => ['required'],
+		    'email' => ['required', 'email:rfc,dns'],
+		];
 
-        // insert
-        else {
-            $rules['email'][] = 'unique:users,email';
-            $rules['password'] = ['required'];
-        }
+		// update
+		if ($this->id) {
+		    //
+		}
 
-        return \Validator::make($data, $rules);
-    }
+		// insert
+		else {
+		    $rules['email'][] = 'unique:users,email';
+		    $rules['password'] = ['required'];
+		}
 
-    public function getVerifyLink() {
-        return \URL::to("/verification/xxx/");
-    }
+		return $rules;
+	}
 
-    public function getJWTIdentifier() {
-        return $this->getKey();
-    }
 
-    public function getJWTCustomClaims() {
-        return [];
-    }
-
-    public function setPasswordAttribute($value) {
+	public function setPasswordAttribute($value)
+	{
 		if (! $value) return;
 		if (! \Hash::needsRehash($value)) return;
 		return $this->attributes['password'] = \Hash::make($value);
 	}
 
-    public function getPhotoAttribute($value) {
-        return $value? $value: config('user.photo_default');
-    }
 
-	public function oauthProviders() {
-		return $this->hasMany(\App\Models\User::class, 'user_id', 'id');
+	public function passwordResetStart()
+	{
+		if (! $this->id) return;
+		$this->remember_token = substr(uniqid(), 0, 6);
+		$this->save();
+
+		(new \App\Mail\UserPasswordReset($this))->sendTo($this->email);
+
+		return $this;
 	}
 
-	public function address() {
-		return $this->belongsTo(\App\Models\User::class, 'address_id', 'id');
+
+	public function setPhotoIdAttribute($value)
+	{
+		return $this->attributes['photo_id'] = $value? $value: null;
 	}
 
-	public function usersNotifications() {
-		return $this->hasMany(\App\Models\User::class, 'user_id', 'id');
+
+	public function page()
+	{
+		return $this->belongsTo(App\Models\Pages::class, 'owner', 'id');
+	}
+
+
+	public function photo()
+	{
+		return $this->hasOne(Files::class, 'id', 'photo_id');
+	}
+
+
+	public function photos()
+	{
+		return $this->hasMany(Files::class, 'id', 'photo_id');
 	}
 }

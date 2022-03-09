@@ -6,9 +6,7 @@ trait Model
 {
     public static function bootModel() {
         static::saving(function($model) {
-
-            $data = $model->toArray();
-            $validate = $model->validate($data);
+            $validate = $model->validate();
 
             if ($validate->fails()) {
                 throw new \Exception(json_encode($validate->errors()));
@@ -16,41 +14,27 @@ trait Model
 
             // Gerando slug caso coluna exista
             if (in_array('slug', $model->getFillable()) AND !$model->slug) {
-                $model->slug = \Str::slug($model->name);
+                $model->slug = $model->slugify();
             }
 
             return $model;
         });
     }
+
+
+    public function validationRules() {
+        return ['name' => 'required'];
+    }
     
-    public function validate($data=[]) {
-        return \Validator::make($data, []);
+
+    public function validate($data=null) {
+        $data = $data===null? $this->attributes: $data;
+        return \Validator::make($data, $this->validationRules());
     }
 
-    public function store($data=[]) {
-        $data = array_merge($this->toArray(), $data);
-        foreach($data as $key=>$value) {
-            if (is_array($value)) {
-                $data[$key] = json_encode($value);
-            }
-        }
 
-        $table_name = $this->getTable();
-        $table_pk = $this->getKeyName();
-        $id = isset($data[$table_pk])? $data[$table_pk]: false;
-
-        if ($validator = $this->validate($data) AND $validator->fails()) {
-            throw new \Exception(json_encode($validator->errors()));
-        }
-
-        if ($id AND $save=self::find($id)) {
-            $save->fill($data)->save();
-        }
-        else {
-            $save = self::create($data);
-        }
-
-        return $save;
+    public function slugify() {
+        return \Str::slug($this->name);
     }
 
 
@@ -58,33 +42,127 @@ trait Model
         // 
     }
 
+
     public function import($format, $content) {
         // 
     }
 
+
+    public function scopeFindIdOrSlug($query, $slugid)
+    {
+        $fillable = $this->fillable;
+        $query->where(function($q) use($slugid, $fillable) {
+            $q->where('id', $slugid);
+
+            if (in_array('slug', $fillable)) {
+                $q->orWhere('slug', $slugid);
+            }
+        });
+
+        return $query->first();
+    }
+
+
     public function scopeExport($query) {
         $format = request('format', 'json');
-        $class = app('App\Formats\\'. \Str::of($format)->studly());
-        $filename = $class->filename();
-        $content = $class->export($query);
+        $filename = uniqid('download-'). ".{$format}";
+        $mime = "application/{$format}";
+        $all = $query->get()->toArray();
+
+        if ($format=='csv') {
+            $f = fopen('php://memory', 'r+');
+            foreach ($all as $item) { fputcsv($f, $item, ';'); }
+            rewind($f);
+            $content = stream_get_contents($f);
+        }
+
+        else if ($format=='html') {
+            $mime = 'text/html';
+            $content = '<!DOCTYPE html><html lang="en"><head><title>'. $format .' export</title>';
+            $content .= '<meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">';
+            $content .= '<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document</title></head>';
+            $content .= '<body><table><thead>';
+            foreach($all as $line=>$cols) {
+                if ($line==0) {
+                    $content .= '<thead><tr>';
+                    foreach($cols as $name=>$value) { $content .= '<th>'. $name .'</th>'; }
+                    $content .= '<tr></thead><tbody>';
+                }
+
+                $content .= '<tr>';
+                foreach($cols as $name=>$value) { $content .= '<td>'. $value .'</td>'; }
+                $content .= '</tr>';
+                if ($line==sizeof($all)-1) { $content .= '</tbody>'; }
+            }
+            $content .= '</table></body></html>';
+        }
+
+        else {
+            $content = json_encode($all);
+        }
 
         return \Response::make($content, 200, [
-            'Content-type' => $class->mime(),
+            'Content-type' => $mime,
             'Content-Disposition' => "attachment; filename=\"{$filename}\"",
         ]);
     }
 
-    // TODO: Remover apenas se existir condições where
-    public function scopeRemove($query) {
+
+    public function scopeDeleteAll($query, $params=null) {
+        $params = $params===null? request()->all(): $params;
+        $params = (object) array_merge([
+            'forced' => '',
+        ], $params);
+        
+        $return = [];
+        $items = $query->get();
+
         if (\Schema::hasColumn($this->getTable(), 'deleted_at')) {
-            return $query->get()->transform(function($item) {
+            foreach($items as $item) {
+                if ($params->forced) {
+                    $item->delete();
+                    $return[] = $item;
+                    continue;
+                }
+
                 $item->deleted_at = date('Y-m-d H:i:s');
                 $item->save();
-                return $item;
+                $return[] = $item;
+            }
+        }
+
+        return $return;
+    }
+
+
+    public function scopeRestoreAll($query)
+    {
+        $return = [];
+        foreach($query->get() as $item) {
+            $item->deleted_at = null;
+            $item->save();
+            $return[] = $item;
+        }
+        return $return;
+    }
+
+    public function scopeWhereDeleted($query, $deleted=true) {
+        if (!in_array('deleted_at', $this->fillable)) return;
+
+        if ($deleted) {
+            $query->where(function($q) {
+                $q->whereNotNull('deleted_at');
+                $q->orWhere('deleted_at', '!=', '');
+            });
+        }
+        else {
+            $query->where(function($q) {
+                $q->whereNull('deleted_at');
+                $q->orWhere('deleted_at', '');
             });
         }
 
-        return $query->delete();
+        return $query;
     }
 
 
@@ -103,6 +181,11 @@ trait Model
     }
 
 
+    public function searchQuery($query) {
+        return $query;
+    }
+
+
     public function scopeSearch($query, $params=null) {
         $params = $params? $params: request()->all();
         $params = array_merge([
@@ -112,6 +195,7 @@ trait Model
             'orderby' => 'updated_at',
             'order' => 'desc',
             'deleted' => '',
+            'limit' => '',
         ], $this->searchParams(), $params);
 
         foreach($params as $field=>$value) {
@@ -120,41 +204,72 @@ trait Model
 
             $operator = isset($params["{$field}_op"])? $params["{$field}_op"]: false;
 
+            // ?status[]=progress&term[]=payment
+            // where status in ('progress', 'payment')
             if (is_array($value)) {
                 $query->whereIn($field, $value);
             }
+
+            // ?price=1000&price_op=lt
+            // where price < 1000
             else if ($operator=='lt') {
                 $query->where($field, '<', $value);
             }
+            
+            // ?price=1000&price_op=lte
+            // where price <= 1000
             else if ($operator=='lte') {
                 $query->where($field, '<=', $value);
             }
+
+            // ?price=1000&price_op=gt
+            // where price > 1000
             else if ($operator=='gt') {
                 $query->where($field, '>', $value);
             }
+
+            // ?price=1000&price_op=gte
+            // where price >= 1000
             else if ($operator=='gte') {
                 $query->where($field, '>=', $value);
             }
+
+            // ?status=finished&status_op=neq
+            // where status != 'finished'
             else if ($operator=='neq') {
                 $query->where($field, '!=', $value);
             }
+
+            // ?title=search&title_op=like
+            // where title like '%search%'
             else if ($operator=='like') {
                 $query->where($field, 'like', "%{$value}%");
             }
-            else if ($operator=='not_like') {
+
+            // ?title=search&title_op=nlike
+            // where title not like '%search%'
+            else if ($operator=='nlike') {
                 $query->where($field, 'not like', "%{$value}%");
             }
+
+            // ?stars[]=3&stars[]=4&stars_op=between
+            // where stars between(3, 4)
             else if ($operator=='between') {
                 $query->whereBetween($field, $value);
             }
-            else if ($operator=='not_between') {
+
+            // ?stars[]=3&stars[]=4&stars_op=nbetween
+            // where stars not between(3, 4)
+            else if ($operator=='nbetween') {
                 $query->whereNotBetween($field, $value);
             }
+
+            // ?status=finished
+            // where status='finished'
             else {
                 $query->where($field, $value);
             }
         }
-
 
         // ?orderby=id&order=desc
         $query->orderBy($params['orderby'], $params['order']);
@@ -176,13 +291,32 @@ trait Model
         }
 
         // ?deleted=1
-        if (!$params['deleted'] AND in_array('deleted_at', $this->fillable)) {
-            $query->where(function($q) {
-                $q->whereNull('deleted_at');
-                $q->orWhere('deleted_at', '');
-            });
+        $query->whereDeleted($params['deleted']);
+
+        // ?limit=3
+        if ($params['limit']) {
+            $query->limit($params['limit']);
         }
 
         return $query;
+    }
+
+
+
+    public static function scopeToRawSql($query)
+    {
+        $sqlQuery = \Str::replaceArray(
+        '?',
+        collect($query->getBindings())
+            ->map(function ($i) {
+            if (is_object($i)) {
+                $i = (string)$i;
+            }
+            return (is_string($i)) ? "'$i'" : $i;
+            })->all(),
+        $query->toSql()
+        );
+
+        return $sqlQuery;
     }
 }

@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $user = \App\Models\User::firstOrNew(['id' => 1], [
-            'name' => 'User Root',
-            'email' => 'root@grr.la',
-            'password' => '321321',
-        ]);
-        
-        $user->save();
+        if (! \DB::table('users')->where('id', 1)->first()) {
+            \DB::table('users')->insert([
+                'name' => 'Root User',
+                'email' => 'root@grr.la',
+                'password' => \Hash::make('321321'),
+            ]);
+        }
     }
 }

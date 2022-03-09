@@ -1,65 +1,55 @@
 <template>
-    <div>
-        <div class="d-flex">
-            <div class="bg-dark" style="min-width:150px!important; max-width:150px!important;">
-                <ui-nav :items="pages" mode="vertical" text-color="#fff"></ui-nav>
+    <ui-form method="post" action="/api/settings" v-model="settings" #default="{loading, response}" success-text="Configurações salvas">
+        <div class="row g-0 bg-white shadow-sm">
+            <div class="col-12 col-md-2 bg-light">
+                <ui-nav :items="navItems"></ui-nav>
             </div>
-
-            <div class="flex-grow-1">
-                <ui-form method="post" action="/api/settings/save-all" v-model="settings" #default="{loading}" success-message="Configurações alteradas">
-                    <div class="card-header">
-                        <div v-for="p in pages" v-if="p.to==$route.path">{{ p.label }}</div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <nuxt-child :settings="settings" :settings-get-all="settingsGetAll" :settings-save-all="settingsSaveAll"></nuxt-child>
-                        </div>
-
-                        <div class="card-footer text-end">
-                            <button type="submit" class="btn btn-primary" v-loading="loading">
-                                Salvar
-                            </button>
-                        </div>
-                    </div>
-                </ui-form>
+    
+            <div class="col-12 col-md-10 p-3">
+                <nuxt-child v-model="settings"></nuxt-child>
+            </div>
+                
+            <div class="col-12 bg-light text-end p-2">
+                <button type="submit" class="btn btn-primary" v-loading="loading">
+                    Salvar
+                </button>
             </div>
         </div>
-    </div>
+    </ui-form>
 </template>
 
 <script>
 export default {
+    layout: "default/admin",
     middleware: 'auth',
-    layout: 'admin',
+
+    head() {
+        return {
+            title: "Configurações",
+        };
+    },
 
     data() {
         return {
+            navItems: [
+                {label:"Principal", to:"/admin/settings"},
+                {label:"E-mail", to:"/admin/settings/email"},
+                {label:"Arquivos", to:"/admin/settings/files"},
+            ],
             settings: {},
-            pages: [],
         };
     },
 
     methods: {
         settingsGetAll() {
-            this.$axios.get('/api/settings/get-all').then(resp => {
+            this.$axios.get('/api/settings').then(resp => {
                 this.settings = resp.data;
-            });
-        },
-
-        settingsSaveAll() {
-            this.$axios.post('/api/settings/save-all').then(resp => {
-                this.settings = resp.data;
-                this.$store.dispatch('app/init');
             });
         },
     },
 
     mounted() {
         this.settingsGetAll();
-
-        this.$helpers.routes('/admin/settings/').then(resp => {
-            this.pages = resp;
-        });
     },
 }
 </script>

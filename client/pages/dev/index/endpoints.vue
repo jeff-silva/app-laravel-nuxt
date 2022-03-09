@@ -1,18 +1,24 @@
 <template>
     <div>
-        <table class="table table-bordered table-sm">
+        <table class="table">
             <thead>
                 <tr>
-                    <th>Métodos</th>
+                    <th width="50px"></th>
+                    <th width="150px">Métodos</th>
                     <th>URI</th>
                     <th>Parâmetros</th>
                 </tr>
             </thead>
+
             <tbody>
-                <tr v-for="e in endpoints">
-                    <td>{{ e.methods.join(', ') }}</td>
-                    <td>{{ e.uri }}</td>
-                    <td>{{ e.parameters.length==0? 'Nenhum': e.parameters.join(', ') }}</td>
+                <tr v-for="(e, i) in endpoints">
+                    <td>{{ i }}</td>
+                    <td>{{ e.methods.join(' | ') }}</td>
+                    <td>
+                        <div>{{ e.uri }}</div>
+                        <div v-if="e.name" class="text-muted">name: {{ e.name }}</div>
+                    </td>
+                    <td>{{ e.parameterNames.join(' | ') }}</td>
                 </tr>
             </tbody>
         </table>
@@ -21,12 +27,6 @@
 
 <script>
 export default {
-    head() {
-        return {
-            title: "Endpoints",
-        };
-    },
-
     data() {
         return {
             endpoints: [],
@@ -34,15 +34,15 @@ export default {
     },
 
     methods: {
-        getEndpoints() {
-            this.$axios.get('/api/endpoints').then(resp => {
+        endpointsList() {
+            this.$axios.get('/api/app/endpoints').then(resp => {
                 this.endpoints = resp.data;
             });
         },
     },
 
     mounted() {
-        this.getEndpoints();
+        this.endpointsList();
     },
 }
 </script>

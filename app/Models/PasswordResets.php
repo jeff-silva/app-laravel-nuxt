@@ -2,19 +2,13 @@
 
 namespace App\Models;
 
+/**
+ * Teste
+ */
 class PasswordResets extends \Illuminate\Database\Eloquent\Model
 {
+	use \Illuminate\Database\Eloquent\Factories\HasFactory;
 	use \App\Traits\Model;
 
-	protected $fillable = [
-		'email',
-		'token',
-		'created_at'
-	];
-
-	public function validate($data=[]) {
-		return \Validator::make($data, [
-			'name' => ['required'],
-		]);
-	}
+	public $fillable = ['email', 'token', 'created_at'];
 }

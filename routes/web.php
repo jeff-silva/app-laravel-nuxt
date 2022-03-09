@@ -13,14 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('{path}', function() {
     if ($content = realpath(public_path('app.html'))) {
         return file_get_contents($content);
     }
 
-    return 'execute o comando "npm run generate" para que a view seja renderizada corretamente';
+    return 'execute o comando "npm run build" para que a view seja renderizada corretamente';
 })->where('path', '(.*)');
