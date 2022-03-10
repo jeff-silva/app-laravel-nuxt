@@ -43,7 +43,7 @@ class AppNuxtViewsGenerate extends AppBase
                 "\t\treturn {",
                 "\t\t\ttitle: \"Buscar\",",
                 "\t\t};",
-                "\t}",
+                "\t},",
                 "}",
                 "</script>",
             ]);
@@ -73,7 +73,7 @@ class AppNuxtViewsGenerate extends AppBase
                 "\t\treturn {",
                 "\t\t\ttitle: \"Editar\",",
                 "\t\t};",
-                "\t}",
+                "\t},",
                 "}",
                 "</script>",
             ]);

@@ -26,16 +26,14 @@ class AppModelsGenerate extends AppBase
             $classes = $file->getClasses();
             if (isset($classes[ $table->Model->NameFull ])) {
                 $class = $classes[ $table->Model->NameFull ];
-                $fillable = $class->hasProperty('fillable')? $class->getProperty('fillable'): $class->addProperty('fillable', []);
-                $fillable->setValue((array) array_keys($table->Fields));
 
-                // dd(get_class_methods($fillable), $class->__toString());
-                // dd($fillable->getComment());
-                // dd(get_class_methods($class), $class->hasProperty('lelelel'));
-                // $fillable = $class->addProperty('fillable', (array) array_keys($table->Fields));
-                // $fillableComment = $fillable->getComment();
-                // dump($fillable);
-                // $fillable->addComment($fillableComment? $fillableComment: 'Fields');
+                $protected_table = $class->hasProperty('table')? $class->getProperty('table'): $class->addProperty('table', []);
+                $protected_table->setProtected();
+                $protected_table->setValue($table->Name);
+
+                $protected_fillable = $class->hasProperty('fillable')? $class->getProperty('fillable'): $class->addProperty('fillable', []);
+                $protected_fillable->setProtected();
+                $protected_fillable->setValue((array) array_keys($table->Fields));
                 
                 file_put_contents(base_path($table->Model->File), $file->__toString());
             }

@@ -16,59 +16,59 @@ class AppRoutesGenerate extends AppBase
         $routes = [];
         foreach($this->getTables() as $table) {
             if ($this->ignoredTable($table->Name)) continue;
-            $slug = $this->tableSlug($table->Name);
+            $slug = $this->tableSlug($table->Name=='users'? 'user': $table->Name);
             $model_name = (string) \Str::of($slug)->studly() .'Controller';
 
             $routes["{$slug}-search"] = [
-                'methods' => ['get'],
                 'route' => "{$slug}/search",
-                'call' => "\App\Http\Controllers\\{$model_name}@search"
+                'call' => "\App\Http\Controllers\\{$model_name}@search",
+                'method' => 'get',
             ];
 
             $routes["{$slug}-find"] = [
-                'methods' => ['get'],
+                'method' => 'get',
                 'route' => "{$slug}/find/{id}",
                 'call' => "\App\Http\Controllers\\{$model_name}@find"
             ];
 
             $routes["{$slug}-save"] = [
-                'methods' => ['post'],
+                'method' => 'post',
                 'route' => "{$slug}/save",
                 'call' => "\App\Http\Controllers\\{$model_name}@save"
             ];
 
             $routes["{$slug}-valid"] = [
-                'methods' => ['post'],
+                'method' => 'post',
                 'route' => "{$slug}/valid",
                 'call' => "\App\Http\Controllers\\{$model_name}@valid"
             ];
             
             $routes["{$slug}-delete"] = [
-                'methods' => ['post'],
+                'method' => 'post',
                 'route' => "{$slug}/delete",
                 'call' => "\App\Http\Controllers\\{$model_name}@delete"
             ];
 
             $routes["{$slug}-restore"] = [
-                'methods' => ['post'],
+                'method' => 'post',
                 'route' => "{$slug}/restore",
                 'call' => "\App\Http\Controllers\\{$model_name}@restore"
             ];
 
             $routes["{$slug}-clone"] = [
-                'methods' => ['get'],
+                'method' => 'get',
                 'route' => "{$slug}/clone/{id}",
                 'call' => "\App\Http\Controllers\\{$model_name}@clone"
             ];
 
             $routes["{$slug}-import"] = [
-                'methods' => ['post'],
+                'method' => 'post',
                 'route' => "{$slug}/import",
                 'call' => "\App\Http\Controllers\\{$model_name}@import"
             ];
 
             $routes["{$slug}-export"] = [
-                'methods' => ['get'],
+                'method' => 'get',
                 'route' => "{$slug}/export",
                 'call' => "\App\Http\Controllers\\{$model_name}@export"
             ];

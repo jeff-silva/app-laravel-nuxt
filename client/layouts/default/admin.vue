@@ -54,6 +54,10 @@ export default {
                     {label:"Buscar", to:"/admin/files", children:[]},
                     {label:"Novo", to:"/admin/files/new", children:[]},
                 ]},
+                {label:"Life", children:[
+                    {label:"Personagens", to:"/admin/life-persons", children:[]},
+                    {label:"Interações", to:"/admin/life-persons-interactions", children:[]},
+                ]},
                 {label:"Meus dados", to:"/admin/user/me"},
             ],
         };

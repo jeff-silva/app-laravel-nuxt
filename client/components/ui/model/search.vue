@@ -36,7 +36,7 @@
                         </transition>
         
                         <el-dropdown trigger="click">
-                            <a href="javascript:;" class="btn btn-success">
+                            <a href="javascript:;" class="btn btn-outline-success">
                                 <i class="fas fa-download me-1"></i> Exportar
                             </a>
         
@@ -49,7 +49,7 @@
                             </el-dropdown-menu>
                         </el-dropdown>
         
-                        <nuxt-link :to="`/admin/${modelName}/new`" class="btn btn-primary" v-if="actionsDefault">
+                        <nuxt-link :to="`/admin/${modelName}/new`" class="btn btn-outline-primary" v-if="actionsDefault">
                             <i class="fas fa-fw fa-plus me-1"></i> Novo
                         </nuxt-link>
                     </ui-mobile-action>
