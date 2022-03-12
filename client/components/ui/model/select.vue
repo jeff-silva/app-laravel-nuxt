@@ -14,7 +14,7 @@
     >
         <template v-for="d in results.data">
             <slot name="option" :item="d">
-                <el-option :value="d.id" :key="d.id" :label="d.name">
+                <el-option :value="String(d.id)" :key="d.id" :label="d.name">
                     {{ d.name }}
                 </el-option>
             </slot>
@@ -38,6 +38,7 @@ export default {
         $props: {deep:true, handler(value) {
             if (this.__preventRecursive) return;
             this.props = JSON.parse(JSON.stringify(value));
+            this.search();
         }},
 
         props: {deep:true, handler(value) {
@@ -80,7 +81,7 @@ export default {
     },
 
     mounted() {
-        this.search();
+        // this.search();
     },
 }
 </script>
